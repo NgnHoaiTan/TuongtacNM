@@ -16,7 +16,7 @@ const SideBar = () => {
 
 
   return (
-    <Box style={{ minHeight: '720px', paddingTop: '25px' }}>
+    <Box style={{ minHeight: '710px', paddingTop: '25px' }}>
       <Box style={{
         backgroundImage: 'url(https://top10az.com/wp-content/uploads/2021/07/Uzumaki-Naruto-1024x1024.jpg)',
         height: '90px',
@@ -32,13 +32,13 @@ const SideBar = () => {
 
       <Box style={{ marginTop: '10px' }}>
         <Typography align='center' variant='h6' style={{ color: '#fff' }}>Bùi Việt Anh</Typography>
-        <Typography align='center' variant='body2' style={{ color: '#fff' }}>Administrato</Typography>
+        <Typography align='center' variant='body2' style={{ color: '#fff' }}>Administrator</Typography>
       </Box>
 
       <Box>
         <Box style={{ borderBottom: '1px solid #fff', margin: '15px 30px 30px 30px' }}></Box>
         <ul>
-            <Typography variant='body1' sx={{color: '#314BD4'}}>Tác vụ quản lý</Typography>
+            <Typography variant='body1' sx={{color: '#314BD4', marginLeft: '10px'}}>Tác vụ quản lý</Typography>
             <Link to='/' style={{ textDecoration: 'none' }}>
               <li className={clsx(classes.sidebarItem, '/' === location.pathname ? classes.activeItem : '')}>
                 <MenuIcon />
@@ -53,7 +53,7 @@ const SideBar = () => {
             </Link>
         </ul>
         <ul>
-            <Typography variant='body1' sx={{color: '#314BD4'}}>Điều hướng</Typography>
+            <Typography variant='body1' sx={{color: '#314BD4', marginLeft: '10px'}}>Điều hướng</Typography>
             <Link to='/user' style={{ textDecoration: 'none' }}>
               <li className={clsx(classes.sidebarItem, '/user' === location.pathname ? classes.activeItem : '')}>
                 <MenuIcon />

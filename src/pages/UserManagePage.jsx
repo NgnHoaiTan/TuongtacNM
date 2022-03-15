@@ -12,7 +12,6 @@ const HomePage = () => {
             <SideBar />
         </Grid>
         <Grid item xs={10}>
-            <NavBar />
             <UserManage />
         </Grid>
     </Grid>
