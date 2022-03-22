@@ -1,11 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
+import Applayout from './layout/Applayout';
 
 function App() {
   return (
-    <div className="App">
-     
-    </div>
+    <Applayout />
   );
 }
 
