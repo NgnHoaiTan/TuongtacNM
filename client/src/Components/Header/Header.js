@@ -13,7 +13,7 @@ const pages=[
 const Header = () => {
 
     return (
-        <AppBar>
+        <AppBar position='relative'>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Typography
@@ -32,9 +32,9 @@ const Header = () => {
                          menu icon when screen is small 
                     </Box> */}
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } } }>
-                        {pages.map((page) => (
+                        {pages.map((page, index) => (
                             <Button
-                                key={page}    
+                                key={index}    
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
                                 {page}
