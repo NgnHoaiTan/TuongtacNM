@@ -3,9 +3,9 @@ import { Grid } from '@mui/material'
 
 import CoverImageUser from '../../Components/CoverImageUser/CoverImageUser'
 import SidebarUser from '../../Components/SidebarUser/SidebarUser'
-import HomeUser from '../../Components/HomeUser/HomeUser'
+import PostVideoUser from '../../Components/PostVideoUser/PostVideoUser'
 
-const Userpage = () => {
+const PostVideoUserPage = () => {
   return (
     <>
       <CoverImageUser />
@@ -15,7 +15,7 @@ const Userpage = () => {
             <SidebarUser />
           </Grid>
           <Grid item xs={9}>
-            <HomeUser />
+            <PostVideoUser />
           </Grid>
         </Grid>
       </div>
@@ -23,4 +23,4 @@ const Userpage = () => {
   )
 }
 
-export default Userpage
+export default PostVideoUserPage
