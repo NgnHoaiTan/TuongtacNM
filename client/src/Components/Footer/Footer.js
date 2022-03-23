@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-import React from 'react'
-
-const Footer = () => {
-  return (
-    <div>Footer</div>
-  )
-}
-
-export default Footer
-=======
 import { Button, Container, IconButton, Typography } from '@mui/material';
 import React from 'react';
 import { makeStyles } from '@mui/styles';
@@ -67,4 +56,3 @@ const Footer = () => {
 };
 
 export default Footer;
->>>>>>> 33db1ffd0265c75393102c56d7b01b41b600a13b

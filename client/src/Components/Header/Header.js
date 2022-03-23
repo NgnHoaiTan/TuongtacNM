@@ -42,40 +42,6 @@ ElevationScroll.propTypes = {
 const Header = (props) => {
 
     return (
-<<<<<<< HEAD
-        <AppBar position='relative'>
-            <Container maxWidth="xl">
-                <Toolbar disableGutters>
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        sx={{
-                            mr: 2, display: {
-                                xs: 'none', md: 'flex'
-                            }
-                        }}
-                    >
-                        WILD DISCOVERY
-                    </Typography>
-                    {/* <Box>
-                         menu icon when screen is small 
-                    </Box> */}
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } } }>
-                        {pages.map((page, index) => (
-                            <Button
-                                key={index}    
-                                sx={{ my: 2, color: 'white', display: 'block' }}
-                            >
-                                {page}
-                            </Button>
-                        ))}
-                    </Box>
-                    {/* avatar */}
-                </Toolbar>
-            </Container>
-        </AppBar>
-=======
         <ElevationScroll {...props}>
             <AppBar>
                 <Container maxWidth="xl">
@@ -127,7 +93,6 @@ const Header = (props) => {
                 </Container>
             </AppBar>
         </ElevationScroll>
->>>>>>> 33db1ffd0265c75393102c56d7b01b41b600a13b
     );
 };
 
