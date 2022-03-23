@@ -1,5 +1,5 @@
-import HeroImage from "../../Components/HeroImage/HeroImage";
 import React from 'react';
+import HeroImage from "../../Components/HeroImage/HeroImage";
 import IntroWrite from "../../Components/IntroWrite/IntroWrite";
 import Explore from "../../Components/Explore/Explore";
 

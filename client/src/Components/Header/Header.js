@@ -43,7 +43,7 @@ const Header = (props) => {
 
     return (
         <ElevationScroll {...props}>
-            <AppBar>
+            <AppBar position='relative'>
                 <Container maxWidth="xl">
                     <Toolbar disableGutters >
                         <Typography
