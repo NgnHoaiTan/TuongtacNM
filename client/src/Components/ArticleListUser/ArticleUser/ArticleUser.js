@@ -10,16 +10,16 @@ const ArticleUser = ({ article }) => {
             <CardMedia
                 style={{
                     backgroundImage: `url(${article.image})`,
-                    width: '94%',
-                    height: '200px',
-                    margin: '10px 10px 0 10px',
+                    width: '96%',
+                    height: '180px',
+                    margin: '5px 10px 0 5px',
                     backgroundRepeat: 'no-repeat',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     borderRadius: '10px',
                 }}
             />
-            <CardContent>
+            <CardContent style={{ padding: '10px'}}>
                 <div>
                     <Typography
                         style={{
@@ -37,23 +37,23 @@ const ArticleUser = ({ article }) => {
                         {article.title}
                     </Typography>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
+                <div style={{ display: 'flex', alignItems: 'center', margin: '20px 0' }}>
                     <div>
-                        <IconButton>
+                        <IconButton sx={{backgroundColor: '#fff', marginRight: '10px'}} size='small'>
                             <FavoriteRoundedIcon sx={{ color: '#FF0000' }} />
                         </IconButton>
-                        <Typography variant='h6' component='span' sx={{ color: '#fff' }}>
+                        <Typography variant='body1' component='span' sx={{ color: '#fff' }}>
                             {article.like}
                         </Typography>
                     </div>
                     <div style={{ marginLeft: '30px' }}>
-                        <IconButton>
+                        <IconButton sx={{backgroundColor: '#fff', marginRight: '10px'}} size='small'>
                             <ChatBubbleIcon sx={{ color: '#999' }} />
                         </IconButton>
-                        <Typography variant='h6' component='span' sx={{ color: '#fff' }}>{article.comment}</Typography>
+                        <Typography variant='body1' component='span' sx={{ color: '#fff' }}>{article.comment}</Typography>
                     </div>
                 </div>
-                <CardActions style={{ display: 'flex', justifyContent: 'center', marginTop: '15px'}}>
+                <CardActions style={{ display: 'flex', justifyContent: 'center', marginTop: '20px'}}>
                     <Link to='/user' style={{ textDecoration: 'none' }}>
                         <Button variant='contained' size='small' sx={{ color: '#fff'}}>
                             Xem chi tiết

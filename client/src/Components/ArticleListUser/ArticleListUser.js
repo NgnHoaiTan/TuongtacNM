@@ -31,14 +31,21 @@ const articleUser = [
         title: 'ếch giun zzzzz',
         like: 123,
         comment: 456,
+    },
+    {
+        id: 5,
+        image: 'http://khoahocphattrien.vn/Images/Uploaded/Share/2016/06/17/Loai-ech-giun-nua-giun-nua-ran-ghe-ron-o-Viet-Nam_2.jpg',
+        title: 'ếch giun zzzzz',
+        like: 123,
+        comment: 456,
     }
 ]
 
 const ArticleListUser = () => {
     return (
-        <Grid container spacing={4}>
+        <Grid container spacing={2}>
             {articleUser.map((article, index) => (
-                <Grid key={index} item xs={12} sm={6} md={4} lg={4}>
+                <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
                     <ArticleUser article={article} />
                 </Grid>
             ))}
