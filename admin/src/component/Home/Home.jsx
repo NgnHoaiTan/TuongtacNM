@@ -115,17 +115,17 @@ const Home = () => {
           </Box>
         </Grid>
         <Grid item xs={4} style={{ backgroundColor: '#6691FF', borderRadius: '10px' }}>
-          <Box style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column'}}>
-            <Typography variant='h5' style={{ margin: '20px auto 10px auto', color: '#fff', fontWeight: '700'}}>
+          <Box style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
+            <Typography variant='h5' style={{ margin: '20px auto 10px auto', color: '#fff', fontWeight: '700' }}>
               Quản trị viên
             </Typography>
-            <ul style={{ listStyle: 'none', marginLeft: '40px'}}>
-                {adminInfo.map((info, index) => (
-                  <li key={index} className={classes.infoItem}>
-                    <Box style={{ backgroundImage: `url(${info.avata})`}} className={classes.avataAdmin}></Box>
-                    <Typography style={{ color: '#fff', marginLeft: '20px' }} variant='body1'>{info.name}</Typography>  
-                  </li>
-                ))}
+            <ul style={{ listStyle: 'none', marginLeft: '40px' }}>
+              {adminInfo.map((info, index) => (
+                <li key={index} className={classes.infoItem}>
+                  <Box style={{ backgroundImage: `url(${info.avata})` }} className={classes.avataAdmin}></Box>
+                  <Typography style={{ color: '#fff', marginLeft: '20px' }} variant='body1'>{info.name}</Typography>
+                </li>
+              ))}
             </ul>
           </Box>
         </Grid>
