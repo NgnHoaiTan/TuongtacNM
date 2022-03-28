@@ -28,12 +28,12 @@ const sidebarUserData = [
         title: 'Trang chủ'
     },
     {
-        path: '/user/post-video',
+        path: '/user/upload-video',
         icon: <VideoCallIcon fontSize='20px'/>,
         title: 'Đăng video'
     },
     {
-        path: '/user',
+        path: '/user/upload-article',
         icon: <PostAddIcon fontSize='20px'/>,
         title: 'Tạo bài viết'
     },
@@ -50,7 +50,7 @@ const SidebarUser = () => {
     return (
         <div style={{ minHeight: '520px' }}>
             <div style={{
-                backgroundImage: 'url(https://scontent.fvca1-3.fna.fbcdn.net/v/t39.30808-6/270058684_2847398758814170_5004830795248101596_n.jpg?stp=dst-jpg_s851x315&_nc_cat=110&ccb=1-5&_nc_sid=da31f3&_nc_ohc=bYajZpaTSgUAX-tGBwh&_nc_ht=scontent.fvca1-3.fna&oh=00_AT8u-ATIH9hJ-qeT6rnixz5hU-BJqHokj0Xa2ybexOs6DQ&oe=623FCC69)',
+                backgroundImage: 'url(https://scontent.fsgn2-2.fna.fbcdn.net/v/t39.30808-6/258435246_2819886521565394_3094128005690604096_n.jpg?stp=dst-jpg_s851x315&_nc_cat=103&ccb=1-5&_nc_sid=da31f3&_nc_ohc=blUWK3G-rjMAX-wWDtU&_nc_ht=scontent.fsgn2-2.fna&oh=00_AT-vzEOf6THHqP_qjiH-WRguxo7ldjLTV7b5ww65kTMxkg&oe=6241F3F8)',
                 height: '130px',
                 width: '130px',
                 margin: 'auto',

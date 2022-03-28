@@ -39,9 +39,9 @@ const videoUser = [
 
 const VideoListUser = () => {
     return (
-        <Grid container spacing={2}>
+        <Grid container spacing={3}>
             {videoUser.map((video, index) => (
-                <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
+                <Grid key={index} item xs={12} lg={4}>
                     <VideoUser video={video} />
                 </Grid>
             ))}
