@@ -1,13 +1,26 @@
 import React from 'react'
+import { Grid } from '@mui/material'
 
-import User from '../../Components/Users/User'
+import CoverImageUser from '../../Components/CoverImageUser/CoverImageUser'
+import SidebarUser from '../../Components/SidebarUser/SidebarUser'
+import HomeUser from '../../Components/HomeUser/HomeUser'
 
-const UserPage = () => {
+const Userpage = () => {
   return (
     <>
-      <User />
+      <CoverImageUser />
+      <div>
+        <Grid container spacing={0}>
+          <Grid item xs={3} style={{ backgroundColor: '#8850FF' }}>
+            <SidebarUser />
+          </Grid>
+          <Grid item xs={9}>
+            <HomeUser />
+          </Grid>
+        </Grid>
+      </div>
     </>
   )
 }
 
-export default UserPage
+export default Userpage
