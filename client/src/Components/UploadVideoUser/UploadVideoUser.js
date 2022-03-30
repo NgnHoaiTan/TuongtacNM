@@ -10,10 +10,10 @@ const UploadVideoUser = () => {
 
     const handleSubmit = () => {
         console.log(fileVideo);
+        console.log(description);
     }
     return (
         <>
-
             <Paper style={{ backgroundColor: '#E0E3E3', minHeight: '300px', width: '80%', margin: '20px auto' }}>
                 <div style={{ padding: '20px' }}>
                     <TextField

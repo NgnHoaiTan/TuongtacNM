@@ -1,21 +1,12 @@
 import React from 'react'
 
-const input = ({ title, width, handleChange, errorSubmit }) => {
+import LableTitle from '../LableTitle/LableTitle'
+
+const input = ({ title, width, handleChange, errorSubmit, normal }) => {
     return (
         <div style={{ display: 'flex', alignItems: 'center', marginBottom: '15px' }}>
-            <div style={{ minWidth: '150px' }}>
-                <label 
-                    style={{ 
-                        fontWeight: '500', 
-                        fontSize: '17px' 
-                    }}
-                >
-                    {title}
-                    <span style={{ color: 'red'}}>*</span>
-                </label>
-            </div>
-
-            <div style={{ width: '100%' }}>
+            <LableTitle title={title} normal={normal ? true : false}/>
+            <div style={{ flex: '1', marginLeft: '20px' }}>
                 <input
                     style={{
                         width: width,

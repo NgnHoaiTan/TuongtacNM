@@ -2,7 +2,7 @@ import React from 'react'
 import { Card, CardContent, Typography, IconButton } from '@mui/material'
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 
-import video1 from '../../../assets/video/video1.mp4'
+
 
 const VideoUser = ({ video }) => {
     return (
@@ -15,7 +15,7 @@ const VideoUser = ({ video }) => {
                         objectFit: 'unset'
                     }}
                     type="video/mp4"
-                    src={video1}
+                    src={video.video}
                     controls
                 />
                 
