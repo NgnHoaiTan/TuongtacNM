@@ -53,7 +53,7 @@ const UploadVideoUser = () => {
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px' }}>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <label htmlFor="upload-video" style={{ padding: '2px 18px', backgroundColor: '#FF6948', borderRadius: '5px' }}>
+                        <label htmlFor="upload-video" style={{ padding: '2px 18px', backgroundColor: '#FF6948', borderRadius: '5px', cursor: 'pointer' }}>
                             <CameraEnhanceIcon sx={{ color: '#fff' }} />
                         </label>
                         <label
@@ -62,7 +62,8 @@ const UploadVideoUser = () => {
                                 alignItems: 'center',
                                 backgroundColor: '#fff',
                                 padding: '5px',
-                                borderRadius: '5px'
+                                borderRadius: '5px',
+                                cursor: 'pointer'
                             }}
                             htmlFor="upload-video"
                         >

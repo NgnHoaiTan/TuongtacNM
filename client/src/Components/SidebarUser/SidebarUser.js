@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { makeStyles } from '@mui/styles';
 import { Typography, IconButton } from '@mui/material'
 import clsx from 'clsx'
@@ -38,7 +38,7 @@ const sidebarUserData = [
         title: 'Tạo bài viết'
     },
     {
-        path: '/user',
+        path: '/user/information',
         icon: <InfoIcon fontSize='20px'/>,
         title: 'Thông tin cá nhân'
     }
@@ -46,7 +46,7 @@ const sidebarUserData = [
 
 const SidebarUser = () => {
     const classes = useStyles()
-    const [active, setactive] = useState()
+    const location = useLocation()
     return (
         <div style={{ minHeight: '520px' }}>
             <div style={{
@@ -79,8 +79,7 @@ const SidebarUser = () => {
                     {sidebarUserData.map((sidebarItem, index) => (
                         <Link to={sidebarItem.path} style={{ textDecoration: 'none' }} key={index}>
                             <li 
-                                className={clsx(classes.sidebarItem, active === index ? classes.active : '')}
-                                onClick={(e) => setactive(index)}
+                                className={clsx(classes.sidebarItem, sidebarItem.path === location.pathname ? classes.active : '')}
                             >
                                 <div style={{ padding: '10px', display: 'flex', alignItems: 'center' }}>
                                     <IconButton sx={{ color: '#000', backgroundColor: '#fff', padding: '5px' }} size='large'>
