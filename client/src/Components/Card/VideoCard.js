@@ -20,7 +20,12 @@ const useStyle = makeStyles((theme) => ({
     },
     textinbtn: {
         fontSize: '12px',
-    }
+    },
+    cardimg: {
+        objectFit: 'cover',
+        objectPosition: 'center',
+        height: '150px',
+    },
 }))
 const VideoCard = () => {
     console.log(buttonViewColor);
@@ -37,12 +42,17 @@ const VideoCard = () => {
                 }
                 title="Chorizo Paella"
                 subheader="March 20, 2022"
+                sx={{padding:1}}
             />
             <CardMedia
                 component="img"
                 height="194"
                 image={demoPost}
-                alt="image post"
+                className={classes.cardimg}
+                alt="image video"
+                sx={{
+                    mx: "auto"
+                }}
 
             />
             <CardContent sx={{
@@ -79,16 +89,6 @@ const VideoCard = () => {
                         50
                     </Typography>
                 </IconButton>
-
-                <Button variant="contained" className={classes.buttonview} size="small"
-                    sx={{
-                        ml:1
-                    }}
-                >
-                    <Typography variant="p" className={classes.textinbtn}>
-                        Xem chi tiết
-                    </Typography>
-                </Button>
             </CardActions>
 
 

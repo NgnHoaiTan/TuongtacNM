@@ -1,4 +1,4 @@
-import { Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, Typography, Button } from '@mui/material';
+import { Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, Typography, Button, Grid } from '@mui/material';
 import React from 'react';
 import avtUser from '../../Images/user5.jpg';
 import demoPost from '../../Images/echgiunnguyen.JPG';
@@ -13,6 +13,11 @@ const useStyle = makeStyles((theme) => ({
         padding: "10px",
         backgroundColor: postColor,
         color: 'white'
+    },
+    cardimg: {
+        objectFit: 'cover',
+        objectPosition: 'center',
+        height: '150px',
     },
     buttonview: {
         backgroundColor: buttonViewColor,
@@ -32,63 +37,78 @@ const PostCard = () => {
                     <Avatar
                         src={avtUser}
                     />
-
-
                 }
                 title="Chorizo Paella"
                 subheader="March 20, 2022"
+                sx={{padding:1}}
             />
             <CardMedia
                 component="img"
-                height="194"
                 image={demoPost}
+                className={classes.cardimg}
                 alt="image post"
+                sx={{
+                    mx: "auto"
+                }}
 
             />
             <CardContent sx={{
-                py:1, px:0
+                py: 1, px: 0
             }}>
-                <Typography sx={{fontWeight:600}}>
+                <Typography sx={{ fontWeight: 600 }}>
                     Loài ếch giun nguyễn
                 </Typography>
             </CardContent>
             <CardActions disableSpacing sx={{
-                py:0.5,px:0
+                py: 0.5, px: 0
             }}>
-                <IconButton sx={{
-                    color: 'white'
+                <Grid container spacing={1} sx={{
+                    justifyContent: 'center',
+                    align: 'center'
                 }}>
-                    <FavoriteBorderIcon />
-                    {/* if react */}
-                    {/* FavoriteIcon */}
-                    <Typography variant="p" sx={{
-                        fontSize:'16px',
-                        ml:0.5
-                    }}>
-                        150
-                    </Typography>
-                </IconButton>
-                <IconButton sx={{
-                    color: 'white'
-                }}>
-                    <CommentIcon />
-                    <Typography variant="p" sx={{
-                        fontSize:'16px',
-                        ml:0.5
-                    }}>
-                        50
-                    </Typography>
-                </IconButton>
+                    <Grid item lg={12}>
+                        <IconButton sx={{
+                            color: 'white'
+                        }}>
+                            <FavoriteBorderIcon />
+                            {/* if react */}
+                            {/* FavoriteIcon */}
+                            <Typography variant="p" sx={{
+                                fontSize: '16px',
+                                ml: 0.5
+                            }}>
+                                150
+                            </Typography>
+                        </IconButton>
+                        <IconButton sx={{
+                            color: 'white'
+                        }}>
+                            <CommentIcon />
+                            <Typography variant="p" sx={{
+                                fontSize: '16px',
+                                ml: 0.5
+                            }}>
+                                50
+                            </Typography>
+                        </IconButton>
+                    </Grid>
 
-                <Button variant="contained" className={classes.buttonview} size="small"
-                    sx={{
-                        ml:1
-                    }}
-                >
-                    <Typography variant="p" className={classes.textinbtn}>
-                        Xem chi tiết
-                    </Typography>
-                </Button>
+                    {/* <Grid item lg={12} sx={{
+                        alignItem: 'center'
+                    }}>
+                        <Button variant="contained" className={classes.buttonview} size="small"
+
+                        >
+                            <Typography variant="p" className={classes.textinbtn}>
+                                Xem chi tiết
+                            </Typography>
+                        </Button>
+                    </Grid> */}
+                </Grid>
+
+
+
+
             </CardActions>
 
 

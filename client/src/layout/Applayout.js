@@ -1,21 +1,22 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-
-
-import Header from '../Components/Header/Header';
 import Homepage from '../Pages/Homepage/Homepage';
 import Userpage from '../Pages/Users/UserPage';
 import UploadVideoUserPage from '../Pages/Users/UploadVideoUserPage';
 import UploadArticleUserPage from '../Pages/Users/UploadArticleUserPage';
 import InforPersonalUserPage from '../Pages/Users/InforPersonalUserPage';
-import Footer from '../Components/Footer/Footer';
+import Posts from '../Pages/Article/Posts';
+import Videos from '../Pages/Article/Videos'
 import Layout from './Layout';
-
+import LandingPage from '../Pages/LandingPage/LandingPage';
 const Applayout = () => {
   return (
     <>
       <Routes>
         <Route path="/" element={<Layout page={Homepage} />} />
+        <Route path="/welcome" element={<LandingPage />} />
+        <Route path="/post" element={<Layout page={Posts} />} />
+        <Route path="/video" element={<Layout page={Videos} />} />
         <Route path="/user">
           <Route path="" element={<Layout page={Userpage} />} />
           <Route path="upload-video" element={<Layout page={UploadVideoUserPage} />} />

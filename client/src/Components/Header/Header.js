@@ -64,9 +64,9 @@ const Header = (props) => {
                         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: { md: 'center' },alignItems:'center', marginRight:{
                             md:'80px'
                         } }}>
-                            {pages.map((page) => (
+                            {pages.map((page,index) => (
                                 <Button
-                                    key={page}
+                                    key={index}
                                     sx={{ my: 0, mx: 1,py:2,px:3, color: 'white', display: 'block', 
                                         alignItem:'center',
                                         lineHeight:'0',
