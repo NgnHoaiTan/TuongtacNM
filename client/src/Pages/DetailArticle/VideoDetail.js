@@ -62,7 +62,7 @@ const VideoDetail = () => {
                             controls
                             style={{
                                 width: '100%',
-                                
+                                objectFit:'unset'
                             }}
                             
                             type="video/mp4"
