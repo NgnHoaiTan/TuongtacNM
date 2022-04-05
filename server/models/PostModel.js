@@ -50,7 +50,12 @@ const schema = mongoose.Schema({
         type: String,
         require:true
     },
-    // noi sinh song
+    // sinh cảnh
+    habitat:{
+        type:String,
+        require:true
+    },
+    // dia diem sinh song
     living_area:{
         type:String,
         require:true
