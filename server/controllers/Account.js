@@ -1,6 +1,6 @@
-import {AccountModel} from "../models/AccountModel";
+import {AccountModel} from "../models/AccountModel.js";
 import bcrypt from "bcryptjs";
-import {UserModel} from "../models/UserModel";
+import {UserModel} from "../models/UserModel.js";
 export const registerAccount = async(req, res)=>{
     try{
         const accountCheck = await AccountModel.findOne({username:req.body.username});
@@ -20,6 +20,7 @@ export const registerAccount = async(req, res)=>{
                 birthday: req.body.birthday,
                 address: req.body.address,
                 phone_number: req.body.phone_number,
+                account:idAccount
             });
             await user.save();
             res.status(200).json({

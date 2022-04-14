@@ -4,6 +4,10 @@ const schema = mongoose.Schema({
         type:String,
         require:true
     },
+    image: {
+        type: String,
+        default: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMqI4dJM6gAS7v_jKJy0_bCkeqZpZ-_vPO67WSQpi-9wqkdqScFvd57VvMG3qS2NnbzXU&usqp=CAU"
+    },
     email:{
         type:String,
         require:true
@@ -35,8 +39,11 @@ const schema = mongoose.Schema({
     account:{
         type:mongoose.Schema.Types.ObjectId,
         ref: 'account',
-        require:true
-    }
+        // require:true
+    },
+    cloudinary_id: {
+        type: String
+    } 
 
 },{
     versionKey: false,

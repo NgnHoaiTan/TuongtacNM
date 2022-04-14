@@ -14,4 +14,4 @@ const schema = mongoose.Schema({
 },{
     versionKey: false,
 })
-export const ReactionPostModel = mongoose.model('reaction_post', schema);
+export const ReactionPostModel = mongoose.model('reaction_video', schema);

@@ -21,6 +21,9 @@ const schema = mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref: 'user',
         require:true
+    },
+    cloudinary_id: {
+        type: String
     }
 
 },{

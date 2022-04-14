@@ -13,6 +13,9 @@ const schema = mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref: 'post',
         require:true
+    },
+    cloudinary_id: {
+        type: String
     }
 
 },{

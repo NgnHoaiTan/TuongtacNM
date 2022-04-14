@@ -1,3 +1,4 @@
+import cloudinary from "../cloudinary";
 import {PostModel} from "../models/PostModel";
 export const getPosts = async (req, res) => {
     try {
@@ -16,8 +17,19 @@ export const getPost = async (req, res) => {
         res.status(500).json({ error: err});
     }
 };
+export const getPostByUser = async (req, res) => {
+    try {
+        const posts = await PostModel.find({ user: req.params.userId });
+        
+        res.status(200).json(posts);        
+    } catch (err) {
+        res.status(500).json({ error: err});
+    }
+};
 export const createPost = async (req, res) => {
     try {
+        const result = await cloudinary.uploader.upload(req.file.path,{folder:'AnimalDiscovery/Post',resource_type: 'auto'});
+        
         const newPost = req.body;
         const post = new PostModel(newPost);
         await post.save();
@@ -27,7 +39,7 @@ export const createPost = async (req, res) => {
     }
 }; 
 
-export const deletetPost = async (req, res) => {
+export const deletePost = async (req, res) => {
     try {
         const postId = req.params.id;
         const post = await PostModel.findOneAndDelete({ _id: postId });
