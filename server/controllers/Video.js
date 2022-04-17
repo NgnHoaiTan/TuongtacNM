@@ -1,4 +1,5 @@
 import {VideoModel} from "../models/VideoModel.js";
+import cloudinary from "../cloudinary.js";
 export const getVideos = async (req, res) => {
     try {
         const videos = await VideoModel.find();

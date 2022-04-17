@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 const schema = mongoose.Schema({
-    name:{
+    title:{
         type:String,
         require:true
     },
@@ -8,10 +8,7 @@ const schema = mongoose.Schema({
         type:String,
         require:true
     },
-    title:{
-        type:String,
-        require:true
-    },
+    
     date_upload:{
         type:Date,
         default: Date.now

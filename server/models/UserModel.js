@@ -10,15 +10,12 @@ const schema = mongoose.Schema({
     },
     email:{
         type:String,
-        require:true
     },
     phone_number:{
         type:String,
-        require:true
     },
     address:{
         type:String,
-        require:true
     },
     bithday:{
         type: Date,

@@ -59,8 +59,10 @@ export const updateUser = async (req, res) => {
 
 export const deletetUser = async (req, res) => {
     try {
-        const user = await UserModel.findOneAndDelete({ _id: req.params.id });
-        await cloudinary.uploader.destroy(user.cloudinary_id);
+        const user = await UserModel.findOneAndDelete({ _id: req.params.id }); 
+        if(user.cloudinary_id!==null){
+            await cloudinary.uploader.destroy(user.cloudinary_id);
+        }  
         res.status(200).json(user);
     } catch (err) {
         console.log(err);

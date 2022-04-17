@@ -1,78 +1,104 @@
 import mongoose from "mongoose";
 const schema = mongoose.Schema({
-    name:{
+    title:{
         type:String,
-        require:true
+        //require:true
+    },
+    // ten khoa hoc
+    scientific_name:{
+        type:String,
+        //require:true
+    },
+    // ten viet nam
+    vietnamese_name:{
+        type:String,
+        //require:true
+    },
+    // ten dia phuong
+    region_name:{
+        type:String,
+        //require:true
+    },
+    date_upload:{
+        type:String,
+        //require:true
     },
     // gioi
     kingdom:{
         type:String,
-        require:true
+        //require:true
     },
     // nganh
     phylum:{
         type:String,
-        require:true
+        //require:true
     },
     class:{
         type:String,
-        require:true
+        //require:true
     },
     // bo
     order:{
         type:String,
-        require:true
+        //require:true
     },
     // ho
     family:{
         type:String,
-        require:true
+        //require:true
     },
     distribution:{
         type:String,
-        require:true
+        //require:true
     },
     value_of_use:{
         type:String,
-        require:true
+       // require:true
     },
     status_creature:{
         type:String,
-        require:true
+        //require:true
     },
     // hinh thai
     morphology:{
         type: String,
-        require:true
+        //require:true
     },
     // sinh thai
     ecology:{
         type: String,
-        require:true
+        //require:true
     },
     // sinh cảnh
     habitat:{
         type:String,
-        require:true
+       // require:true
     },
     // dia diem sinh song
     living_area:{
         type:String,
-        require:true
+        //require:true
     },
-    coordinates:{
-        type:Array,
-        require:true
+    // vi độ - bề ngang
+    latitude:{
+        type:Number,
+        //require:true
+    },
+    // kinh độ - bề dọc
+    longitude:{
+        type:Number,
+        //require:true
     },
     state_of_maintainment:{
         type:Object,
-        require:true
+        //require:true
     },
     user:{
         type:mongoose.Schema.Types.ObjectId,
         ref: 'user',
-        require:true
+        //require:true
     }
+    
 
 },{
     versionKey: false,

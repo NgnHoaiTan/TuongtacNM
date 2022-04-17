@@ -11,7 +11,7 @@ import commentVideo from './routers/commentVideo.js';
 import reactionPost from './routers/reactionPost.js';
 import reactionVideo from './routers/reactionVideo.js';
 import video from './routers/video.js';
-
+import post from './routers/post.js';
 const app = express();
 const PORT = 5000;
 const URI = "mongodb+srv://hoaitan:CWwAn9VV0dpdQz0y@cluster0.n8bi5.mongodb.net/WildDiscoveryDB?retryWrites=true&w=majority";
@@ -32,8 +32,9 @@ mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true })
 app.use('/accounts',account);
 app.use('/users',user);
 app.use('/images',image);
-app.use('/commentpost',commentPost);
-app.use('/commentvideo',commentVideo);
-app.use('/reactionpost',reactionPost);
-app.use('/reactionvideo',reactionVideo);
-app.use('/video',video);
+app.use('/commentposts',commentPost);
+app.use('/commentvideos',commentVideo);
+app.use('/reactionposts',reactionPost);
+app.use('/reactionvideos',reactionVideo);
+app.use('/videos',video);
+app.use('/posts',post);

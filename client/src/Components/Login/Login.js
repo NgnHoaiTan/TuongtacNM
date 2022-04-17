@@ -7,7 +7,8 @@ import LockIcon from '@mui/icons-material/Lock';
 const useStyle = makeStyles({
     errormsg: {
         color: 'red',
-        fontSize: '13px'
+        margin:'5px 0',
+
     }
 })
 
@@ -51,19 +52,19 @@ const Login = () => {
                             <Form >
                                 {console.log(props)}
                                 <FastField as={TextField} label="Tài khoản" name="username" fullWidth className={classes.input} required sx={{
-                                    mt:3
+                                    my:1
                                 }} />
                                 {props.errors.username && props.touched.username && (
-                                    <p className={classes.errormsg}>{props.errors.username}</p>
+                                    <Typography variant='body4' className={classes.errormsg}>{props.errors.username}</Typography>
                                 )}
                                 <FastField as={TextField} type="password" label="Mật khẩu" name="password" fullWidth className={classes.input} required sx={{
                                     my:1
-                                }} />
+                                }}/>
                                 {/* hien thi thong bao loi khi validation error voi Yup */}
                                 {props.errors.password && props.touched.password && (
-                                    <p className={classes.errormsg}>{props.errors.password}</p>
+                                    <Typography variant='body4' sx={{mb:1}} className={classes.errormsg}>{props.errors.password}</Typography>
                                 )}
-                                <Button variant="contained" type="submit" fullWidth sx={{}}>
+                                <Button variant="contained" type="submit" fullWidth sx={{mt:1,padding:'10px 16px',}}>
                                     Đăng nhập
                                 </Button>
                             </Form>
