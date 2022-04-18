@@ -11,6 +11,7 @@ import Layout from './Layout';
 import LandingPage from '../Pages/LandingPage/LandingPage';
 import PostDetail from '../Pages/DetailArticle/PostDetail';
 import VideoDetail from '../Pages/DetailArticle/VideoDetail';
+import Login from '../Components/Login/Login';
 const Applayout = () => {
   return (
     <>
