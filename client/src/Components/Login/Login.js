@@ -38,7 +38,6 @@ const Login = () => {
         }
         loginUser(data, dispatch, navigate)
     }
-    console.log(isLoading, error);
     return (
         <Grid>
             <Paper elevation={0}>

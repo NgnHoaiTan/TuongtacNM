@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Redirect } from 'react-router-dom'
 import Homepage from '../Pages/Homepage/Homepage';
 import Userpage from '../Pages/Users/UserPage';
 import UploadVideoUserPage from '../Pages/Users/UploadVideoUserPage';
@@ -11,8 +11,9 @@ import Layout from './Layout';
 import LandingPage from '../Pages/LandingPage/LandingPage';
 import PostDetail from '../Pages/DetailArticle/PostDetail';
 import VideoDetail from '../Pages/DetailArticle/VideoDetail';
-import Login from '../Components/Login/Login';
+import { useSelector } from 'react-redux';
 const Applayout = () => {
+  const { currentUser } = useSelector(state => state.auth.login)
   return (
     <>
       <Routes>
