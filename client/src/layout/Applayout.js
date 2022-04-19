@@ -1,10 +1,6 @@
 import React from 'react'
-<<<<<<< HEAD
 import { Routes, Route } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
-=======
-import { Routes, Route, Redirect } from 'react-router-dom'
->>>>>>> 09ece6a4667e0b16d142d145834b8292721cc9dd
 import Homepage from '../Pages/Homepage/Homepage';
 import Userpage from '../Pages/Users/UserPage';
 import UploadVideoUserPage from '../Pages/Users/UploadVideoUserPage';
@@ -16,18 +12,12 @@ import Layout from './Layout';
 import LandingPage from '../Pages/LandingPage/LandingPage';
 import PostDetail from '../Pages/DetailArticle/PostDetail';
 import VideoDetail from '../Pages/DetailArticle/VideoDetail';
-<<<<<<< HEAD
 import Login from '../Components/Login/Login';
 import { getresult } from '../features/Auth/authSlice';
 import { useSelector } from 'react-redux';
 const Applayout = () => {
   const loggedin = useSelector(getresult);
   console.log(Object.keys(loggedin).length === 0)
-=======
-import { useSelector } from 'react-redux';
-const Applayout = () => {
-  const { currentUser } = useSelector(state => state.auth.login)
->>>>>>> 09ece6a4667e0b16d142d145834b8292721cc9dd
   return (
     <>
       <Routes>

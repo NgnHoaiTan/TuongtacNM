@@ -5,9 +5,6 @@ import { Formik, Form, FastField } from 'formik';
 import React from "react";
 
 import LockIcon from '@mui/icons-material/Lock';
-<<<<<<< HEAD
-
-=======
 import { useNavigate } from 'react-router';
 import { useDispatch } from "react-redux";
 import { registerUser } from "../../features/Auth/registerSlice";
@@ -15,7 +12,6 @@ import { registerUser } from "../../features/Auth/registerSlice";
 const theme = createTheme({
     spacing: [0, 4, 8, 10, 12, 16, 32],
 });
->>>>>>> 09ece6a4667e0b16d142d145834b8292721cc9dd
 const useStyles = makeStyles({
     // input: {
     //     marginTop: '15px'
@@ -60,13 +56,8 @@ const Signup = () => {
             phone_number: value.phonenumber,
 
         }
-<<<<<<< HEAD
         console.log(data)
-        
-=======
-        console.log(data);
         registerUser(data, dispatch, navigate)
->>>>>>> 09ece6a4667e0b16d142d145834b8292721cc9dd
     }
 
     return (
