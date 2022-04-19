@@ -7,6 +7,7 @@ import { makeStyles } from '@mui/styles';
 import { exploreBg } from "../../common/color"
 import NewestPost from '../Newest/NewestPost';
 import NewestVideo from '../Newest/NewestVideo';
+import { Link } from 'react-router-dom'
 const useStyle = makeStyles((theme) => ({
     container: {
         padding: "0 40px"
@@ -44,7 +45,7 @@ const Explore = () => {
                     }}>
                         Khám phá ngay
                     </Typography>
-                    
+
                 </Box>
                 <Box >
                     <TabContext value={value}>
@@ -53,11 +54,11 @@ const Explore = () => {
                         }}>
                             <TabList onChange={handleChange} aria-label="tab trantition">
                                 <Tab label="Bài viết mới nhất" value="1" sx={{
-                                    color:'white'
+                                    color: 'white'
                                 }} />
                                 <Tab label="Video mới nhất" value="2" sx={{
-                                    color:'white'
-                                }}/>
+                                    color: 'white'
+                                }} />
                             </TabList>
                         </Box>
 
@@ -70,23 +71,6 @@ const Explore = () => {
                     </TabContext>
 
                 </Box>
-
-                {/* <NewestVideo /> */}
-
-                <div className={classes.btnseemore}>
-                    <Button variant="contained" className={classes.buttonview} size="small"
-
-                        sx={{
-                            mt: 3,
-
-                        }}
-                    >
-                        <Typography variant="p" className={classes.textinbtn}>
-                            Xem thêm
-                        </Typography>
-                    </Button>
-                </div>
-
             </Box>
         </Container>
 

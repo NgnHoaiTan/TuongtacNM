@@ -1,14 +1,11 @@
-import { Typography, TextField, FormControl, Button, Paper, Grid, Avatar, Box, FormControlLabel, Checkbox, Link } from "@mui/material";
+import { Typography, TextField, Button, Paper, Grid, Avatar } from "@mui/material";
 import { makeStyles } from '@mui/styles';
-import { createTheme, spacing } from '@mui/system';
 import * as Yup from 'yup';
 import { Formik, Form, FastField } from 'formik';
-import React, { useEffect, useState } from "react";
-import moment from 'moment';
+import React from "react";
+
 import LockIcon from '@mui/icons-material/Lock';
-const theme = createTheme({
-    spacing: [0, 4, 8, 10, 12, 16, 32],
-});
+
 const useStyles = makeStyles({
     // input: {
     //     marginTop: '15px'
@@ -37,9 +34,7 @@ const Signup = () => {
 
         username: Yup.string().min(6, "Toi thieu 6 ky tu").required("Required!"),
         password: Yup.string().min(6, "Toi thieu 6 ky tu").required("Required!"),
-        verifypassword: Yup.string()
-            .oneOf([Yup.ref("password")], "Mật khẩu không tương thích")
-            .required("Required!"),
+        
         fullname: Yup.string().required("Required!"),
         phonenumber: Yup.string().matches(phoneregex, 'Vui long kiem tra so dien thoai').required("Required!"),
 
@@ -52,6 +47,7 @@ const Signup = () => {
             phone_number: value.phonenumber,
 
         }
+        console.log(data)
         
     }
 

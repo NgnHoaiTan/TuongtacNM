@@ -12,7 +12,7 @@ const router = express.Router();
 
 router.get('/',getUsers);
 router.get('/:id',getUser);
-router.get('/account/:id',getUserByAccount);
+router.get('/getbyaccount/:accountId',getUserByAccount);
 router.post('/',upload.single('image'),postUser);
 router.put('/:id',upload.single('image'),updateUser);
 router.delete('/:id',deletetUser);

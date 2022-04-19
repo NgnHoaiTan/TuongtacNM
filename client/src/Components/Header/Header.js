@@ -9,7 +9,8 @@ import useScrollTrigger from '@mui/material/useScrollTrigger';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { AppBar, Toolbar, Box, IconButton, Typography, Container, Avatar, Tooltip, Button } from '@mui/material'
-
+import {useSelector} from 'react-redux';
+import {getUser } from '../../features/Slice/UserSlice';
 function ElevationScroll(props) {
     const { children, window } = props;
     // Note that you normally won't need to set the window ref as useScrollTrigger
@@ -35,7 +36,7 @@ ElevationScroll.propTypes = {
 };
 
 const Header = (props) => {
-
+    const user = useSelector(getUser);
     return (
         <ElevationScroll {...props}>
             <AppBar position='relative'>
@@ -122,11 +123,11 @@ const Header = (props) => {
                         </Box>
                         {/* avatar */}
                         <Box >
-                            <Link to='/user'>
+                            <Link to={`/user/${user._id}`}>
                                 <IconButton disableRipple sx={{ m: 0, p: 0 }}>
                                     <Avatar
                                         alt="avatar user"
-                                        src={avtUser}
+                                        src={user.image}
 
                                     />
                                     <MenuIcon sx={{ color: "white" }} />

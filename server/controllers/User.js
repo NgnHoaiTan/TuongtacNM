@@ -20,7 +20,7 @@ export const getUser = async (req, res) => {
 };
 export const getUserByAccount = async (req, res) => {
     try {
-        const user = await UserModel.findOne({account: req.params.account });
+        const user = await UserModel.findOne({account: req.params.accountId });
         res.status(200).json(user);        
     } catch (err) {
         res.status(500).json({ error: err});

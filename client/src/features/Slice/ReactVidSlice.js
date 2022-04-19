@@ -18,7 +18,8 @@ export const fetchAsyncReactionsInVideoByUser = createAsyncThunk('reaction_video
 
 export const createAsyncReaction = createAsyncThunk('reaction_video/createAsyncReaction', async (reaction) => {
     const response = await Axios.post('reactionvideos', {
-        video: reaction.videoId
+        video: reaction.videoId,
+        user:reaction.userId
     });
     return response.data;
 });

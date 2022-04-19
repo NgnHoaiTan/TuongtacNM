@@ -16,9 +16,6 @@ export const registerAccount = async(req, res)=>{
             const idAccount = account._id;
             const user = new UserModel({
                 name:req.body.name,
-                email:req.body.email,
-                birthday: req.body.birthday,
-                address: req.body.address,
                 phone_number: req.body.phone_number,
                 account:idAccount
             });
@@ -38,9 +35,9 @@ export const registerAccount = async(req, res)=>{
 export const loginAccount = async(req,res)=>{
     try{
         const account = await AccountModel.findOne({username:req.body.username});
-        if(!account) res.status(400).json({ message: 'Username is not found!'});
+        if(!account) return res.status(400).json({ message: 'Username is invalid!'});
         const validPass = await bcrypt.compare(req.body.password,account.password);
-        if (!validPass) res.status(400).json({ message: 'Invalid password'});
+        if (!validPass) return res.status(400).json({ message: 'Invalid password'});
         res.status(200).json({ message: 'Login success!', isloged:true, accountId:account._id });
     }
     catch(err){

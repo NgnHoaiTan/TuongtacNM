@@ -7,7 +7,9 @@ import VideoCallIcon from '@mui/icons-material/VideoCall';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import InfoIcon from '@mui/icons-material/Info';
 import HomeIcon from '@mui/icons-material/Home';
-
+import LogoutIcon from '@mui/icons-material/Logout';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../features/Auth/authSlice';
 const useStyles = makeStyles(() => ({
     sidebarItem: {
         margin: '5px 0',
@@ -24,22 +26,22 @@ const useStyles = makeStyles(() => ({
 const sidebarUserData = [
     {
         path: '/user',
-        icon: <HomeIcon fontSize='20px'/>,
+        icon: <HomeIcon fontSize='20px' />,
         title: 'Trang chủ'
     },
     {
         path: '/user/upload-video',
-        icon: <VideoCallIcon fontSize='20px'/>,
+        icon: <VideoCallIcon fontSize='20px' />,
         title: 'Đăng video'
     },
     {
         path: '/user/upload-article',
-        icon: <PostAddIcon fontSize='20px'/>,
+        icon: <PostAddIcon fontSize='20px' />,
         title: 'Tạo bài viết'
     },
     {
         path: '/user/information',
-        icon: <InfoIcon fontSize='20px'/>,
+        icon: <InfoIcon fontSize='20px' />,
         title: 'Thông tin cá nhân'
     }
 ]
@@ -47,6 +49,11 @@ const sidebarUserData = [
 const SidebarUser = () => {
     const classes = useStyles()
     const location = useLocation()
+    const dispatch = useDispatch();
+    const handleLogout=()=>{
+        console.log('logout')
+        dispatch(logout())
+    }
     return (
         <div style={{ minHeight: '520px' }}>
             <div style={{
@@ -78,7 +85,7 @@ const SidebarUser = () => {
                 <ul style={{ listStyle: 'none', margin: '0 30px', padding: '0' }}>
                     {sidebarUserData.map((sidebarItem, index) => (
                         <Link to={sidebarItem.path} style={{ textDecoration: 'none' }} key={index}>
-                            <li 
+                            <li
                                 className={clsx(classes.sidebarItem, sidebarItem.path === location.pathname ? classes.active : '')}
                             >
                                 <div style={{ padding: '10px', display: 'flex', alignItems: 'center' }}>
@@ -92,6 +99,20 @@ const SidebarUser = () => {
                             </li>
                         </Link>
                     ))}
+                    <li
+                        className={classes.sidebarItem}
+                        sx={{cursor: 'pointer'}}
+                        onClick={handleLogout}
+                    >
+                        <div style={{ padding: '10px', display: 'flex', alignItems: 'center' }}>
+                            <IconButton sx={{ color: '#000', backgroundColor: '#fff', padding: '5px' }} size='large'>
+                                <LogoutIcon fontSize='20px'/>
+                            </IconButton>
+                            <Typography sx={{ color: '#fff' }} variant='h6' component='span' marginLeft='30px'>
+                                Đăng xuất
+                            </Typography>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>

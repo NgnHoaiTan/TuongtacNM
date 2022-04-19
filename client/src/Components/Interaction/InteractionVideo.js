@@ -8,6 +8,7 @@ import { fetchAsyncCommentsByVideo, createAsyncComment, getListComments } from '
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
 import { unwrapResult } from '@reduxjs/toolkit';
+import { fetchAsyncUsers, getListUsers, getUser } from '../../features/Slice/UserSlice';
 const useStyle = makeStyles({
     horizon_comment: {
         width: '100%',
@@ -33,11 +34,14 @@ const InteractionVideo = () => {
     const [actionReact, setActionReact] = useState(false);
     const [actionComment, setActionComment] = useState(false);
     const [content,setContent] = useState('');
+    const user = useSelector(getUser); 
+    const listusers = useSelector(getListUsers);
     useEffect(() => {
         const dispatchCall = () => {
             dispatch(fetchAsyncReactionsByVideo(id));
-            let data = { videoId: id, userId: '625bf29d05a2408cf630d04e' }
+            let data = { videoId: id, userId: user._id }
             dispatch(fetchAsyncReactionsInVideoByUser(data))
+            dispatch(fetchAsyncUsers());
         }
         dispatchCall();
     }, [dispatch, actionReact, id])
@@ -52,7 +56,7 @@ const InteractionVideo = () => {
     const handleReact = async () => {
         // add id user after
         setActionReact(false);
-        const data = { videoId: id }
+        const data = { videoId: id,userId:user._id }
         try {
             await dispatch(createAsyncReaction(data));
             setActionReact(true);
@@ -161,13 +165,13 @@ const InteractionVideo = () => {
                                 <Box key={comment._id}>
                                     <ListItem>
                                         <ListItemAvatar>
-                                            <Avatar src={userdemo} />
+                                            <Avatar src={listusers.find(user=>user._id===comment.user).image} />
                                         </ListItemAvatar>
                                         <ListItemText
                                             primary={
                                                 <React.Fragment>
                                                     <Typography component={'span'} sx={{ fontWeight: 500 }}>
-                                                        {comment.user}
+                                                        {listusers.find(user=>user._id===comment.user).name}
                                                     </Typography>
                                                 </React.Fragment>
                                             }

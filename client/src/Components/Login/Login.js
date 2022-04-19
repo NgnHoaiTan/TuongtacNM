@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@mui/styles';
 import { Avatar, Grid, Paper, Typography,TextField, Button, CircularProgress, Box } from '@mui/material';
 import { Formik, Form, FastField } from 'formik';
@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import LockIcon from '@mui/icons-material/Lock';
 import { loginUser } from '../../features/Auth/loginSlice';
 import { useNavigate } from 'react-router';
+import { getlogin, getresult } from '../../features/Auth/authSlice';
 const useStyle = makeStyles({
     errormsg: {
         color: 'red',
@@ -23,8 +24,13 @@ const Login = () => {
     const classes = useStyle();
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const { isLoading, error } = useSelector(state => state.auth.login)
-
+    const { isLoading, error } = useSelector(getlogin)
+    const loggedin = useSelector(getresult);
+    console.log(loggedin);
+   
+    if(Object.keys(loggedin).length !== 0){
+        navigate('/');
+    }
     // validation form with yup
     const validationSchema = Yup.object().shape({
         username: Yup.string().min(3,'Ít nhất 3 ký tự').required("Required!"),

@@ -1,24 +1,20 @@
-import { loginPending, loginSuccess, loginFail } from "./authSlice";
+import { unwrapResult } from "@reduxjs/toolkit";
+import { Navigate } from "react-router-dom";
+import { loginPending, loginSuccess, loginFail, AsyncLogin } from "./authSlice";
 
 const userCheck = {
     username: 'admin',
     password: 'admin123'
 }
 
-export const loginUser = (user, dispatch, navigate) => {
+export const loginUser = async(user, dispatch, navigate) => {
     dispatch(loginPending())
     try {
         // call api xử lý
-        if (user.username == userCheck.username && user.password == userCheck.password) {
-            setTimeout(() => {
-                dispatch(loginSuccess(user))
-                navigate("/")
-            }, 2000)
-        } else {
-            setTimeout(() => {
-                dispatch(loginFail())
-            }, 2000)
-        }
+        const rawresult = await dispatch(AsyncLogin(user));
+        const result = unwrapResult(rawresult);
+        navigate('/');
+        window.location.reload();
     } catch (error) {
         dispatch(loginFail())
     }

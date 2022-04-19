@@ -8,6 +8,7 @@ import { fetchAsyncCommentsByPost, createAsyncComment, getListComments } from '.
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
 import { unwrapResult } from '@reduxjs/toolkit';
+import { fetchAsyncUsers, getListUsers, getUser } from '../../features/Slice/UserSlice';
 const useStyle = makeStyles({
     horizon_comment: {
         width: '100%',
@@ -33,11 +34,14 @@ const InteractionPost = () => {
     const [actionReact, setActionReact] = useState(false);
     const [actionComment, setActionComment] = useState(false);
     const [content,setContent] = useState('');
+    const user = useSelector(getUser); 
+    const listusers = useSelector(getListUsers);
     useEffect(() => {
         const dispatchCall = () => {
             dispatch(fetchAsyncReactionsByPost(id));
-            let data = { postId: id, userId: '625bf29d05a2408cf630d04e' }
+            let data = { postId: id, userId: user._id }
             dispatch(fetchAsyncReactionsInPostByUser(data))
+            dispatch(fetchAsyncUsers());
         }
         dispatchCall();
     }, [dispatch, actionReact, id])
@@ -52,7 +56,7 @@ const InteractionPost = () => {
     const handleReact = async () => {
         // add id user after
         setActionReact(false);
-        const data = { post: id }
+        const data = { postId: id,userId:user._id }
         console.log(data);
         try {
             await dispatch(createAsyncReaction(data));
@@ -79,7 +83,7 @@ const InteractionPost = () => {
         try {
             let data ={
                 content:content,
-                user:'625bf29d05a2408cf630d04e',
+                user:user._id,
                 post:id
             }
             const actionresult = await dispatch(createAsyncComment(data));
@@ -162,13 +166,13 @@ const InteractionPost = () => {
                                 <Box key={comment._id}>
                                     <ListItem>
                                         <ListItemAvatar>
-                                            <Avatar src={userdemo} />
+                                            <Avatar src={listusers.find(user=>user._id===comment.user).image} />
                                         </ListItemAvatar>
                                         <ListItemText
                                             primary={
                                                 <React.Fragment>
                                                     <Typography component={'span'} sx={{ fontWeight: 500 }}>
-                                                        {comment.user}
+                                                        {listusers.find(user=>user._id===comment.user).name}
                                                     </Typography>
                                                 </React.Fragment>
                                             }

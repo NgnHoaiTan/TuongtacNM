@@ -18,7 +18,8 @@ export const fetchAsyncReactionsInPostByUser = createAsyncThunk('reaction_post/f
 
 export const createAsyncReaction = createAsyncThunk('reaction_post/createAsyncReaction', async (reaction) => {
     const response = await Axios.post('reactionposts', {
-        post:reaction.post
+        post:reaction.postId,
+        user:reaction.userId
     });
     return response.data;
 });
