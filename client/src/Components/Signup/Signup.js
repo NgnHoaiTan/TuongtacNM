@@ -9,9 +9,6 @@ import { useNavigate } from 'react-router';
 import { useDispatch } from "react-redux";
 import { registerUser } from "../../features/Auth/registerSlice";
 
-const theme = createTheme({
-    spacing: [0, 4, 8, 10, 12, 16, 32],
-});
 const useStyles = makeStyles({
     // input: {
     //     marginTop: '15px'

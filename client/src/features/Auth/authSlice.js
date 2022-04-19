@@ -7,21 +7,17 @@ const initialState = {
         isLoading: false,
         error: false
     },
-<<<<<<< HEAD
-    result:{
-
-=======
+    result: {},
     register: {
         isLoading: false,
         success: false,
         error: false
->>>>>>> 09ece6a4667e0b16d142d145834b8292721cc9dd
-    }
+    },
 }
-export const AsyncLogin = createAsyncThunk('auth/AsyncLogin',async(data)=>{
-    const response = await Axios.post('accounts/login',{
-        username:data.username,
-        password:data.password
+export const AsyncLogin = createAsyncThunk('auth/AsyncLogin', async (data) => {
+    const response = await Axios.post('accounts/login', {
+        username: data.username,
+        password: data.password
     })
     return response.data;
 })
@@ -61,45 +57,34 @@ const authReducer = createSlice({
             state.result = {};
         }
     },
-    extraReducers:{
-        [AsyncLogin.pending]:()=>{
+    extraReducers: {
+        [AsyncLogin.pending]: () => {
             console.log('Start checkout account')
-            
+
         },
-        [AsyncLogin.fulfilled]:(state,action)=>{
-            console.log('Checkout account success')     
+        [AsyncLogin.fulfilled]: (state, action) => {
+            console.log('Checkout account success')
             state.login.isLoading = false;
             state.login.error = false;
             state.result = action.payload;
 
-            
+
         },
-        [AsyncLogin.rejected]:(state)=>{
+        [AsyncLogin.rejected]: (state) => {
             console.log('Checkout account failure')
             state.login.error = true;
         }
     }
-    
+
 })
 
-const { reducer, actions} = authReducer;
+const { reducer, actions } = authReducer;
 
-<<<<<<< HEAD
-export const { loginPending, loginSuccess, loginFail, logout } = actions;
-export const getlogin = (state)=>state.auth.login;
-export const getresult = (state)=>state.auth.result;
-=======
-export const { 
-    loginPending, 
-    loginSuccess, 
-    loginFail,
-    registerPending,
-    registerSuccess,
-    registerFail, 
-    logout 
-} = actions;
+export const { loginPending, loginSuccess, loginFail, logout, registerPending, registerSuccess, registerFail } = actions;
+export const getlogin = (state) => state.auth.login;
+export const getresult = (state) => state.auth.result;
 
->>>>>>> 09ece6a4667e0b16d142d145834b8292721cc9dd
+
 // export const selectUser = (state) = state.user.user;
 
 export default reducer;
