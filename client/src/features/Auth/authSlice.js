@@ -7,8 +7,15 @@ const initialState = {
         isLoading: false,
         error: false
     },
+<<<<<<< HEAD
     result:{
 
+=======
+    register: {
+        isLoading: false,
+        success: false,
+        error: false
+>>>>>>> 09ece6a4667e0b16d142d145834b8292721cc9dd
     }
 }
 export const AsyncLogin = createAsyncThunk('auth/AsyncLogin',async(data)=>{
@@ -26,15 +33,28 @@ const authReducer = createSlice({
             state.login.isLoading = true;
             state.login.error = false;
         },
-
         loginSuccess: (state, action) => {
             console.log(action.payload)
             state.login.isLoading = false;
             state.login.error = false;
         },
-
         loginFail: (state) => {
             state.login.error = true;
+        },
+
+        registerPending: (state) => {
+            state.register.isLoading = true;
+            state.register.error = false;
+        },
+        registerSuccess: (state) => {
+            state.register.isLoading = false;
+            state.register.success = true;
+            state.register.error = false;
+        },
+        registerFail: (state) => {
+            state.register.isLoading = false;
+            state.register.success = false;
+            state.register.error = true;
         },
 
         logout: (state) => {
@@ -64,9 +84,22 @@ const authReducer = createSlice({
 
 const { reducer, actions} = authReducer;
 
+<<<<<<< HEAD
 export const { loginPending, loginSuccess, loginFail, logout } = actions;
 export const getlogin = (state)=>state.auth.login;
 export const getresult = (state)=>state.auth.result;
+=======
+export const { 
+    loginPending, 
+    loginSuccess, 
+    loginFail,
+    registerPending,
+    registerSuccess,
+    registerFail, 
+    logout 
+} = actions;
+
+>>>>>>> 09ece6a4667e0b16d142d145834b8292721cc9dd
 // export const selectUser = (state) = state.user.user;
 
 export default reducer;

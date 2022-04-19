@@ -5,7 +5,17 @@ import { Formik, Form, FastField } from 'formik';
 import React from "react";
 
 import LockIcon from '@mui/icons-material/Lock';
+<<<<<<< HEAD
 
+=======
+import { useNavigate } from 'react-router';
+import { useDispatch } from "react-redux";
+import { registerUser } from "../../features/Auth/registerSlice";
+
+const theme = createTheme({
+    spacing: [0, 4, 8, 10, 12, 16, 32],
+});
+>>>>>>> 09ece6a4667e0b16d142d145834b8292721cc9dd
 const useStyles = makeStyles({
     // input: {
     //     marginTop: '15px'
@@ -28,6 +38,8 @@ const initialState = {
     phonenumber: '',
 }
 const Signup = () => {
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
     const classes = useStyles();
     const phoneregex = /^(84|0[3|5|7|8|9])+([0-9]{8})$/;
     const validationSchema = Yup.object().shape({
@@ -39,6 +51,7 @@ const Signup = () => {
         phonenumber: Yup.string().matches(phoneregex, 'Vui long kiem tra so dien thoai').required("Required!"),
 
     })
+
     const onSubmit = (value, props) => {
         const data = {
             username: value.username,
@@ -47,8 +60,13 @@ const Signup = () => {
             phone_number: value.phonenumber,
 
         }
+<<<<<<< HEAD
         console.log(data)
         
+=======
+        console.log(data);
+        registerUser(data, dispatch, navigate)
+>>>>>>> 09ece6a4667e0b16d142d145834b8292721cc9dd
     }
 
     return (

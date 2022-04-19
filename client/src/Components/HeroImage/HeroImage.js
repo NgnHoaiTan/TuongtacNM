@@ -5,6 +5,7 @@ import background from "../../Images/background.jpg";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import Slider from '../Slider/Slider';
+
 const useStyle = makeStyles((theme) => ({
     container: {
         marginTop: "40px",
