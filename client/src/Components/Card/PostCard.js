@@ -7,7 +7,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import CommentIcon from '@mui/icons-material/Comment';
 import { buttonViewColor, postColor } from "../../common/color.js";
 import { makeStyles } from '@mui/styles';
-
+import {Link} from 'react-router-dom';
 const useStyle = makeStyles((theme) => ({
     container: {
         padding: "10px",
@@ -27,8 +27,8 @@ const useStyle = makeStyles((theme) => ({
         fontSize: '12px',
     }
 }))
-const PostCard = () => {
-    console.log(buttonViewColor);
+const PostCard = (props) => {
+    const { post } = props;
     const classes = useStyle();
     return (
         <Card className={classes.container}>
@@ -40,25 +40,30 @@ const PostCard = () => {
                 }
                 title="Chorizo Paella"
                 subheader="March 20, 2022"
-                sx={{padding:1}}
+                sx={{ padding: 1 }}
             />
-            <CardMedia
-                component="img"
-                image={demoPost}
-                className={classes.cardimg}
-                alt="image post"
-                sx={{
-                    mx: "auto"
-                }}
+            
+                <CardMedia
+                    component="img"
+                    image={post.avatar}
+                    className={classes.cardimg}
+                    alt="image post"
+                    sx={{
+                        mx: "auto"
+                    }}
 
-            />
-            <CardContent sx={{
-                py: 1, px: 0
-            }}>
-                <Typography sx={{ fontWeight: 600 }}>
-                    Loài ếch giun nguyễn
-                </Typography>
-            </CardContent>
+                />
+            
+                <CardContent sx={{
+                    py: 1, px: 0
+                }}>
+                    
+                    <Typography sx={{ fontWeight: 600 }}>
+                        {post.title}
+                    </Typography>
+                    
+                </CardContent>
+            
             <CardActions disableSpacing sx={{
                 py: 0.5, px: 0
             }}>

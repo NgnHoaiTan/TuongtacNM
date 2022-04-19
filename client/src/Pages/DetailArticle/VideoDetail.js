@@ -1,11 +1,14 @@
-import React from 'react';
-import Interaction from '../../Components/Interaction/Interaction';
+import React, { useEffect } from 'react';
+
 import { makeStyles } from '@mui/styles';
 import userdemo from '../../Images/user5.jpg';
 import videoDemo from '../../assets/video/videodemo.mp4'
 import { createTheme } from '@mui/material/styles';
 import { Avatar, Box, Container, Typography } from '@mui/material';
-
+import InteractionVideo from '../../Components/Interaction/InteractionVideo';
+import { useParams } from 'react-router';
+import { fetchAsyncVideoById, getVideo } from '../../features/Slice/VideoSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const theme = createTheme();
 
@@ -13,7 +16,7 @@ const useStyle = makeStyles({
     root: {
         backgroundColor: '#EEEEEE',
         minHeight: '100vh',
-        
+
     },
     userinfo: {
         display: 'flex',
@@ -27,56 +30,69 @@ const useStyle = makeStyles({
 
 const VideoDetail = () => {
     const classes = useStyle();
-    
+    const dispatch = useDispatch();
+    const { id } = useParams();
+    const video = useSelector(getVideo);
+    useEffect(() => {
+        const dispatchCall = async () => {
+            await dispatch(fetchAsyncVideoById(id))
+        }
+        dispatchCall();
+    }, [dispatch, id])
     return (
-        <div className={classes.root}>
-            <Container maxWidth='md' sx={{
-                bgcolor: 'white',
-                py: 2,
-                
+        <>
+            {video !== {} &&
+                <div className={classes.root}>
+                    <Container maxWidth='md' sx={{
+                        bgcolor: 'white',
+                        py: 2,
 
-            }}>
-                <Box component='div' className={classes.userinfo}>
-                    <Avatar alt='user image' src={userdemo} sx={{ mr: 1 }} />
-                    <div className={classes.username}>
-                        <Typography sx={{
-                            fontWeight: 500
-                        }}>
-                            Nguyễn Hoài Tân
-                        </Typography>
-                        <Typography variant="body2" sx={{
-                            fontWeight: 300,
 
-                        }}>
-                            04/04/2022
-                        </Typography>
-                    </div>
-                </Box>
-                <Box component='div' className={classes.videoinfo}>
-                    <Typography className='title_of_post' sx={{ fontWeight: 500, fontSize: '18px', my: 1 }}>
-                        Khám phá thế giới động vật hoang dã
-                    </Typography>
-                    <Box className={classes.mui_player}>
-                        <video 
-                            src={videoDemo}
-                            controls
-                            style={{
-                                width: '100%',
-                                objectFit:'unset'
-                            }}
-                            
-                            type="video/mp4"
-                        />
-                    </Box>
-                </Box>
-                <div className={classes.horizon}>
+                    }}>
+                        <Box component='div' className={classes.userinfo}>
+                            <Avatar alt='user image' src={userdemo} sx={{ mr: 1 }} />
+                            <div className={classes.username}>
+                                <Typography sx={{
+                                    fontWeight: 500
+                                }}>
+                                    Nguyễn Hoài Tân
+                                </Typography>
+                                <Typography variant="body2" sx={{
+                                    fontWeight: 300,
 
+                                }}>
+                                    {video.date_upload}
+                                </Typography>
+                            </div>
+                        </Box>
+                        <Box component='div' className={classes.videoinfo}>
+                            <Typography className='title_of_post' sx={{ fontWeight: 500, fontSize: '18px', my: 1 }}>
+                                {video.title}
+                            </Typography>
+                            <Box className={classes.mui_player}>
+                                <video
+                                    src={video.videourl}
+                                    controls
+                                    style={{
+                                        width: '100%',
+                                        objectFit: 'unset'
+                                    }}
+                                    autoPlay
+                                    type="video/mp4"
+                                />
+                            </Box>
+                        </Box>
+                        <div className={classes.horizon}>
+
+                        </div>
+                        <Box component='div' className={classes.interaction}>
+                            <InteractionVideo />
+                        </Box>
+                    </Container>
                 </div>
-                <Box component='div' className={classes.interaction}>
-                    <Interaction />
-                </Box>
-            </Container>
-        </div>
+            }
+        </>
+
     );
 };
 

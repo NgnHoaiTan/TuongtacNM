@@ -44,39 +44,7 @@ const Explore = () => {
                     }}>
                         Khám phá ngay
                     </Typography>
-                    {/* <div className={classes.btnOption}>
-                        <Button
-                            sx={{
-                                color: 'white',
-                                borderBottom: "2px solid #2269D2",
-                                marginRight: '10px'
-                            }}
-                        >
-                            <Typography
-                                variant="body2"
-                                sx={{
-                                    fontWeight: 300,
-                                    fontSize: '13px'
-                                }}
-                            >
-                                Bài viết mới nhất
-                            </Typography>
-
-                        </Button>
-                        <Button sx={{
-                            color: 'white',
-                        }}>
-                            <Typography
-                                variant="body2"
-                                sx={{
-                                    fontWeight: 300,
-                                    fontSize: '13px'
-                                }}
-                            >
-                                Video mới nhất
-                            </Typography>
-                        </Button>
-                    </div> */}
+                    
                 </Box>
                 <Box >
                     <TabContext value={value}>

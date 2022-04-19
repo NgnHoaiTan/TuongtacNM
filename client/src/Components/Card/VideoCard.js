@@ -27,8 +27,8 @@ const useStyle = makeStyles((theme) => ({
         height: '150px',
     },
 }))
-const VideoCard = () => {
-    console.log(buttonViewColor);
+const VideoCard = (props) => {
+    const {video} = props;
     const classes = useStyle();
     return (
         <Card className={classes.container}>
@@ -45,9 +45,9 @@ const VideoCard = () => {
                 sx={{padding:1}}
             />
             <CardMedia
-                component="img"
+                component="video"
                 height="194"
-                image={demoPost}
+                src={video.videourl}
                 className={classes.cardimg}
                 alt="image video"
                 sx={{
@@ -56,10 +56,10 @@ const VideoCard = () => {
 
             />
             <CardContent sx={{
-                py:1, px:0
+                py:1, px:0,height:30
             }}>
                 <Typography sx={{fontWeight:600}}>
-                    Video Loài ếch giun nguyễn
+                    {video.title}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing sx={{

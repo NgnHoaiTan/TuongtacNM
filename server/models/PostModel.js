@@ -4,6 +4,10 @@ const schema = mongoose.Schema({
         type:String,
         //require:true
     },
+    avatar:{
+        type:String,
+        default:'https://4kwallpapers.com/images/walls/thumbs_2t/5114.jpg'
+    },
     // ten khoa hoc
     scientific_name:{
         type:String,
@@ -20,7 +24,8 @@ const schema = mongoose.Schema({
         //require:true
     },
     date_upload:{
-        type:String,
+        type:Date,
+        default: Date.now
         //require:true
     },
     // gioi
@@ -96,7 +101,11 @@ const schema = mongoose.Schema({
     user:{
         type:mongoose.Schema.Types.ObjectId,
         ref: 'user',
+        default: '625bf29d05a2408cf630d04e'
         //require:true
+    },
+    cloudinary_id: {
+        type: String
     }
     
 

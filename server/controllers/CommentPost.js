@@ -3,7 +3,15 @@ import {CommentPostModel} from "../models/CommentPostModel.js"
 export const getComments =async(req,res)=>{
     try{
         const comments = await CommentPostModel.find();
-        res.status(200).json(users); 
+        res.status(200).json(comments); 
+    }catch(err){
+        res.status(500).json({ error: err});
+    }
+};
+export const getCommentsByPost =async(req,res)=>{
+    try{
+        const comments = await CommentPostModel.find({post:req.params.postId});
+        res.status(200).json(comments); 
     }catch(err){
         res.status(500).json({ error: err});
     }

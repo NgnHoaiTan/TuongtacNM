@@ -16,8 +16,8 @@ const HomeUser = () => {
             <TabContext value={value}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider', padding: '10px 0 0 40px' }}>
                     <TabList onChange={handleChange} aria-label="" textColor='secondary' indicatorColor="secondary">
-                        <Tab label="Bài viết" value="1" />
-                        <Tab label="Video" value="2" />
+                        <Tab label="Bài viết" value="1" sx={{fontWeight:600,fontSize:'16px'}}/>
+                        <Tab label="Video" value="2" sx={{fontWeight:600,fontSize:'16px'}}/>
                     </TabList>
                 </Box>
                 <TabPanel value="1">

@@ -26,7 +26,7 @@ const Applayout = () => {
           <Route path=":id" element={<Layout page={VideoDetail} />} />
         </Route>
         <Route path="/user">
-          <Route path="" element={<Layout page={Userpage} />} />
+          <Route path=":id" element={<Layout page={Userpage} />} />
           <Route path="upload-video" element={<Layout page={UploadVideoUserPage} />} />
           <Route path="upload-article" element={<Layout page={UploadArticleUserPage} />} />
           <Route path="information" element={<Layout page={InforPersonalUserPage} />} />

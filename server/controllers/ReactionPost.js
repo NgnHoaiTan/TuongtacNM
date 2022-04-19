@@ -8,6 +8,23 @@ export const getReactions =async(req,res)=>{
         res.status(500).json({ error: err});
     }
 };
+export const getReactionsByPost =async(req,res)=>{
+    try{
+        const reactions = await ReactionPostModel.find({post:req.params.postId});
+        res.status(200).json(reactions); 
+    }catch(err){
+        res.status(500).json({ error: err});
+    }
+};
+export const getReactionInPostByUser =async(req,res)=>{
+    try{
+        const reactions = await ReactionPostModel.findOne({post:req.params.postId,user:req.params.userId});
+        res.status(200).json(reactions); 
+    }catch(err){
+        res.status(500).json({ error: err});
+    }
+};
+
 export const postReaction = async(req,res)=>{
     try{
         const newReaction = req.body;

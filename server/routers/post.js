@@ -1,6 +1,6 @@
 import express from 'express';
 import multer from 'multer';
-import { getPosts,getPost,createPost, deletePost } from '../controllers/Post.js';
+import { getPosts,getPost,getPostByUser,createPost, deletePost } from '../controllers/Post.js';
 const storage = multer.diskStorage({
     filename: (req, file, cb) => {
         cb(null, Date.now() + file.originalname)
@@ -17,7 +17,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 const router = express.Router();
 router.get('/', getPosts);
-router.get('/:id', getPost);;
+router.get('/:id', getPost);
+router.get('/getbyuser/:userId', getPostByUser);
 router.post('/', upload.array('image'), createPost);
 router.delete('/:id', deletePost);
 
