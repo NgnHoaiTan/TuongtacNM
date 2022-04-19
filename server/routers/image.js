@@ -13,7 +13,7 @@ const upload = multer({ storage: storage });
 const router = express.Router();
 
 router.get('/', getImages);
-router.get('/post/:id', getImagesByPost);
+router.get('/getbypost/:id', getImagesByPost);
 router.post('/', upload.single('image'), postImage);
 router.delete('/:id', deleteImage);
 

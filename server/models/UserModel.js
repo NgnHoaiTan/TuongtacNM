@@ -6,7 +6,7 @@ const schema = mongoose.Schema({
     },
     image: {
         type: String,
-        default: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMqI4dJM6gAS7v_jKJy0_bCkeqZpZ-_vPO67WSQpi-9wqkdqScFvd57VvMG3qS2NnbzXU&usqp=CAU"
+        default: "https://thumbs.dreamstime.com/b/portrait-handsome-smiling-young-man-folded-arms-smiling-joyful-cheerful-men-crossed-hands-isolated-studio-shot-172869765.jpg"
     },
     email:{
         type:String,

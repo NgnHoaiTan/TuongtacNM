@@ -30,7 +30,30 @@ export const getPostByUser = async (req, res) => {
 export const createPost = async (req, res) => {
     try {
         const newPost = req.body;
-        const post = new PostModel(newPost);
+        const avatar = await cloudinary.uploader.upload(req.files[0].path,{folder:'AnimalDiscovery/Post',resource_type: 'auto'}); 
+        const post = new PostModel({
+            title:req.body.title,
+            avatar:avatar.secure_url,
+            cloudinary_id:avatar.public_id,
+            scientific_name:req.body.scientific_name,
+            vietnamese_name:req.body.vietnamese_name,
+            region_name:req.body.region_name,
+            kingdom:req.body.kingdom,
+            phylum:req.body.phylum,
+            class:req.body.class,
+            order:req.body.order,
+            family:req.body.family,
+            distribution:req.body.distribution,
+            value_of_use:req.body.value_of_use,
+            status_creature:req.body.status_creature,
+            morphology:req.body.morphology,
+            ecology:req.body.ecology,
+            living_area:req.body.living_area,
+            latitude:req.body.latitude,
+            longitude:req.body.longitude,
+            state_of_maintainment:req.body.state_of_maintainment
+        });
+        await post.save();
         const files = req.files;
         for(const file of files){
             const {path} = file;
@@ -42,9 +65,7 @@ export const createPost = async (req, res) => {
             })
             newImage.save();
         }
-        //const result = await cloudinary.uploader.upload(req.file.path,{folder:'AnimalDiscovery/Post',resource_type: 'auto'});
-        //console.log(result);
-        await post.save();
+        
         res.status(200).json(post);
     }catch (err) {
         res.status(500).json({ error: err });
@@ -55,6 +76,14 @@ export const deletePost = async (req, res) => {
     try {
         const postId = req.params.id;
         const post = await PostModel.findOneAndDelete({ _id: postId });
+       
+        if(post.imageurl){
+            const images = await ImagesModel.deleteMany({post:postId})
+            for(const image of images){
+                await cloudinary.uploader.destroy(image.cloudinary_id);
+            }  
+        }
+          
         res.status(200).json(post);
     } catch (err) {
         res.status(500).json({ error: err });

@@ -7,14 +7,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import avtUser from "../../Images/user5.jpg";
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import PropTypes from 'prop-types';
-
+import { Link } from 'react-router-dom';
 import { AppBar, Toolbar, Box, IconButton, Typography, Container, Avatar, Tooltip, Button } from '@mui/material'
-const pages = [
-    <HomeIcon sx={{ fontSize: "32px"}} />,
-    <ArticleIcon sx={{ fontSize: "30px" }} />,
-    <VideoLibraryIcon sx={{ fontSize: "30px" }} />,
-    <HelpIcon sx={{ fontSize: "30px" }} />
-]
+
 function ElevationScroll(props) {
     const { children, window } = props;
     // Note that you normally won't need to set the window ref as useScrollTrigger
@@ -61,33 +56,83 @@ const Header = (props) => {
                         {/* <Box>
                          menu icon when screen is small 
                     </Box> */}
-                        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: { md: 'center' },alignItems:'center', marginRight:{
-                            md:'80px'
-                        } }}>
-                            {pages.map((page,index) => (
+                        <Box sx={{
+                            flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: { md: 'center' }, alignItems: 'center', marginRight: {
+                                md: '80px'
+                            }
+                        }}>
+                            <Link to='/'>
                                 <Button
-                                    key={index}
-                                    sx={{ my: 0, mx: 1,py:2,px:3, color: 'white', display: 'block', 
-                                        alignItem:'center',
-                                        lineHeight:'0',
-                                        '&:hover':{
-                                        backgroundColor:'black'
-                                    } }}
+                                    sx={{
+                                        my: 0, mx: 1, py: 2, px: 3, color: 'white', display: 'block',
+                                        alignItem: 'center',
+                                        lineHeight: '0',
+                                        '&:hover': {
+                                            backgroundColor: 'black'
+                                        }
+                                    }}
                                 >
-                                    {page}
+                                    <HomeIcon sx={{ fontSize: "32px" }} />
                                 </Button>
-                            ))}
+                            </Link>
+                            <Link to='/post'>
+                                <Button
+                                    sx={{
+                                        my: 0, mx: 1, py: 2, px: 3, color: 'white', display: 'block',
+                                        alignItem: 'center',
+                                        lineHeight: '0',
+                                        '&:hover': {
+                                            backgroundColor: 'black'
+                                        }
+                                    }}
+                                >
+                                    <ArticleIcon sx={{ fontSize: "30px" }} />
+                                </Button>
+                            </Link>
+                            <Link to='/video'>
+                                <Button
+                                    sx={{
+                                        my: 0, mx: 1, py: 2, px: 3, color: 'white', display: 'block',
+                                        alignItem: 'center',
+                                        lineHeight: '0',
+                                        '&:hover': {
+                                            backgroundColor: 'black'
+                                        }
+                                    }}
+                                >
+                                    <VideoLibraryIcon sx={{ fontSize: "30px" }} />
+                                </Button>
+                            </Link>
+                            <Link to='/'>
+                                <Button
+                                    sx={{
+                                        my: 0, mx: 1, py: 2, px: 3, color: 'white', display: 'block',
+                                        alignItem: 'center',
+                                        lineHeight: '0',
+                                        '&:hover': {
+                                            backgroundColor: 'black'
+                                        }
+                                    }}
+                                >
+                                    <HelpIcon sx={{ fontSize: "30px" }} />
+                                </Button>
+                            </Link>
+
+
                         </Box>
                         {/* avatar */}
                         <Box >
-                            <IconButton disableRipple sx={{m:0,p:0}}>
-                                <Avatar
-                                    alt="avatar user"
-                                    src={avtUser}
+                            <Link to='/user'>
+                                <IconButton disableRipple sx={{ m: 0, p: 0 }}>
+                                    <Avatar
+                                        alt="avatar user"
+                                        src={avtUser}
 
-                                />
-                                <MenuIcon sx={{ color: "white" }} />    
-                            </IconButton>
+                                    />
+                                    <MenuIcon sx={{ color: "white" }} />
+                                </IconButton>
+                            </Link>
+
                         </Box>
                     </Toolbar>
                 </Container>

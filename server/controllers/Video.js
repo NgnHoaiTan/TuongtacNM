@@ -17,6 +17,15 @@ export const getVideo = async (req, res) => {
         res.status(500).json({ error: err});
     }
 };
+export const getVideoByUser = async (req, res) => {
+    try {
+        const videos = await VideoModel.find({ user: req.params.userId });
+        
+        res.status(200).json(videos);        
+    } catch (err) {
+        res.status(500).json({ error: err});
+    }
+};
 export const createVideo = async (req, res) => {
     try {
         const result = await cloudinary.uploader.upload(req.file.path, { folder: 'AnimalDiscovery/Video', resource_type: 'auto' });
