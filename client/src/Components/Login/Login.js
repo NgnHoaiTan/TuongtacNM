@@ -26,7 +26,7 @@ const Login = () => {
     const navigate = useNavigate()
     const { isLoading, error } = useSelector(getlogin)
     const loggedin = useSelector(getresult);
-    console.log(loggedin);
+    console.log(isLoading, error);
    
     if(Object.keys(loggedin).length !== 0){
         navigate('/');

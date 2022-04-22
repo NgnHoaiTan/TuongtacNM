@@ -21,6 +21,15 @@ export const AsyncLogin = createAsyncThunk('auth/AsyncLogin', async (data) => {
     })
     return response.data;
 })
+export const AsyncRegister = createAsyncThunk('auth/AsyncRegister', async (data) => {
+    const response = await Axios.post('accounts/register', {
+        username: data.username,
+        password: data.password,
+        name: data.fullname,
+        phone_number: data.phonenumber,
+    })
+    return response.data;
+})
 const authReducer = createSlice({
     name: 'auth',
     initialState,
@@ -73,7 +82,26 @@ const authReducer = createSlice({
         [AsyncLogin.rejected]: (state) => {
             console.log('Checkout account failure')
             state.login.error = true;
-        }
+        },
+
+        
+        [AsyncRegister.pending]: () => {
+            console.log('Start checkout account')
+
+        },
+        [AsyncRegister.fulfilled]: (state) => {
+            console.log('Checkout account success')
+            state.register.isLoading = false;
+            state.register.error = false;
+            state.register.success= true;
+
+
+        },
+        [AsyncRegister.rejected]: (state) => {
+            console.log('Checkout account failure')
+            state.register.error = true;
+        },
+        
     }
 
 })

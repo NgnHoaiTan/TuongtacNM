@@ -1,20 +1,13 @@
-import { registerPending, registerSuccess, registerFail } from "./authSlice";
+import { unwrapResult } from "@reduxjs/toolkit";
+import { registerPending, registerSuccess, registerFail, AsyncRegister } from "./authSlice";
 
-export const registerUser = (user, dispatch, navigate) => {
+export const registerUser = async(user, dispatch, navigate) => {
     dispatch(registerPending())
     try {
-        // call api xử lý
-        if (user) {
-            setTimeout(() => {
-                console.log(user);
-                dispatch(registerSuccess())
-                navigate("/welcome")
-            }, 2000)
-        } else {
-            setTimeout(() => {
-                dispatch(registerFail())
-            }, 2000)
-        }
+        // call server xử lý
+        const rawresult = await dispatch(AsyncRegister(user));
+        const result = unwrapResult(rawresult);
+        navigate('/welcome');
     } catch (error) {
         dispatch(registerFail())
     }
