@@ -2,9 +2,18 @@ import React from 'react'
 import { Card, CardContent, CardActions, Typography, Button, IconButton } from '@mui/material'
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import { Link } from 'react-router-dom';
+import { makeStyles } from '@mui/styles';
+const useStyle = makeStyles({
 
-
+    nameofarticle: {
+        display: 'box',
+        lineClamp: 2,
+        boxOrient: 'vertical',
+        overflow: 'hidden',
+    }
+})
 const VideoUser = ({ video }) => {
+    const classes = useStyle();
     return (
         <Card style={{ backgroundColor: '#191919', borderRadius: '10px' }}>
             <div>
@@ -27,17 +36,14 @@ const VideoUser = ({ video }) => {
                         <Typography
                             style={{
                                 color: '#fff',
-                                height: '20px',
-                                overflow: 'hidden',
-                                display: '-webkit-box',
-                                WebkitBoxOrient: 'vertical',
-                                WebkitLineClamp: '2',
                                 fontSize: '17px',
-                                fontWeight: 500
+                                fontWeight: 500,
+                                height:'50px'
                             }}
-
+                            
                             component='span'
                             gutterBottom
+                            className={classes.nameofarticle}
                         >
                             {video.title}
                         </Typography>

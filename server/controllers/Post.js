@@ -51,7 +51,8 @@ export const createPost = async (req, res) => {
             living_area:req.body.living_area,
             latitude:req.body.latitude,
             longitude:req.body.longitude,
-            state_of_maintainment:req.body.state_of_maintainment
+            state_of_maintainment:req.body.state_of_maintainment,
+            user:req.body.user
         });
         await post.save();
         const files = req.files;
@@ -76,14 +77,15 @@ export const deletePost = async (req, res) => {
     try {
         const postId = req.params.id;
         const post = await PostModel.findOneAndDelete({ _id: postId });
-       
-        if(post.imageurl){
-            const images = await ImagesModel.deleteMany({post:postId})
-            for(const image of images){
-                await cloudinary.uploader.destroy(image.cloudinary_id);
+        const images = await ImagesModel.find({post:postId})
+        if(images){    
+            for(const image of images){ 
+                const imagedel = await ImagesModel.findOneAndDelete({post:postId});
+                await cloudinary.uploader.destroy(imagedel.cloudinary_id);
+                
             }  
         }
-          
+        await cloudinary.uploader.destroy(post.cloudinary_id);
         res.status(200).json(post);
     } catch (err) {
         res.status(500).json({ error: err });

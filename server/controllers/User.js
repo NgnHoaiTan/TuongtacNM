@@ -45,6 +45,7 @@ export const updateUser = async (req, res) => {
         let user = await UserModel.findById(req.params.id);
         let updateUser = req.body;
         if (req.file !== undefined){
+            
             await cloudinary.uploader.destroy(user.cloudinary_id);
             const result = await cloudinary.uploader.upload(req.file.path, { folder: 'AnimalDiscovery/User', resource_type: 'auto' });
             updateUser.image = result.secure_url;

@@ -7,7 +7,7 @@ import { useCallback, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createAsyncVideo } from '../../features/Slice/VideoSlice'
 import { unwrapResult } from '@reduxjs/toolkit';
-const UploadVideoUser = () => {
+const UploadVideoUser = ({user}) => {
     const dispatch = useDispatch();
     const [fileVideo, setFileVideo] = useState('')
     const [description, setDescription] = useState('')
@@ -16,25 +16,37 @@ const UploadVideoUser = () => {
     const [loading, setLoading] = useState('');
     const [createResult, setResult] = useState(false);
     const [openToast, setOpen] = useState(false);
-
+    const [reviewVid, setReviewVid] = useState()
     const handleCloseToast = () => {
         setOpen(false);
     }
     
+    const handleUploadFile=(e)=>{
+        let file = e.target.files[0];
+        const filesFormats = ["video/mp4"];
+        if (file) {
+            if (filesFormats.includes(file.type)) {
+                setFileVideo(file)
+                const objectURL = URL.createObjectURL(file);
+                setReviewVid(objectURL);
+                // free memory when ever this component is unmounted
+                return () => URL.revokeObjectURL(objectURL);
+            }
+            else{
+                setVideoErr('Chỉ hỗ trợ định dạng video/mp4');
+                
+            }
+         }
+    }
     const handleSubmit = async () => {
         console.log(fileVideo);
         console.log(description);
         setLoading(true);
         if (fileVideo) {
-            const fileFormats = ["video/mp4"];
-            const isRightFormat = fileFormats.includes(fileVideo.type);
-            if (!isRightFormat) {
-                setVideoErr('Chỉ hỗ trợ định dạng video/mp4');
-                return false;
-            }
             const formdata = new FormData();
             formdata.append('title', description);
             formdata.append('video', fileVideo);
+            formdata.append('user',user._id)
             try {
                 const actionresult = await dispatch(createAsyncVideo(formdata));
                 const result = unwrapResult(actionresult);
@@ -42,6 +54,7 @@ const UploadVideoUser = () => {
                 setResult(true);
                 setError(false);
                 setFileVideo('');
+                setReviewVid('')
                 setDescription('');
             } catch (err) {
                 console.log(err);
@@ -84,7 +97,7 @@ const UploadVideoUser = () => {
                             objectFit: 'unset'
                         }}
                         type="video/mp4"
-                        src={fileVideo ? window.URL.createObjectURL(fileVideo) : ''}
+                        src={reviewVid}
                         controls={fileVideo}
                     />
 
@@ -106,7 +119,7 @@ const UploadVideoUser = () => {
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px' }}>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
 
-                        <label htmlFor="upload-video" style={{ padding: '2px 18px', backgroundColor: '#FF6948', borderRadius: '5px', cursor: 'pointer' }}>
+                        <label htmlFor="video" style={{ padding: '2px 18px', backgroundColor: '#FF6948', borderRadius: '5px', cursor: 'pointer' }}>
                             <CameraEnhanceIcon sx={{ color: '#fff' }} />
                         </label>
                         <label
@@ -118,17 +131,17 @@ const UploadVideoUser = () => {
                                 borderRadius: '5px',
                                 cursor: 'pointer'
                             }}
-                            htmlFor="upload-video"
+                            htmlFor="video"
                         >
                             Chọn video
                         </label>
                         <input
-                            onChange={useMemo((e) => {
-                                setFileVideo(e.target.files[0])
-                                setVideoErr('');
-                            },[fileVideo])}
+                            id='video'
+                            onChange={(e) => {
+                                handleUploadFile(e)
+                            }}
                             style={{ display: 'none' }}
-                            type='file' id='upload-video'
+                            type='file'
                         />
                     </div>
                     <div>

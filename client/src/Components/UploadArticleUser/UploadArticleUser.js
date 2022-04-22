@@ -12,7 +12,7 @@ import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import { useSelector, useDispatch } from 'react-redux';
 import { unwrapResult } from "@reduxjs/toolkit";
 import { createAsyncPost, getListPosts } from '../../features/Slice/PostSlice';
-const UploadArticleUser = () => {
+const UploadArticleUser = ({ user }) => {
     const dispatch = useDispatch();
     const posts = useSelector(getListPosts);
     const [imageErr, setImageErr] = useState('');
@@ -42,10 +42,10 @@ const UploadArticleUser = () => {
     })
 
     const [baoTon, setBaoTon] = useState({
-        iuc: 'không nằm trong danh mục bảo tồn',
-        sachdo: 'không nằm trong danh mục bảo tồn',
-        ndcp: 'không nằm trong danh mục bảo tồn',
-        cites: 'không nằm trong danh mục bảo tồn',
+        iuc: '',
+        sachdo: '',
+        ndcp: '',
+        cites: '',
     })
 
     const [images, setImages] = useState([])
@@ -53,12 +53,39 @@ const UploadArticleUser = () => {
     const handleCloseToast = () => {
         setOpen(false);
     }
+    const refreshStatePost = () => {
+        setArticleValue(() => ({
+            title: '',
+            scientific_name: '',
+            vietnamese_name: '',
+            region_name: '',
+            kingdom: '',
+            phylum: '',
+            class: '',
+            family: '',
+            order: '',
+            value_of_use: '',
+            distribution: '',
+            status_creature: '',
+            morphology: '',
+            ecology: '',
+            habitat: '',
+            living_area: '',
+            latitude: 0,
+            longitude: 0
+        }));
+        setBaoTon(() => ({
+            iuc: '',
+            sachdo: '',
+            ndcp: '',
+            cites: '',
+        }))
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        console.log(articleValue);
-        console.log(baoTon);
-        console.log(images);
+        
         const formdata = new FormData();
         if (images.length > 0) {
             formdata.append('title', articleValue.title)
@@ -87,13 +114,16 @@ const UploadArticleUser = () => {
                 console.log(image);
                 formdata.append('image', image)
             })
-
+            formdata.append('user', user._id)
             try {
                 const actionresult = await dispatch(createAsyncPost(formdata));
                 const result = unwrapResult(actionresult);
                 setOpen(true);
                 setResult(true);
                 setError(false);
+                setTimeout(()=>{
+                    window.location.reload();
+                },2500)
             } catch (err) {
                 console.log(err);
                 setOpen(true);
@@ -107,7 +137,7 @@ const UploadArticleUser = () => {
 
 
     }
-
+    
     return (
         <>
             <form style={{ margin: '30px 80px', borderBottom: '1px solid #ccc' }} onSubmit={handleSubmit} encType="multipart/form-data" >
@@ -115,12 +145,14 @@ const UploadArticleUser = () => {
                     width='100%'
                     errorSubmit='Vui lòng nhập tiêu đề'
                     title='Tiêu đề bài viết'
+                    value={articleValue.title}
                     handleChange={(e) => setArticleValue({ ...articleValue, title: e.target.value })}
                 />
                 <Input
                     width='50%'
                     errorSubmit='Vui lòng nhập tên khoa học'
                     title='Tên khoa học'
+                    value={articleValue.scientific_name}
                     handleChange={(e) => setArticleValue({ ...articleValue, scientific_name: e.target.value })}
                 />
                 <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
@@ -129,6 +161,7 @@ const UploadArticleUser = () => {
                             width='100%'
                             errorSubmit='Vui lòng nhập tên tiếng việt'
                             title='Tên tiếng việt'
+                            value={articleValue.vietnamese_name}
                             handleChange={(e) => setArticleValue({ ...articleValue, vietnamese_name: e.target.value })}
                         />
                     </div>
@@ -137,6 +170,7 @@ const UploadArticleUser = () => {
                             width='100%'
                             errorSubmit='Vui lòng nhập tên địa phương'
                             title='Tên địa phương'
+                            value={articleValue.region_name}
                             handleChange={(e) => setArticleValue({ ...articleValue, region_name: e.target.value })}
                         />
                     </div>
@@ -146,60 +180,70 @@ const UploadArticleUser = () => {
                         width='40%'
                         errorSubmit='Vui lòng nhập giới'
                         title='Giới'
+                        value={articleValue.kingdom}
                         handleChange={(e) => setArticleValue({ ...articleValue, kingdom: e.target.value })}
                     />
                     <Input
                         width='40%'
                         errorSubmit='Vui lòng nhập ngành'
                         title='Ngành'
+                        value={articleValue.phylum}
                         handleChange={(e) => setArticleValue({ ...articleValue, phylum: e.target.value })}
                     />
                     <Input
                         width='40%'
                         errorSubmit='Vui lòng nhập lớp'
                         title='Lớp'
+                        value={articleValue.class}
                         handleChange={(e) => setArticleValue({ ...articleValue, class: e.target.value })}
                     />
                     <Input
                         width='40%'
                         errorSubmit='Vui lòng nhập họ'
                         title='Họ'
+                        value={articleValue.family}
                         handleChange={(e) => setArticleValue({ ...articleValue, family: e.target.value })}
                     />
                     <Input
                         width='40%'
                         errorSubmit='Vui lòng nhập bộ'
                         title='Bộ'
+                        value={articleValue.order}
                         handleChange={(e) => setArticleValue({ ...articleValue, order: e.target.value })}
                     />
                     <Input
                         width='50%'
                         errorSubmit='Vui lòng nhập giá trị sử dụng'
                         title='Giá trị sử dụng'
+                        value={articleValue.value_of_use}
                         handleChange={(e) => setArticleValue({ ...articleValue, value_of_use: e.target.value })}
                     />
                     <Input
                         width='50%'
                         errorSubmit='Vui lòng nhập nơi phân bố'
                         title='Phân bố'
+                        value={articleValue.distribution}
                         handleChange={(e) => setArticleValue({ ...articleValue, distribution: e.target.value })}
                     />
                     <Input
                         width='40%'
                         errorSubmit='Vui lòng nhập tình trạng mẫu vật'
                         title='Tình trạng mẫu vật'
+                        value={articleValue.status_creature}
                         handleChange={(e) => setArticleValue({ ...articleValue, status_creature: e.target.value })}
                     />
                     <TextArea
                         row={4}
                         title='Đặc điểm hình thái'
                         errorSubmit='Vui lòng nhập đặc điểm hình thái'
+                        value={articleValue.morphology}
                         handleChange={(e) => setArticleValue({ ...articleValue, morphology: e.target.value })}
                     />
                     <TextArea
                         row={2}
                         title='Đặc điểm sinh thái'
                         errorSubmit='Vui lòng nhập đặc điểm sinh thái'
+                        value={articleValue.ecology}
                         handleChange={(e) => setArticleValue({ ...articleValue, ecology: e.target.value })}
                     />
                 </div>
@@ -210,17 +254,20 @@ const UploadArticleUser = () => {
                             normal
                             width='50%'
                             title='Theo IUC'
+                            value={baoTon.iuc}
                             handleChange={(e) => setBaoTon({ ...baoTon, iuc: e.target.value })}
                         />
                         <Input
                             normal
                             width='50%'
+                            value={baoTon.sachdo}
                             title='Theo Sách đỏ Việt Nam'
                             handleChange={(e) => setBaoTon({ ...baoTon, sachdo: e.target.value })}
                         />
                         <Input
                             normal
                             width='50%'
+                            value={baoTon.ndcp}
                             title='Theo nghị định 32/2006/NĐCP'
                             handleChange={(e) => setBaoTon({ ...baoTon, ndcp: e.target.value })}
                         />
@@ -228,6 +275,7 @@ const UploadArticleUser = () => {
                             normal
                             width='50%'
                             title='Theo CITES'
+                            value={baoTon.cites}
                             handleChange={(e) => setBaoTon({ ...baoTon, cites: e.target.value })}
                         />
                     </div>
@@ -239,6 +287,7 @@ const UploadArticleUser = () => {
                             normal
                             width='40%'
                             errorSubmit='Vui lòng nhập vĩ độ!'
+                            value={articleValue.latitude}
                             title='Vĩ độ (Latitude)'
                             handleChange={(e) => setArticleValue({ ...articleValue, latitude: e.target.value })}
                         />
@@ -247,6 +296,7 @@ const UploadArticleUser = () => {
                             width='40%'
                             title='Kinh độ (Longitude)'
                             errorSubmit='Vui lòng nhập kinh độ!'
+                            value={articleValue.longitude}
                             handleChange={(e) => setArticleValue({ ...articleValue, longitude: e.target.value })}
                         />
 
@@ -255,12 +305,14 @@ const UploadArticleUser = () => {
                 <TextArea
                     row={2}
                     title='Sinh cảnh'
+                    value={articleValue.habitat}
                     errorSubmit='Vui lòng nhập sinh cảnh'
                     handleChange={(e) => setArticleValue({ ...articleValue, habitat: e.target.value })}
                 />
                 <TextArea
                     row={2}
                     title='Địa điểm'
+                    value={articleValue.living_area}
                     errorSubmit='Vui lòng nhập địa điểm'
                     handleChange={(e) => setArticleValue({ ...articleValue, living_area: e.target.value })}
                 />
@@ -348,8 +400,8 @@ const UploadArticleUser = () => {
                                 </label>
                             </div> */}
                         </div>
-                        {!loading&&<Button type='submit' variant="contained" size='large'>Đăng bài</Button>}
-                        {loading&&<Button  variant="contained" size='large'>Đang khởi tạo</Button>}
+                        {!loading && <Button type='submit' variant="contained" size='large'>Đăng bài</Button>}
+                        {loading && <Button variant="contained" size='large'>Đang khởi tạo</Button>}
                     </div>
                 </div>
             </form>
@@ -380,7 +432,7 @@ const UploadArticleUser = () => {
                     <Snackbar
                         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                         open={openToast}
-                        autoHideDuration={6000}
+                        autoHideDuration={2000}
                         onClose={handleCloseToast}
                     >
                         <MuiAlert elevation={6} severity="success" variant="filled" >
@@ -394,7 +446,7 @@ const UploadArticleUser = () => {
                     <Snackbar
                         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                         open={openToast}
-                        autoHideDuration={6000}
+                        autoHideDuration={2000}
                         onClose={handleCloseToast}
                     >
                         <MuiAlert elevation={6} severity="error" variant="filled" >

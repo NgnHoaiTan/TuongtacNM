@@ -6,7 +6,7 @@ const schema = mongoose.Schema({
     },
     image: {
         type: String,
-        default: "https://thumbs.dreamstime.com/b/portrait-handsome-smiling-young-man-folded-arms-smiling-joyful-cheerful-men-crossed-hands-isolated-studio-shot-172869765.jpg"
+        default: "https://res.cloudinary.com/hoaitandev/image/upload/v1650636611/AnimalDiscovery/User/istockphoto-1200677760-612x612_kfgufs.jpg"
     },
     email:{
         type:String,
@@ -22,7 +22,7 @@ const schema = mongoose.Schema({
     },
     gender:{
         type:Boolean,
-        default:0
+        default:false,
     },
     introduce:{
         type:String,
@@ -30,16 +30,15 @@ const schema = mongoose.Schema({
     education:{
         type:String,
     },
-    workplace:{
-        type:String,
-    },
+    
     account:{
         type:mongoose.Schema.Types.ObjectId,
         ref: 'account',
         // require:true
     },
     cloudinary_id: {
-        type: String
+        type: String,
+        default:'istockphoto-1200677760-612x612_kfgufs'
     } 
 
 },{

@@ -37,10 +37,10 @@ const Applayout = () => {
               <Route path=":id" element={<Layout page={VideoDetail} />} />
             </Route>
             <Route path="/user">
-              <Route path=":id" element={<Layout page={Userpage} />} />
-              <Route path="upload-video" element={<Layout page={UploadVideoUserPage} />} />
-              <Route path="upload-article" element={<Layout page={UploadArticleUserPage} />} />
-              <Route path="information" element={<Layout page={InforPersonalUserPage} />} />
+              <Route path=":userId" element={<Layout page={Userpage} />} />
+              <Route path="upload-video/:userId" element={<Layout page={UploadVideoUserPage} />} />
+              <Route path="upload-article/:userId" element={<Layout page={UploadArticleUserPage} />} />
+              <Route path="information/:userId" element={<Layout page={InforPersonalUserPage} />} />
             </Route>
 
           </>

@@ -14,6 +14,21 @@ export const fetchAsyncUserByAccount = createAsyncThunk('user/fetchAsyncUserByAc
     const response = await Axios.get(`users/getbyaccount/${accountId}`);
     return response.data;
 });
+export const fetchAsyncUserById = createAsyncThunk('user/fetchAsyncUserById',async(userId)=>{
+    const response = await Axios.get(`users/${userId}`);
+    return response.data;
+});
+export const AsyncUpdateUser = createAsyncThunk('user/AsyncUpdateUser',async({formdata,userId})=>{
+    const response = await Axios.put(`users/${userId}`,
+        formdata,
+        {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        }
+    );
+    return response.data;
+});
 
 const UserSlice = createSlice({
     name:'user',
@@ -40,11 +55,30 @@ const UserSlice = createSlice({
                 user:action.payload
             }
         },
+        [fetchAsyncUserById.fulfilled]:(state,action)=>{
+            console.log('Finish to fetch user by id');
+            return{
+                ...state,
+                user:action.payload
+            }
+        },
+        [AsyncUpdateUser.fulfilled]:()=>{
+            console.log('Update information successfully')
+        },
+
+
         [fetchAsyncUsers.rejected]:()=>{
             console.log('Fetch list user rejected');
         },
         [fetchAsyncUserByAccount.rejected]:()=>{
             console.log('Fetch user by account rejected');
+        },
+        [fetchAsyncUserById.rejected]:()=>{
+            console.log('fetch user by id rejected');
+           
+        },
+        [AsyncUpdateUser.rejected]:()=>{
+            console.log('Update information rejected');
         },
     }
 });

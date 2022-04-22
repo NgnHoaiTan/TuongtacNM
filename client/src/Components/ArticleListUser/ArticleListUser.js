@@ -9,10 +9,11 @@ import ArticleUser from './ArticleUser/ArticleUser'
 
 const ArticleListUser = () => {
     const dispatch = useDispatch();
+    const {userId} = useParams();
     const articleUser = useSelector(getListPosts);
     console.log(articleUser);
     useEffect(async()=>{
-        dispatch(fetchAsyncPostByUser('625bf29d05a2408cf630d04e'));  
+        dispatch(fetchAsyncPostByUser(userId));  
     },[])
     
     return (

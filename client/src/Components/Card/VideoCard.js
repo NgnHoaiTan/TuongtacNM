@@ -7,6 +7,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import CommentIcon from '@mui/icons-material/Comment';
 import { buttonViewColor, postColor } from "../../common/color.js";
 import { makeStyles } from '@mui/styles';
+import { Link } from 'react-router-dom';
 
 const useStyle = makeStyles((theme) => ({
     container: {
@@ -28,7 +29,7 @@ const useStyle = makeStyles((theme) => ({
     },
 }))
 const VideoCard = (props) => {
-    const {video} = props;
+    const { video } = props;
     const classes = useStyle();
     return (
         <Card className={classes.container}>
@@ -42,28 +43,34 @@ const VideoCard = (props) => {
                 }
                 title="Chorizo Paella"
                 subheader="March 20, 2022"
-                sx={{padding:1}}
+                sx={{ padding: 1 }}
             />
-            <CardMedia
-                component="video"
-                height="194"
-                src={video.videourl}
-                className={classes.cardimg}
-                alt="image video"
-                sx={{
-                    mx: "auto"
-                }}
+            <Link to={`video/${video._id}`}>
+                <CardMedia
+                    component="video"
+                    height="194"
+                    src={video.videourl}
+                    className={classes.cardimg}
+                    alt="image video"
+                    sx={{
+                        mx: "auto"
+                    }}
 
-            />
-            <CardContent sx={{
-                py:1, px:0,height:30
-            }}>
-                <Typography sx={{fontWeight:600}}>
-                    {video.title}
-                </Typography>
-            </CardContent>
+                />
+            </Link>
+
+            <Link to={`video/${video._id}`}>
+                <CardContent sx={{
+                    py: 1, px: 0, height: 30
+                }}>
+                    <Typography sx={{ fontWeight: 600 }}>
+                        {video.title}
+                    </Typography>
+                </CardContent>
+            </Link>
+
             <CardActions disableSpacing sx={{
-                py:0.5,px:0
+                py: 0.5, px: 0
             }}>
                 <IconButton sx={{
                     color: 'white'
@@ -72,8 +79,8 @@ const VideoCard = (props) => {
                     {/* if react */}
                     {/* FavoriteIcon */}
                     <Typography variant="p" sx={{
-                        fontSize:'16px',
-                        ml:0.5
+                        fontSize: '16px',
+                        ml: 0.5
                     }}>
                         150
                     </Typography>
@@ -83,8 +90,8 @@ const VideoCard = (props) => {
                 }}>
                     <CommentIcon />
                     <Typography variant="p" sx={{
-                        fontSize:'16px',
-                        ml:0.5
+                        fontSize: '16px',
+                        ml: 0.5
                     }}>
                         50
                     </Typography>

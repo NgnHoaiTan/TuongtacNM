@@ -1,4 +1,4 @@
-import { Grid,Button,Typography } from '@mui/material';
+import { Grid, Button, Typography } from '@mui/material';
 import React from 'react';
 import VideoCard from '../Card/VideoCard';
 import { makeStyles } from '@mui/styles';
@@ -17,29 +17,22 @@ const NewestPost = () => {
     const videos = useSelector(getListVideos);
     return (
         <>
-            <Grid container className={classes.gridcontainer} spacing={4}>
+            <Grid container className={classes.gridcontainer} spacing={3}>
                 {videos && videos.length > 0 &&
                     <>
                         <Grid item md={3}>
-                            <Link to={`video/${videos[0]._id}`}>
-                                <VideoCard video={videos[0]} />
-                            </Link>
+                            <VideoCard video={videos[0]} />
                         </Grid>
                         <Grid item md={3}>
-                            <Link to={`video/${videos[1]._id}`}>
-                                <VideoCard video={videos[1]} />
-                            </Link>
+                            <VideoCard video={videos[1]} />
                         </Grid>
                         <Grid item md={3}>
-                            <Link to={`video/${videos[2]._id}`}>
-                                <VideoCard video={videos[2]} />
-                            </Link>
+                            <VideoCard video={videos[2]} />
                         </Grid>
                         <Grid item md={3}>
-                            <Link to={`video/${videos[3]._id}`}>
-                                <VideoCard video={videos[3]} />
-                            </Link>
+                            <VideoCard video={videos[3]} />
                         </Grid>
+
                     </>}
             </Grid>
             <div className={classes.btnseemore}>

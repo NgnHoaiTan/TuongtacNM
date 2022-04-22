@@ -1,7 +1,7 @@
 import { InputBase, Typography } from '@mui/material'
 import React from 'react'
 
-const Infor = ({ title, content,setInfo,name }) => {
+const TextAreaInput = ({ title, content,setInfo,name }) => {
     const handleInput =async(e)=>{
         let field = e.target.id;
         let value = e.target.value;
@@ -21,11 +21,11 @@ const Infor = ({ title, content,setInfo,name }) => {
                 </Typography>
             </div>
             <div style={{ flex: '1', backgroundColor: '#5EC39F', borderRadius: '5px' }}>
-                <InputBase id={name} variant='body1' sx={{ color: '#fff', padding: '5px 0 5px 10px' }} defaultValue={content?content:" "} 
+                <InputBase multiline  id={name} fullWidth  style={{ color: '#fff', padding: '5px 0 5px 10px' }} defaultValue={content?content:" "} 
                 onChange={(e)=>handleInput(e)}/>
             </div>
         </div>
     )
 }
 
-export default Infor
+export default TextAreaInput;

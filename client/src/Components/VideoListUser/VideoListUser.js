@@ -3,18 +3,19 @@ import { Grid } from '@mui/material'
 import VideoUser from './VideoUser/VideoUser'
 import { fetchAsyncVideoByUser,getListVideos } from '../../features/Slice/VideoSlice'
 import { useDispatch,useSelector } from 'react-redux'
-
+import { useParams } from 'react-router'
 const VideoListUser = () => {
     const dispatch = useDispatch();
     const videoUser = useSelector(getListVideos);
-    console.log(videoUser);
+    const {userId} = useParams()
+    console.log(userId);
     useEffect(async()=>{
-        await dispatch(fetchAsyncVideoByUser('625bf29d05a2408cf630d04e'));
+        await dispatch(fetchAsyncVideoByUser(userId));
     },[])
     return (
         <Grid container spacing={3}>
             {videoUser&&videoUser.map((video, index) => (
-                <Grid key={index} item xs={12} lg={4}>
+                <Grid key={index} item xs={6} lg={4}>
                     <VideoUser video={video} />
                 </Grid>
             ))}
