@@ -14,6 +14,8 @@ import { useParams } from 'react-router';
 import { fetchAsyncPostById, getPost } from '../../features/Slice/PostSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import InteractionPost from '../../Components/Interaction/InteractionPost';
+import {  fetchAsyncAuthUserById, getAuthUser, getUser } from '../../features/Slice/UserSlice';
+import { Link } from 'react-router-dom';
 
 const theme = createTheme();
 
@@ -83,16 +85,22 @@ const PostDetail = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
     const post = useSelector(getPost);
+    const authUser = useSelector(getAuthUser);
+    const user = useSelector(getUser);
+    const authuserId = post.user;
+    console.log(authUser);
+    console.log(user);
     useEffect(() => {
-        const dispatchCall = async()=>{
-            await dispatch(fetchAsyncPostById(id))
+        const dispatchCall = async () => {
+            await dispatch(fetchAsyncPostById(id));
+            await dispatch(fetchAsyncAuthUserById(authuserId))
         }
         dispatchCall();
-    }, [dispatch,id])
-    
+    }, [dispatch, id, authuserId])
+
     return (
         <>
-            {post!=={} &&
+            {post !== {} &&
                 <div className={classes.root}>
                     <Container maxWidth='md' sx={{
                         bgcolor: 'white',
@@ -101,15 +109,22 @@ const PostDetail = () => {
                     }}>
 
                         <Box component='div' className={classes.userinfo}>
-                            <Avatar alt='user image' src={userdemo} sx={{ mr: 1 }} />
+                            <Link to={`/user/${post.user}`}>
+                                <Avatar alt='user image' src={authUser.image} sx={{ mr: 1 }} />
+                            </Link>
+
                             <div className={classes.username}>
-                                <Typography sx={{
-                                    fontWeight: 500
-                                }}>
-                                    Nguyễn Hoài Tân
-                                </Typography>
+                                <Link to={`/user/${post.user}`}>
+                                    <Typography sx={{
+                                        fontWeight: 500
+                                    }}>
+                                        {authUser.name}
+                                    </Typography>
+                                </Link>
+
                                 <Typography variant="body2" sx={{
                                     fontWeight: 300,
+                                    
 
                                 }}>
                                     {post.date_upload}
@@ -174,60 +189,60 @@ const PostDetail = () => {
                                     Tình trạng bảo tồn
                                 </Typography>
                                 <Grid item xs={12}>
-                                    {post.state_of_maintainment&&
-                                    <Box component={Paper} className={classes.table_maintainment}>
-                                        <Table>
-                                            <TableHead>
-                                                <TableRow>
-                                                    <StyledTableCell>Theo IUC</StyledTableCell>
-                                                    <StyledTableCell>Theo sách đỏ Việt Nam</StyledTableCell>
-                                                    <StyledTableCell>Theo Nghị định 32/2006/NĐCP</StyledTableCell>
-                                                    <StyledTableCell>Theo CITES</StyledTableCell>
-                                                </TableRow>
-                                            </TableHead>
-                                            <TableBody>
-                                                <TableRow>
-                                                    <TableCell sx={{
-                                                        fontWeight: 500,
-                                                        [theme.breakpoints.down(400)]: {
-                                                            padding: '5px'
+                                    {post.state_of_maintainment &&
+                                        <Box component={Paper} className={classes.table_maintainment}>
+                                            <Table>
+                                                <TableHead>
+                                                    <TableRow>
+                                                        <StyledTableCell>Theo IUC</StyledTableCell>
+                                                        <StyledTableCell>Theo sách đỏ Việt Nam</StyledTableCell>
+                                                        <StyledTableCell>Theo Nghị định 32/2006/NĐCP</StyledTableCell>
+                                                        <StyledTableCell>Theo CITES</StyledTableCell>
+                                                    </TableRow>
+                                                </TableHead>
+                                                <TableBody>
+                                                    <TableRow>
+                                                        <TableCell sx={{
+                                                            fontWeight: 500,
+                                                            [theme.breakpoints.down(400)]: {
+                                                                padding: '5px'
 
-                                                        },
-                                                    }} >
-                                                        {post.state_of_maintainment['iuc']?post.state_of_maintainment['iuc']:''}
-                                                    </TableCell>
-                                                    <TableCell sx={{
-                                                        fontWeight: 500,
-                                                        [theme.breakpoints.down(400)]: {
-                                                            padding: '5px'
+                                                            },
+                                                        }} >
+                                                            {post.state_of_maintainment['iuc'] ? post.state_of_maintainment['iuc'] : ''}
+                                                        </TableCell>
+                                                        <TableCell sx={{
+                                                            fontWeight: 500,
+                                                            [theme.breakpoints.down(400)]: {
+                                                                padding: '5px'
 
-                                                        },
-                                                    }} >
-                                                        {post.state_of_maintainment['sachdo']}
-                                                    </TableCell>
-                                                    <TableCell sx={{
-                                                        fontWeight: 500,
-                                                        [theme.breakpoints.down(400)]: {
-                                                            padding: '5px'
+                                                            },
+                                                        }} >
+                                                            {post.state_of_maintainment['sachdo']}
+                                                        </TableCell>
+                                                        <TableCell sx={{
+                                                            fontWeight: 500,
+                                                            [theme.breakpoints.down(400)]: {
+                                                                padding: '5px'
 
-                                                        },
-                                                    }} >
-                                                        {post.state_of_maintainment['ndcp']}
-                                                    </TableCell>
-                                                     <TableCell sx={{
-                                                        fontWeight: 500,
-                                                        [theme.breakpoints.down(400)]: {
-                                                            padding: '5px'
+                                                            },
+                                                        }} >
+                                                            {post.state_of_maintainment['ndcp']}
+                                                        </TableCell>
+                                                        <TableCell sx={{
+                                                            fontWeight: 500,
+                                                            [theme.breakpoints.down(400)]: {
+                                                                padding: '5px'
 
-                                                        },
-                                                    }} >
-                                                        {post.state_of_maintainment['cites']}
-                                                    </TableCell> 
-                                                </TableRow>
-                                            </TableBody>
+                                                            },
+                                                        }} >
+                                                            {post.state_of_maintainment['cites']}
+                                                        </TableCell>
+                                                    </TableRow>
+                                                </TableBody>
 
-                                        </Table>
-                                    </Box>}
+                                            </Table>
+                                        </Box>}
                                 </Grid>
 
                             </div>
@@ -301,7 +316,7 @@ const PostDetail = () => {
 
                         </div>
                         <Box component='div' className={classes.interaction}>
-                            <InteractionPost />
+                            <InteractionPost authUser={authUser}/>
                         </Box>
                     </Container>
                 </div>}

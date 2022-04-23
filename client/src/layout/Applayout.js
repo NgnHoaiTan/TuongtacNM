@@ -25,9 +25,6 @@ const Applayout = () => {
         {Object.keys(loggedin).length === 0 &&
           <>
             <Route path="/welcome" element={<LandingPage />} />
-            <Route path="/user">
-              <Route path=":userId" element={<Layout page={Userpage} />} />
-            </Route>
           </>
 
         }

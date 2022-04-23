@@ -6,7 +6,7 @@ import InteractionVideo from '../../Components/Interaction/InteractionVideo';
 import { useParams } from 'react-router';
 import { fetchAsyncVideoById, getVideo } from '../../features/Slice/VideoSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAsyncUserById, getUser } from '../../features/Slice/UserSlice';
+import { fetchAsyncAuthUserById, fetchAsyncUserById, getAuthUser, getUser } from '../../features/Slice/UserSlice';
 
 
 const useStyle = makeStyles({
@@ -30,14 +30,16 @@ const VideoDetail = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
     const video = useSelector(getVideo);
+    const authUser = useSelector(getAuthUser);
     const user = useSelector(getUser);
+    const authuserId = video.user;
     useEffect(() => {
         const dispatchCall = async () => {
             await dispatch(fetchAsyncVideoById(id))
-            await dispatch(fetchAsyncUserById(video.user))
+            await dispatch(fetchAsyncAuthUserById(authuserId))
         }
         dispatchCall();
-    }, [dispatch, id,video.user])
+    }, [dispatch, id,authuserId])
     return (
         <>
             {video !== {} &&
@@ -49,12 +51,12 @@ const VideoDetail = () => {
 
                     }}>
                         <Box component='div' className={classes.userinfo}>
-                            <Avatar alt='user image' src={user.image ? user.image : userdemo} sx={{ mr: 1 }} />
+                            <Avatar alt='user image' src={authUser.image ? authUser.image : userdemo} sx={{ mr: 1 }} />
                             <div className={classes.username}>
                                 <Typography sx={{
                                     fontWeight: 500
                                 }}>
-                                    {user.name}
+                                    {authUser.name}
                                 </Typography>
                                 <Typography variant="body2" sx={{
                                     fontWeight: 300,
