@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { makeStyles } from '@mui/styles';
 import { Typography, IconButton, Avatar, Box, Button } from '@mui/material'
@@ -7,11 +7,11 @@ import VideoCallIcon from '@mui/icons-material/VideoCall';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import InfoIcon from '@mui/icons-material/Info';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { useDispatch } from 'react-redux';
 import { logout } from '../../features/Auth/authSlice';
 import HomeIcon from '@mui/icons-material/Home';
 import { resetUser } from '../../features/Slice/UserSlice';
-import AddIcon from '@mui/icons-material/Add';
+import { useDispatch, useSelector } from 'react-redux'
+import { getFollows, fetchAsyncFollowsOfUser } from '../../features/Slice/FollowSlice'
 
 const useStyles = makeStyles(() => ({
     sidebarItem: {
@@ -29,7 +29,7 @@ const useStyles = makeStyles(() => ({
 
 
 const SidebarUser = ({ user, authUser }) => {
-
+    const follows = useSelector(getFollows)
     const classes = useStyles()
     const location = useLocation()
     const dispatch = useDispatch();
@@ -38,7 +38,6 @@ const SidebarUser = ({ user, authUser }) => {
         dispatch(logout())
         dispatch(resetUser())
     }
-    console.log(user._id === authUser._id);
     const sidebarUserData = (user._id === authUser._id ? ([
         {
             path: '/user/',
@@ -69,10 +68,13 @@ const SidebarUser = ({ user, authUser }) => {
             },
         ]
     ))
+    useEffect(() => {
+        dispatch(fetchAsyncFollowsOfUser(authUser._id))
+    }, [dispatch, authUser._id])
     return (
         <>
             {user && Object.keys(user).length > 0 ?
-                <div style={{ minHeight: '800px' }}>
+                <div style={{ minHeight: '600px' }}>
                     <Box sx={{ alignItems: 'center' }}>
                         <div style={{ position: 'relative', height: '80px' }}>
                             <Avatar
@@ -87,19 +89,20 @@ const SidebarUser = ({ user, authUser }) => {
                                 }}
                             />
                         </div>
-                        <div>
-                            <div style={{ padding: '10px', display: 'flex', alignItems: 'center' }}>
-                                <Button variant='contained' sx={{ bgcolor: 'white','&:hover':{bgcolor:'#fffddd'} }}>
-                                    <Typography sx={{ color: 'black', fontWeight: 500 }}>
-                                        Theo dõi
-                                    </Typography>
-                                    <AddIcon sx={{ color: 'black' }} />
-                                </Button>
-                            </div>
-                        </div>
 
                         <div style={{ display: 'flex' }}>
                             <Typography variant='h5' sx={{ color: '#fff', position: 'relative', margin: '0 auto' }} component='span'>{authUser.name}</Typography>
+                        </div>
+                        <div style={{ display: 'flex',justifyContent:'center' }}>
+                            {follows ?
+                                <Typography sx={{fontWeight:500,color:'white',fontSize:'14px'}}>
+                                    {follows.length} Người theo dõi
+                                </Typography>
+                                :
+                                <Typography sx={{fontWeight:500,color:'white',fontSize:'14px'}}>
+                                    0 Người theo dõi
+                                </Typography>
+                            }
                         </div>
                     </Box>
 
@@ -148,6 +151,7 @@ const SidebarUser = ({ user, authUser }) => {
                         </ul>
 
                     </div>
+
                 </div>
                 : <div>
                     Loading

@@ -40,7 +40,8 @@ const PostCard = (props) => {
     const { post } = props;
     const classes = useStyle();
     const dispatch = useDispatch();
-    const listusers = useSelector(getListUsers)
+    const listusers = useSelector(getListUsers);
+    
     useEffect(() => {
         dispatch(fetchAsyncUsers());
     }, [dispatch])

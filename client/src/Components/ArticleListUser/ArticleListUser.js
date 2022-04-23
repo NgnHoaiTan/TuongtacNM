@@ -11,7 +11,7 @@ const ArticleListUser = () => {
     const dispatch = useDispatch();
     const {userId} = useParams();
     const articleUser = useSelector(getListPosts);
-    console.log(articleUser);
+  
     useEffect(async()=>{
         dispatch(fetchAsyncPostByUser(userId));  
     },[])

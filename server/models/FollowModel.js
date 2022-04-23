@@ -1,13 +1,9 @@
 import mongoose from "mongoose";
 const schema = mongoose.Schema({
-    following:[{
+    following:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user'
-    }],
-    followed:[{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'user'
-    }],
+    },
     user:{
         type:mongoose.Schema.Types.ObjectId,
         ref: 'user',

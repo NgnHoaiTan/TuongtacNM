@@ -7,6 +7,7 @@ import ReactionVideoReducer from './Slice/ReactVidSlice';
 import CommentVideoReducer from './Slice/CmtVidSlice';
 import UserReducer from './Slice/UserSlice';
 import authReducer from './Auth/authSlice';
+import FollowReducer from './Slice/FollowSlice';
 import { combineReducers } from 'redux';
 import {
     persistReducer,
@@ -50,6 +51,7 @@ const rootReducer = combineReducers({
     comment_video: CommentVideoReducer,
     auth: authReducer,
     user: UserReducer,
+    follow:FollowReducer,
 })
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 const store = configureStore({
