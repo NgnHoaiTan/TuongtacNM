@@ -10,7 +10,7 @@ export const getComments =async(req,res)=>{
 };
 export const getCommentsByPost =async(req,res)=>{
     try{
-        const comments = await CommentPostModel.find({post:req.params.postId});
+        const comments = await CommentPostModel.find({post:req.params.postId}).sort({"date_upload":-1});
         res.status(200).json(comments); 
     }catch(err){
         res.status(500).json({ error: err});

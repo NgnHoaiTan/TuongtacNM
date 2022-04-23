@@ -88,8 +88,6 @@ const PostDetail = () => {
     const authUser = useSelector(getAuthUser);
     const user = useSelector(getUser);
     const authuserId = post.user;
-    console.log(authUser);
-    console.log(user);
     useEffect(() => {
         const dispatchCall = async () => {
             await dispatch(fetchAsyncPostById(id));

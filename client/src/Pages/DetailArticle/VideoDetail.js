@@ -7,6 +7,7 @@ import { useParams } from 'react-router';
 import { fetchAsyncVideoById, getVideo } from '../../features/Slice/VideoSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAsyncAuthUserById, fetchAsyncUserById, getAuthUser, getUser } from '../../features/Slice/UserSlice';
+import { Link } from 'react-router-dom';
 
 
 const useStyle = makeStyles({
@@ -39,7 +40,7 @@ const VideoDetail = () => {
             await dispatch(fetchAsyncAuthUserById(authuserId))
         }
         dispatchCall();
-    }, [dispatch, id,authuserId])
+    }, [dispatch, id, authuserId])
     return (
         <>
             {video !== {} &&
@@ -51,13 +52,17 @@ const VideoDetail = () => {
 
                     }}>
                         <Box component='div' className={classes.userinfo}>
-                            <Avatar alt='user image' src={authUser.image ? authUser.image : userdemo} sx={{ mr: 1 }} />
+                            <Link to={`/user/${video.user}`}>
+                                <Avatar alt='user image' src={authUser.image} sx={{ mr: 1 }} />
+                            </Link>
                             <div className={classes.username}>
-                                <Typography sx={{
-                                    fontWeight: 500
-                                }}>
-                                    {authUser.name}
-                                </Typography>
+                                <Link to={`/user/${video.user}`}>
+                                    <Typography sx={{
+                                        fontWeight: 500
+                                    }}>
+                                        {authUser.name}
+                                    </Typography>
+                                </Link>
                                 <Typography variant="body2" sx={{
                                     fontWeight: 300,
 
