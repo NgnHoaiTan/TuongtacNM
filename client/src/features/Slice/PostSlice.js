@@ -19,6 +19,10 @@ export const fetchAsyncPostByUser = createAsyncThunk('post/fetchAsyncPostByUser'
     const response = await Axios.get(`posts/getbyuser/${userId}`);
     return response.data;
 });
+export const fetchAsyncPostByFollowUser = createAsyncThunk('post/fetchAsyncPostByFollowUser',async(userId)=>{
+    const response = await Axios.get(`posts/getbyfollowuser/${userId}`);
+    return response.data;
+});
 export const createAsyncPost = createAsyncThunk('post/createAsyncPost',async(data)=>{
     const response = await Axios.post(`posts`,
         data,
@@ -52,8 +56,7 @@ const PostSlice = createSlice({
         },
         // get post by id
         [fetchAsyncPostById.fulfilled]:(state,action)=>{
-            console.log("Fetching Post by id Successfully");
-            console.log(action.payload)
+            //console.log("Fetching Post by id Successfully");
             return{
                 ...state,
                 post:action.payload
@@ -65,7 +68,7 @@ const PostSlice = createSlice({
 
         // get post by user
         [fetchAsyncPostByUser.fulfilled]:(state,action)=>{
-            console.log("Fetching Posts by user Successfully");
+            //console.log("Fetching Posts by user Successfully");
             return{
                 ...state,
                 posts:action.payload
@@ -74,10 +77,19 @@ const PostSlice = createSlice({
         [fetchAsyncPostByUser.rejected]:()=>{
             console.log("Fetching Posts by user Rejected");
         },
+        // get posts by following
+
+        [fetchAsyncPostByFollowUser.fulfilled]:(state,action)=>{
+            return{
+                ...state,
+                posts:action.payload
+            }
+        },
+       
 
         // create post
         [createAsyncPost.fulfilled]:(state,action)=>{
-            console.log("Create Posts Successfully");
+            //console.log("Create Posts Successfully");
             return{
                 ...state,
                 createresult:action.payload

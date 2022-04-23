@@ -1,7 +1,5 @@
 import React from 'react'
 import { Card, CardContent, CardActions, CardMedia, Typography, IconButton, Button } from '@mui/material'
-import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
-import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 const useStyle = makeStyles({

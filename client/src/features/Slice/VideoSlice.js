@@ -19,6 +19,10 @@ export const fetchAsyncVideoByUser = createAsyncThunk('video/fetchAsyncVideoByUs
     const response = await Axios.get(`videos/getbyuser/${userId}`);
     return response.data;
 });
+export const fetchAsyncVideoByFollowUser = createAsyncThunk('video/fetchAsyncVideoByFollowUser',async(userId)=>{
+    const response = await Axios.get(`videos/getbyfollowuser/${userId}`);
+    return response.data;
+});
 export const createAsyncVideo = createAsyncThunk('video/createAsyncVideo',async(data)=>{
     const response = await Axios.post(`videos`,
         data,
@@ -73,18 +77,24 @@ const VideoSlice = createSlice({
         [fetchAsyncVideoByUser.rejected]:()=>{
             console.log("Fetching Videos by user Rejected");
         },
+        // get videos by follow
+
+        [fetchAsyncVideoByFollowUser.fulfilled]:(state,action)=>{
+            return{
+                ...state,
+                videos:action.payload
+            }
+        },
 
         // create Video
         [createAsyncVideo.fulfilled]:(state,action)=>{
-            console.log("Create Video Successfully");
+            //console.log("Create Video Successfully");
             return{
                 ...state,
                 createresult:action.payload
             }
         },
-        [createAsyncVideo.rejected]:()=>{
-            console.log("Create Video Rejected");
-        },
+       
     }
 });
 export const getListVideos = (state) => state.video.videos;

@@ -27,6 +27,15 @@ export const getPostByUser = async (req, res) => {
         res.status(500).json({ error: err});
     }
 };
+export const getPostByFollowUser = async (req, res) => {
+    try {
+        const posts = await PostModel.find({ user: req.params.userId }).limit(5).sort({"date_upload":-1});
+        
+        res.status(200).json(posts);        
+    } catch (err) {
+        res.status(500).json({ error: err});
+    }
+};
 export const createPost = async (req, res) => {
     try {
         const newPost = req.body;

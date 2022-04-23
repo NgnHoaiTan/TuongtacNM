@@ -5,7 +5,7 @@ import CoverImageUser from '../../Components/CoverImageUser/CoverImageUser'
 import SidebarUser from '../../Components/SidebarUser/SidebarUser'
 import UploadArticleUser from '../../Components/UploadArticleUser/UploadArticleUser'
 import { useParams } from 'react-router'
-import { fetchAsyncAuthUserById, fetchAsyncUserById, getAuthUser, getUser } from '../../features/Slice/UserSlice'
+import { fetchAsyncAuthUserById, getAuthUser, getUser } from '../../features/Slice/UserSlice'
 import { useDispatch, useSelector } from 'react-redux'
 const UploadArticleUserPage = () => {
   const {userId} = useParams();
