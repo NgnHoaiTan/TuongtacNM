@@ -5,6 +5,7 @@ import { Box } from '@mui/system';
 import introImg1 from "../../Images/introwrite1.jpg"
 import introImg2 from "../../Images/introwrite2.jpg"
 import introImg3 from "../../Images/introwite3_1.JPG"
+import { Link } from 'react-router-dom';
 const useStyle = makeStyles((theme) => ({
     container:{
         position:'relative',
@@ -104,7 +105,7 @@ const useStyle = makeStyles((theme) => ({
     }
 }));
 
-const IntroWrite = () => {
+const IntroWrite = ({user}) => {
     const classes = useStyle();
     return (
         <Container maxWidth="xl" className={classes.container}>
@@ -130,9 +131,12 @@ const IntroWrite = () => {
                     và những khám phá của bạn
                 </Typography>
                 <Box className={classes.btn}>
-                    <Button variant="contained" className={classes.btnwrite}>
-                        Viết bài
-                    </Button>
+                    <Link to={`/user/upload-article/${user._id}`}>
+                        <Button variant="contained" className={classes.btnwrite}>
+                            Viết bài
+                        </Button>
+                    </Link>
+                    
                 </Box>
             </Box>
             {/* <Box className={classes.listimage}>

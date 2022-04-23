@@ -22,7 +22,7 @@ const Homepage = () => {
         <div>
             <HeroImage/>
             <Explore />
-            <IntroWrite />
+            <IntroWrite user={user}/>
         </div>
     );
 };

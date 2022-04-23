@@ -12,6 +12,8 @@ import reactionPost from './routers/reactionPost.js';
 import reactionVideo from './routers/reactionVideo.js';
 import video from './routers/video.js';
 import post from './routers/post.js';
+import follow from './routers/follow.js';
+
 const app = express();
 const PORT = 5000;
 const URI = "mongodb+srv://hoaitan:CWwAn9VV0dpdQz0y@cluster0.n8bi5.mongodb.net/WildDiscoveryDB?retryWrites=true&w=majority";
@@ -38,3 +40,4 @@ app.use('/reactionposts',reactionPost);
 app.use('/reactionvideos',reactionVideo);
 app.use('/videos',video);
 app.use('/posts',post);
+app.use('/follows',follow);

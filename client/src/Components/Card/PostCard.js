@@ -1,5 +1,5 @@
 import { Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, Typography, Button, Grid } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
 import avtUser from '../../Images/user5.jpg';
 import demoPost from '../../Images/echgiunnguyen.JPG';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -8,6 +8,9 @@ import CommentIcon from '@mui/icons-material/Comment';
 import { buttonViewColor, postColor } from "../../common/color.js";
 import { makeStyles } from '@mui/styles';
 import {Link} from 'react-router-dom';
+import { useDispatch,useSelector } from 'react-redux';
+import { fetchAsyncUsers, getListUsers } from '../../features/Slice/UserSlice';
+
 const useStyle = makeStyles((theme) => ({
     container: {
         padding: "10px",
@@ -25,21 +28,32 @@ const useStyle = makeStyles((theme) => ({
     },
     textinbtn: {
         fontSize: '12px',
-    }
+    },
+    titlename:{
+        display: 'box',
+        lineClamp: 2,
+        boxOrient: 'vertical',
+        overflow: 'hidden',
+    },
 }))
 const PostCard = (props) => {
     const { post } = props;
     const classes = useStyle();
+    const dispatch = useDispatch();
+    const listusers = useSelector(getListUsers)
+    useEffect(() => {
+        dispatch(fetchAsyncUsers());
+    }, [dispatch])
     return (
         <Card className={classes.container}>
             <CardHeader
                 avatar={
                     <Avatar
-                        src={avtUser}
+                        src={listusers.find(user=>user._id===post.user).image}
                     />
                 }
-                title="Chorizo Paella"
-                subheader="March 20, 2022"
+                title={listusers.find(user=>user._id===post.user).name}
+                subheader={post.date_upload}
                 sx={{ padding: 1 }}
             />
             
@@ -55,69 +69,14 @@ const PostCard = (props) => {
                 />
             
                 <CardContent sx={{
-                    py: 1, px: 0
+                    px:0
                 }}>
                     
-                    <Typography sx={{ fontWeight: 600 }}>
+                    <Typography sx={{ fontWeight: 600,height:'50px' }} className={classes.titlename}>
                         {post.title}
                     </Typography>
                     
                 </CardContent>
-            
-            <CardActions disableSpacing sx={{
-                py: 0.5, px: 0
-            }}>
-                <Grid container spacing={1} sx={{
-                    justifyContent: 'center',
-                    align: 'center'
-                }}>
-                    <Grid item lg={12}>
-                        <IconButton sx={{
-                            color: 'white'
-                        }}>
-                            <FavoriteBorderIcon />
-                            {/* if react */}
-                            {/* FavoriteIcon */}
-                            <Typography variant="p" sx={{
-                                fontSize: '16px',
-                                ml: 0.5
-                            }}>
-                                150
-                            </Typography>
-                        </IconButton>
-                        <IconButton sx={{
-                            color: 'white'
-                        }}>
-                            <CommentIcon />
-                            <Typography variant="p" sx={{
-                                fontSize: '16px',
-                                ml: 0.5
-                            }}>
-                                50
-                            </Typography>
-                        </IconButton>
-                    </Grid>
-
-                    {/* <Grid item lg={12} sx={{
-                        alignItem: 'center'
-                    }}>
-                        <Button variant="contained" className={classes.buttonview} size="small"
-
-                        >
-                            <Typography variant="p" className={classes.textinbtn}>
-                                Xem chi tiết
-                            </Typography>
-                        </Button>
-                    </Grid> */}
-                </Grid>
-
-
-
-
-            </CardActions>
-
-
-
         </Card>
     );
 };

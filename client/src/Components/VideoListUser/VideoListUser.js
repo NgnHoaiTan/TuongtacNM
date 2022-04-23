@@ -9,9 +9,9 @@ const VideoListUser = () => {
     const videoUser = useSelector(getListVideos);
     const {userId} = useParams()
     console.log(userId);
-    useEffect(async()=>{
-        await dispatch(fetchAsyncVideoByUser(userId));
-    },[])
+    useEffect(()=>{
+        dispatch(fetchAsyncVideoByUser(userId));
+    },[dispatch,userId])
     return (
         <Grid container spacing={3}>
             {videoUser&&videoUser.map((video, index) => (

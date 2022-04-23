@@ -15,7 +15,7 @@ const useStyle = makeStyles((theme) => ({
 const NewestPost = () => {
     const classes = useStyle()
     const posts = useSelector(getListPosts);
-
+    console.log(posts)
     return (
         <>
             <Grid container className={classes.gridcontainer} spacing={3}>
@@ -37,8 +37,8 @@ const NewestPost = () => {
                         </Link>
                     </Grid>
                     <Grid item md={3}>
-                        <Link to={`/post/${posts[3]._id}`}>
-                            <PostCard post={posts[3]} />
+                        <Link to={`/post/${posts[2]._id}`}>
+                            <PostCard post={posts[2]} />
                         </Link>
                     </Grid>
 

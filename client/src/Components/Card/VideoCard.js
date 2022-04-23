@@ -1,5 +1,5 @@
 import { Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, Typography, Button } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
 import avtUser from '../../Images/user5.jpg';
 import demoPost from '../../Images/echgiunnguyen.JPG';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -8,6 +8,8 @@ import CommentIcon from '@mui/icons-material/Comment';
 import { buttonViewColor, postColor } from "../../common/color.js";
 import { makeStyles } from '@mui/styles';
 import { Link } from 'react-router-dom';
+import { useDispatch,useSelector } from 'react-redux';
+import { fetchAsyncUsers, getListUsers } from '../../features/Slice/UserSlice';
 
 const useStyle = makeStyles((theme) => ({
     container: {
@@ -27,22 +29,33 @@ const useStyle = makeStyles((theme) => ({
         objectPosition: 'center',
         height: '150px',
     },
+    titlename:{
+        display: 'box',
+        lineClamp: 2,
+        boxOrient: 'vertical',
+        overflow: 'hidden',
+    },
 }))
 const VideoCard = (props) => {
     const { video } = props;
+    const dispatch = useDispatch();
     const classes = useStyle();
+    const listusers = useSelector(getListUsers)
+    useEffect(() => {
+        dispatch(fetchAsyncUsers());
+    }, [dispatch])
     return (
         <Card className={classes.container}>
             <CardHeader
                 avatar={
                     <Avatar
-                        src={avtUser}
+                        src={listusers.find(user=>user._id===video.user).image}
                     />
 
 
                 }
-                title="Chorizo Paella"
-                subheader="March 20, 2022"
+                title={listusers.find(user=>user._id===video.user).name}
+                subheader={video.date_upload}
                 sx={{ padding: 1 }}
             />
             <Link to={`/video/${video._id}`}>
@@ -61,45 +74,13 @@ const VideoCard = (props) => {
 
             <Link to={`/video/${video._id}`}>
                 <CardContent sx={{
-                    py: 1, px: 0, height: 30
+                    px: 0
                 }}>
-                    <Typography sx={{ fontWeight: 600 }}>
+                    <Typography sx={{ fontWeight: 600,height:'50px',pb:0 }} className={classes.titlename}>
                         {video.title}
                     </Typography>
                 </CardContent>
             </Link>
-
-            <CardActions disableSpacing sx={{
-                py: 0.5, px: 0
-            }}>
-                <IconButton sx={{
-                    color: 'white'
-                }}>
-                    <FavoriteBorderIcon />
-                    {/* if react */}
-                    {/* FavoriteIcon */}
-                    <Typography variant="p" sx={{
-                        fontSize: '16px',
-                        ml: 0.5
-                    }}>
-                        150
-                    </Typography>
-                </IconButton>
-                <IconButton sx={{
-                    color: 'white'
-                }}>
-                    <CommentIcon />
-                    <Typography variant="p" sx={{
-                        fontSize: '16px',
-                        ml: 0.5
-                    }}>
-                        50
-                    </Typography>
-                </IconButton>
-            </CardActions>
-
-
-
         </Card>
     );
 };

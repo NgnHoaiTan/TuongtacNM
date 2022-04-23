@@ -1,5 +1,5 @@
 import { unwrapResult } from "@reduxjs/toolkit";
-import { registerPending, registerSuccess, registerFail, AsyncRegister } from "./authSlice";
+import { registerPending, registerFail, AsyncRegister } from "./authSlice";
 
 export const registerUser = async(user, dispatch, navigate) => {
     dispatch(registerPending())

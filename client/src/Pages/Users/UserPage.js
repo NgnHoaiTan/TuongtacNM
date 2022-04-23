@@ -14,7 +14,7 @@ const Userpage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchAsyncUserById(userId))
-  },[userId])
+  },[dispatch,userId])
   const user = useSelector(getUser);
   return (
     <>

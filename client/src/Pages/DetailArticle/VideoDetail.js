@@ -1,9 +1,6 @@
 import React, { useEffect } from 'react';
-
 import { makeStyles } from '@mui/styles';
 import userdemo from '../../Images/user5.jpg';
-import videoDemo from '../../assets/video/videodemo.mp4'
-import { createTheme } from '@mui/material/styles';
 import { Avatar, Box, Container, Typography } from '@mui/material';
 import InteractionVideo from '../../Components/Interaction/InteractionVideo';
 import { useParams } from 'react-router';
@@ -11,7 +8,6 @@ import { fetchAsyncVideoById, getVideo } from '../../features/Slice/VideoSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAsyncUserById, getUser } from '../../features/Slice/UserSlice';
 
-const theme = createTheme();
 
 const useStyle = makeStyles({
     root: {
@@ -41,7 +37,7 @@ const VideoDetail = () => {
             await dispatch(fetchAsyncUserById(video.user))
         }
         dispatchCall();
-    }, [dispatch, id])
+    }, [dispatch, id,video.user])
     return (
         <>
             {video !== {} &&

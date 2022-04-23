@@ -1,18 +1,12 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Grid } from '@mui/material'
 
 import CoverImageUser from '../../Components/CoverImageUser/CoverImageUser'
 import SidebarUser from '../../Components/SidebarUser/SidebarUser'
 import UploadVideoUser from '../../Components/UploadVideoUser/UploadVideoUser'
-import { useParams } from 'react-router'
-import { fetchAsyncUserById, getUser } from '../../features/Slice/UserSlice'
+import {getUser } from '../../features/Slice/UserSlice'
 import { useDispatch, useSelector } from 'react-redux'
 const UploadVideoUserPage = () => {
-  const {userId} = useParams();
-  const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(fetchAsyncUserById(userId))
-  // },[userId])
   const user = useSelector(getUser);
   return (
     <>

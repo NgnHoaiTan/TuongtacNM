@@ -36,10 +36,11 @@ const InteractionVideo = () => {
     const [content,setContent] = useState('');
     const user = useSelector(getUser); 
     const listusers = useSelector(getListUsers);
+    const data = { videoId: id, userId: user._id }
     useEffect(() => {
         const dispatchCall = () => {
             dispatch(fetchAsyncReactionsByVideo(id));
-            let data = { videoId: id, userId: user._id }
+            
             dispatch(fetchAsyncReactionsInVideoByUser(data))
             dispatch(fetchAsyncUsers());
         }

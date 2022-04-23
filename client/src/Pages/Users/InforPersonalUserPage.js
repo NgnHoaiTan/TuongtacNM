@@ -13,7 +13,7 @@ const InforPersonalUserPage = () => {
   const user = useSelector(getUser);
   useEffect(()=>{
     dispatch(fetchAsyncUserById(userId))
-  },[])
+  },[dispatch,userId])
   return (
     <>
       {user && Object.keys(user).length > 0 ?
