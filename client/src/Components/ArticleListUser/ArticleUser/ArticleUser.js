@@ -33,6 +33,7 @@ const ArticleUser = ({ article }) => {
                             sx={{
                                 color: '#262626',
                                 fontWeight: 500,
+                                fontSize:'17px'
                             }}
                             variant='p'
                             component='span'

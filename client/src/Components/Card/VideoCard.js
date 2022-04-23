@@ -45,7 +45,7 @@ const VideoCard = (props) => {
                 subheader="March 20, 2022"
                 sx={{ padding: 1 }}
             />
-            <Link to={`video/${video._id}`}>
+            <Link to={`/video/${video._id}`}>
                 <CardMedia
                     component="video"
                     height="194"
@@ -59,7 +59,7 @@ const VideoCard = (props) => {
                 />
             </Link>
 
-            <Link to={`video/${video._id}`}>
+            <Link to={`/video/${video._id}`}>
                 <CardContent sx={{
                     py: 1, px: 0, height: 30
                 }}>

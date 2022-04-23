@@ -82,7 +82,7 @@ const InteractionVideo = () => {
         try {
             let data ={
                 content:content,
-                userId:'625bf29d05a2408cf630d04e',
+                userId:user._id,
                 videoId:id
             }
             const actionresult = await dispatch(createAsyncComment(data));
@@ -96,7 +96,7 @@ const InteractionVideo = () => {
     return (
         <>
             <Box className={classes.reaction} sx={{ display: 'flex', alignContent: 'center' }}>
-                {reactbyuser!=={}&&reactbyuser!=null?
+                {reactbyuser!=={}&&reactbyuser!==null?
                     <Button variant="outlined" onClick={handleUnreact}
                         sx={{
                             padding: '5px',

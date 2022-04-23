@@ -9,6 +9,7 @@ import InteractionVideo from '../../Components/Interaction/InteractionVideo';
 import { useParams } from 'react-router';
 import { fetchAsyncVideoById, getVideo } from '../../features/Slice/VideoSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchAsyncUserById, getUser } from '../../features/Slice/UserSlice';
 
 const theme = createTheme();
 
@@ -33,9 +34,11 @@ const VideoDetail = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
     const video = useSelector(getVideo);
+    const user = useSelector(getUser);
     useEffect(() => {
         const dispatchCall = async () => {
             await dispatch(fetchAsyncVideoById(id))
+            await dispatch(fetchAsyncUserById(video.user))
         }
         dispatchCall();
     }, [dispatch, id])
@@ -50,12 +53,12 @@ const VideoDetail = () => {
 
                     }}>
                         <Box component='div' className={classes.userinfo}>
-                            <Avatar alt='user image' src={userdemo} sx={{ mr: 1 }} />
+                            <Avatar alt='user image' src={user.image ? user.image : userdemo} sx={{ mr: 1 }} />
                             <div className={classes.username}>
                                 <Typography sx={{
                                     fontWeight: 500
                                 }}>
-                                    Nguyễn Hoài Tân
+                                    {user.name}
                                 </Typography>
                                 <Typography variant="body2" sx={{
                                     fontWeight: 300,

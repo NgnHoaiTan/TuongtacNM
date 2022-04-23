@@ -17,9 +17,9 @@ const ArticleListUser = () => {
     },[])
     
     return (
-        <Grid container spacing={2}>
+        <Grid container spacing={3}>
             {articleUser.map((article, index) => (
-                <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
+                <Grid key={index} item xs={6} md={4}>
                     <ArticleUser article={article} />
                 </Grid>
             ))}

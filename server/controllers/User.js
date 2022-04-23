@@ -18,6 +18,16 @@ export const getUser = async (req, res) => {
         res.status(500).json({ error: err});
     }
 };
+export const getUsersByPost = async (req, res) => {
+    try {
+        const users = await UserModel.find({ _id: req.params.id });
+        
+        res.status(200).json(users);        
+    } catch (err) {
+        res.status(500).json({ error: err});
+    }
+};
+
 export const getUserByAccount = async (req, res) => {
     try {
         const user = await UserModel.findOne({account: req.params.accountId });

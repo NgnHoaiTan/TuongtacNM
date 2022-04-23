@@ -29,7 +29,7 @@ const VideoUser = ({ video }) => {
                 />
 
             </div>
-            <Link to={`video/${video._id}`}>
+            <Link to={`/video/${video._id}`}>
 
                 <CardContent>
                     <div>
