@@ -1,4 +1,4 @@
-import { Typography, Button, Box } from '@mui/material'
+import { Typography, Button, Box, Avatar } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 
 import useStyles from './styles'
 
-const SideBar = () => {
+const SideBar = ({admin}) => {
   const dispatch = useDispatch();
   const location = useLocation()
   const classes = useStyles()
@@ -19,24 +19,14 @@ const SideBar = () => {
     dispatch(logout())
   }
 
-
   return (
     <Box style={{ minHeight: '710px', paddingTop: '25px' }}>
-      <Box style={{
-        backgroundImage: 'url(https://top10az.com/wp-content/uploads/2021/07/Uzumaki-Naruto-1024x1024.jpg)',
-        height: '90px',
-        width: '90px',
-        margin: 'auto',
-        borderRadius: '50%',
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
-      >
+      <Box>
+        <Avatar src={admin.image} sx={{width:100,height:100,margin:'0 auto'}}/>
       </Box>
 
       <Box style={{ marginTop: '10px' }}>
-        <Typography align='center' variant='h6' style={{ color: '#fff' }}>Bùi Việt Anh</Typography>
+        <Typography align='center' variant='h6' style={{ color: '#fff' }}>{admin.name}</Typography>
         <Typography align='center' variant='body2' style={{ color: '#fff' }}>Administrator</Typography>
       </Box>
 
@@ -59,12 +49,12 @@ const SideBar = () => {
         </ul>
         <ul>
           <Typography variant='body1' sx={{ color: '#314BD4', marginLeft: '10px' }}>Điều hướng</Typography>
-          <Link to='/user' style={{ textDecoration: 'none' }}>
+          {/* <Link to='/user' style={{ textDecoration: 'none' }}>
             <li className={clsx(classes.sidebarItem, '/user' === location.pathname ? classes.activeItem : '')}>
               <PublicIcon />
               <Typography variant='body1' style={{ marginLeft: '14px' }}>Website người dùng</Typography>
             </li>
-          </Link>
+          </Link> */}
           <li onClick={handleLogout} className={clsx(classes.sidebarItem)}>
             <ExitToAppIcon />
             <Typography variant='body1' style={{ marginLeft: '14px' }}>Đăng xuất</Typography>

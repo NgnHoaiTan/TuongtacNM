@@ -1,5 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './Auth/authSlice';
+import UserReducer from './Slice/UserSlice'
+import PostReducer from './Slice/PostSlice';
+import VideoReducer from './Slice/VideoSlice';
+import AccountReducer from './Slice/AccountSlice';
+import ReactionPostReducer from './Slice/ReactionPostSlice';
+import ReactionVideoReducer from './Slice/ReactionVideoSlice';
 import { combineReducers } from 'redux';
 import {
     persistReducer,
@@ -36,6 +42,13 @@ const persistConfig = {
 }
 const rootReducer = combineReducers({
     auth: authReducer,
+    user:UserReducer,
+    post:PostReducer,
+    video: VideoReducer,
+    account:AccountReducer,
+    reaction_post:ReactionPostReducer,
+    reaction_video:ReactionVideoReducer
+
 })
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 const store = configureStore({

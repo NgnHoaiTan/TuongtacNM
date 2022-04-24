@@ -2,7 +2,7 @@ import { AppBar, Button, Toolbar, Typography, IconButton, Badge, Box } from '@mu
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import React from 'react'
 
-const NavBar = () => {
+const NavBar = ({admin}) => {
   return (
     <Box style={{ margin: '20px' }}>
       <AppBar
@@ -16,10 +16,10 @@ const NavBar = () => {
       >
         <Toolbar style={{ justifyContent: 'space-between' }}>
           <Box>
-            <Typography variant='h6'>Chào mừng quay trở lại, Việt Anh</Typography>
+            <Typography variant='h6'>Chào mừng quay trở lại, {admin.name}</Typography>
             <Typography variant='h6'>Chúc bạn có một ngày làm việc vui vẻ</Typography>
           </Box>
-          <Box style={{ display: 'flex', alignItems: 'center' }}>
+          {/* <Box style={{ display: 'flex', alignItems: 'center' }}>
             <Box style={{ marginRight: '50px'}}>
               <IconButton color="primary" component="span">
                 <Badge badgeContent={12} color='primary'>
@@ -27,7 +27,7 @@ const NavBar = () => {
                 </Badge>
               </IconButton>
             </Box>
-          </Box>
+          </Box> */}
         </Toolbar>
       </AppBar>
     </Box>

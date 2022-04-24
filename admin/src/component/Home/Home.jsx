@@ -5,42 +5,28 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import { Bar } from 'react-chartjs-2'
 import 'chart.js/auto'
-
+import { useSelector } from 'react-redux';
 import useStyles from './styles'
+import { getListUsers } from '../../features/Slice/UserSlice';
+import { getListPosts } from '../../features/Slice/PostSlice';
+import { getListVideos } from '../../features/Slice/VideoSlice';
+import HotPosts from '../Statistic/HotPosts';
+import HotVideos from '../Statistic/HotVideos';
 
-const adminInfo = [
-  {
-    name: 'Nguyễn Hoài Tân',
-    age: '22',
-    birth: '1-1-2000',
-    avata: 'https://e7.pngegg.com/pngimages/364/72/png-clipart-one-punch-man-saitama-one-punch-man.png',
-  },
-  {
-    name: 'Nguyễn Danh Hưng',
-    age: '22',
-    birth: '2-1-2000',
-    avata: 'https://e7.pngegg.com/pngimages/364/72/png-clipart-one-punch-man-saitama-one-punch-man.png',
-  },
-  {
-    name: 'Lê Ngọc Thái',
-    age: '22',
-    birth: '13-1-2000',
-    avata: 'https://e7.pngegg.com/pngimages/364/72/png-clipart-one-punch-man-saitama-one-punch-man.png',
-  }
-]
-
-const Home = () => {
+const Home = ({ adminAccounts }) => {
   const classes = useStyles()
-  const [value, setValue] = useState('week')
-
+  const [value, setValue] = useState('hotposts')
   const handleChangeChart = (event, newValue) => {
     setValue(newValue);
   };
-
+  console.log(adminAccounts)
+  const users = useSelector(getListUsers);
+  const posts = useSelector(getListPosts);
+  const videos = useSelector(getListVideos);
   return (
     <Box className={classes.main}>
       <Grid container width='100%' marginTop='-20px'>
-        <Grid item xs={8}>
+        <Grid item md={8.5}>
           <Grid container>
             <Grid className={classes.gridItem6} item xs={6}>
               <Box className={classes.gridItem6Wrap}>
@@ -51,7 +37,7 @@ const Home = () => {
                 >
                   Tổng số người dùng
                 </Typography>
-                <Typography className={classes.grid6Context} variant='h4'>900</Typography>
+                <Typography className={classes.grid6Context} variant='h4'>{users.length}</Typography>
                 <Typography className={classes.grid6Context} variant='body1'>Người sử dụng</Typography>
               </Box>
             </Grid>
@@ -62,14 +48,14 @@ const Home = () => {
                   style={{ color: '#222', marginBottom: '10px', fontWeight: '700' }}
                   variant='h6'
                 >
-                  Tổng số Bài viết nghiên cứu
+                  Tổng số bài đăng
                 </Typography>
-                <Typography className={classes.grid6Context} variant='h4'>50</Typography>
+                <Typography className={classes.grid6Context} variant='h4'>{posts.length + videos.length}</Typography>
                 <Typography className={classes.grid6Context} variant='body1'>Bài viết đã được đăng</Typography>
               </Box>
             </Grid>
           </Grid>
-          <Box style={{ margin: '20px 40px 20px 0', height: '400px', border: '1px solid #888' }}>
+          <Box style={{ margin: '20px 40px 20px 0', height: '550px', border: '1px solid #888' }}>
             <Box>
               <Typography
                 variant='h5'
@@ -81,76 +67,52 @@ const Home = () => {
                   color: '#555'
                 }}
               >
-                Thống kê lượt truy cập
+                Thống kê số liệu
               </Typography>
-              <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+              <Box sx={{  borderColor: 'divider' }}>
                 <TabContext value={value}>
                   <TabList onChange={handleChangeChart} aria-label="tab for login" textColor="secondary" indicatorColor="secondary">
-                    <Tab label="Tuần" value="week" />
-                    <Tab label="Tháng" value="month" />
+                    <Tab label="Bài viết nổi bật" value="hotposts" />
+                    <Tab label="Video nổi bật" value="hotvideos" />
+                    
                   </TabList>
-                  <TabPanel value="week" sx={{
-                    p: 0
-                  }}>
-                    {/* Biểu đồ thống kê lượt truy cập tuần */}
-                    <Bar
-                      data={{
-                        labels: ['Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy', 'Chủ Nhật'],
-                        datasets: [{
-                          label: 'Lượt truy cập',
-                          data: [1200, 1900, 1000, 2200, 2800, 3000, 3400],
-                          backgroundColor: '#FF7474',
-                          borderWidth: 1,
-                          color: '#000',
-                          maxBarThickness: 50
-                        }]
-                      }}
-                      width={'100%'}
-                      height={'300px'}
-                      options={{
-                        maintainAspectRatio: false,
-                      }}
-                    />
+                  <TabPanel value='hotposts'>
+                    <HotPosts />
                   </TabPanel>
-                  <TabPanel value="month" sx={{
-                    p: 0
-                  }}>
-                    {/* Biểu đồ thống kê lượt truy cập tháng */}
-                    <Bar
-                      data={{
-                        labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
-                        datasets: [{
-                          label: 'Lượt truy cập',
-                          data: [1200, 1900, 1000, 2200, 2800, 3000, 3400, 3000, 4000, 5000, 6000, 7000],
-                          backgroundColor: '#FF7474',
-                          borderWidth: 1,
-                          color: '#000',
-                          maxBarThickness: 50
-                        }]
-                      }}
-                      width={'100%'}
-                      height={'300px'}
-                      options={{
-                        maintainAspectRatio: false,
-                      }}
-                    />
+                  <TabPanel value='hotvideos'>
+                    <HotVideos />
                   </TabPanel>
+                  
                 </TabContext>
               </Box>
             </Box>
           </Box>
         </Grid>
-        <Grid item xs={4} style={{ backgroundColor: '#6691FF', borderRadius: '10px' }}>
+        <Grid item md={3.5} style={{ backgroundColor: '#6691FF', borderRadius: '10px' }}>
           <Box style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
             <Typography variant='h5' style={{ margin: '20px auto 10px auto', color: '#fff', fontWeight: '700' }}>
               Quản trị viên
             </Typography>
             <ul style={{ listStyle: 'none', marginLeft: '40px' }}>
-              {adminInfo.map((info, index) => (
-                <li key={index} className={classes.infoItem}>
-                  <Box style={{ backgroundImage: `url(${info.avata})` }} className={classes.avataAdmin}></Box>
-                  <Typography style={{ color: '#fff', marginLeft: '20px' }} variant='body1'>{info.name}</Typography>
-                </li>
+
+              {adminAccounts.map((account) => (
+                <div key={account._id}>
+                  {
+                    users.filter(user => user.account === account._id).map(user => {
+                      return (
+                        <>
+                          <li key={user._id} className={classes.infoItem}>
+                            <Box style={{ backgroundImage: `url(${user.image})` }} className={classes.avataAdmin}></Box>
+                            <Typography style={{ color: '#fff', marginLeft: '20px' }} variant='body1'>{user.name}</Typography>
+                          </li>
+                          
+                        </>
+
+                      )
+                    })
+                  }
+                </div>
+
               ))}
             </ul>
           </Box>

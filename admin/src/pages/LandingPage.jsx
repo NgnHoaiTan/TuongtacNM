@@ -55,18 +55,18 @@ const LandingPage = () => {
                             <TabContext value={value}>
                                 <TabList onChange={handleChange} aria-label="tab for login">
                                     <Tab label="Đăng nhập" value="1" />
-                                    <Tab label="Đăng ký" value="2" />
+                                    {/* <Tab label="Đăng ký" value="2" /> */}
                                 </TabList>
                                 <TabPanel value="1" sx={{
                                     p: 0
                                 }}>
                                     <Login />
                                 </TabPanel>
-                                <TabPanel value="2" sx={{
+                                {/* <TabPanel value="2" sx={{
                                     p: 0
                                 }}>
                                     <Signup />
-                                </TabPanel>
+                                </TabPanel> */}
                             </TabContext>
 
                         </Box>
