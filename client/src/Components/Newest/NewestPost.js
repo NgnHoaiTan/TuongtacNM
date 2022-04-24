@@ -15,6 +15,7 @@ const useStyle = makeStyles((theme) => ({
 const NewestPost = () => {
     const classes = useStyle()
     const posts = useSelector(getListPosts);
+    console.log(posts);
 
     return (
         <>
@@ -34,11 +35,6 @@ const NewestPost = () => {
                     <Grid item md={3}>
                         <Link to={`/post/${posts[2]._id}`}>
                             <PostCard post={posts[2]} />
-                        </Link>
-                    </Grid>
-                    <Grid item md={3}>
-                        <Link to={`/post/${posts[3]._id}`}>
-                            <PostCard post={posts[3]} />
                         </Link>
                     </Grid>
 

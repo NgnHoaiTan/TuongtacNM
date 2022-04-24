@@ -1,7 +1,10 @@
 import { Box, Grid, Typography, Tab, Tabs } from '@mui/material'
 import React, { useState } from 'react'
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
 import { Bar } from 'react-chartjs-2'
-import { Chart as ChartJS } from 'chart.js/auto'
+import 'chart.js/auto'
 
 import useStyles from './styles'
 
@@ -81,35 +84,58 @@ const Home = () => {
                 Thống kê lượt truy cập
               </Typography>
               <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <Tabs
-                  value={value}
-                  onChange={handleChangeChart}
-                  textColor="secondary"
-                  indicatorColor="secondary"
-                >
-                  <Tab value="week" label="Tuần" />
-                  <Tab value="month" label="Tháng" />
-                </Tabs>
-              </Box>
-              <Box>
-                <Bar
-                  data={{
-                    labels: ['Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy', 'Chủ Nhật'],
-                    datasets: [{
-                      label: '# of Votes',
-                      data: [1200, 1900, 1000, 2200, 2800, 3000, 3400],
-                      backgroundColor: '#FF7474',
-                      borderWidth: 1,
-                      color: '#000',
-                      maxBarThickness: 50
-                    }]
-                  }}
-                  width={'100%'}
-                  height={'300px'}
-                  options={{
-                    maintainAspectRatio: false,
-                  }}
-                />
+                <TabContext value={value}>
+                  <TabList onChange={handleChangeChart} aria-label="tab for login" textColor="secondary" indicatorColor="secondary">
+                    <Tab label="Tuần" value="week" />
+                    <Tab label="Tháng" value="month" />
+                  </TabList>
+                  <TabPanel value="week" sx={{
+                    p: 0
+                  }}>
+                    {/* Biểu đồ thống kê lượt truy cập tuần */}
+                    <Bar
+                      data={{
+                        labels: ['Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy', 'Chủ Nhật'],
+                        datasets: [{
+                          label: 'Lượt truy cập',
+                          data: [1200, 1900, 1000, 2200, 2800, 3000, 3400],
+                          backgroundColor: '#FF7474',
+                          borderWidth: 1,
+                          color: '#000',
+                          maxBarThickness: 50
+                        }]
+                      }}
+                      width={'100%'}
+                      height={'300px'}
+                      options={{
+                        maintainAspectRatio: false,
+                      }}
+                    />
+                  </TabPanel>
+                  <TabPanel value="month" sx={{
+                    p: 0
+                  }}>
+                    {/* Biểu đồ thống kê lượt truy cập tháng */}
+                    <Bar
+                      data={{
+                        labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+                        datasets: [{
+                          label: 'Lượt truy cập',
+                          data: [1200, 1900, 1000, 2200, 2800, 3000, 3400, 3000, 4000, 5000, 6000, 7000],
+                          backgroundColor: '#FF7474',
+                          borderWidth: 1,
+                          color: '#000',
+                          maxBarThickness: 50
+                        }]
+                      }}
+                      width={'100%'}
+                      height={'300px'}
+                      options={{
+                        maintainAspectRatio: false,
+                      }}
+                    />
+                  </TabPanel>
+                </TabContext>
               </Box>
             </Box>
           </Box>

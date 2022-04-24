@@ -6,8 +6,23 @@ import { DataGrid } from '@mui/x-data-grid';
 import SearchIcon from '@mui/icons-material/Search';
 
 import useStyles from './styles'
-import clsx from 'clsx';
-import usersInfo from './UserData';
+
+const usersInfo = []
+for (let i = 0; i < 40; i++) {
+  usersInfo[i] = {
+    id: i,
+    avata: 'https://scontent.fsgn2-5.fna.fbcdn.net/v/t39.30808-6/273149514_1310333586157034_658527321271494550_n.jpg?_nc_cat=102&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=qbftAzAmgCEAX-Wz1Ay&_nc_ht=scontent.fsgn2-5.fna&oh=00_AT_AvEoHsJdwhVHGqEfCxSBH270oMpKp6aREAE5OK4NsFg&oe=6234F065',
+    name: `Trần Thị Ái Ngân ${i}`,
+    gender: `Nữ ${i}`,
+    age: i,
+    address: 'Cần Thơ, Việt Nam',
+    email: `ngan${i}@gmail.com`,
+    introduce: `Hello, tôi là Trần Thị Ái Ngân - sinh viên tại trường Đại học Cần Thơ, tôi đang trong quá trình xây dựng hành trang kỹ năng và kiến thức của mình`,
+    posts: [1, 2],
+    videos: [1, 2, 3],
+  }
+}
+
 
 const columns = [
   { field: 'name', headerName: 'Họ và tên', headerClassName: 'super-app-theme--header', width: 250 },
@@ -21,12 +36,13 @@ const rows = [...usersInfo];
 const UserManage = () => {
 
   const classes = useStyles()
-  const [detail, setDetail] = useState('0');
+  const [detail, setDetail] = useState(0);
 
   let detailUser = usersInfo[detail];
 
   const handleClickRow = (rows) => {
-    setDetail(rows.row.id - 1);
+    console.log(rows.row.id);
+    setDetail(rows.row.id);
   }
 
   return (
