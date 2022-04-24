@@ -98,7 +98,7 @@ const InforPersonalUser = ({ user }) => {
             setErrUpdate(err.message)
         }
     }
-    console.log(user)
+    
     return (
         <div style={{ width: '60%', minHeight: '200px', margin: '20px auto 30px auto', padding: '0 10px 20px', backgroundColor: '#E9E9E9', borderRadius: '10px' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px 0' }}>

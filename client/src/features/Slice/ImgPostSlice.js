@@ -12,11 +12,15 @@ export const fetchAsyncImagesByPost = createAsyncThunk('image/fetchAsyncImagesBy
     return response.data;
 });
 const ImageSlice = createSlice({
-    name:'image',
+    name:'imagepost',
     initialState,
     reducers:{},
     extraReducers:{
+        [fetchAsyncImagesByPost.pending]:()=>{
+            console.log('fetching images by post start');
+        },
         [fetchAsyncImagesByPost.fulfilled]:(state,action)=>{
+            console.log("Get images by post success")
             return{
                 ...state,
                 images:action.payload
@@ -27,4 +31,5 @@ const ImageSlice = createSlice({
         },
     }
 });
+export const getListImages = (state) => state.imagepost.images;
 export default  ImageSlice.reducer;

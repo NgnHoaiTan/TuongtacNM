@@ -15,25 +15,24 @@ const useStyle = makeStyles((theme) => ({
 const NewestPost = () => {
     const classes = useStyle();
     const videos = useSelector(getListVideos);
+    const newvideos = videos.slice(0, videos.length > 4 ? 4 : videos.length);
     return (
         <>
             <Grid container className={classes.gridcontainer} spacing={3}>
                 {videos && videos.length > 0 &&
                     <>
-                        <Grid item md={3}>
-                            <VideoCard video={videos[0]} />
-                        </Grid>
-                        <Grid item md={3}>
-                            <VideoCard video={videos[1]} />
-                        </Grid>
-                        <Grid item md={3}>
-                            <VideoCard video={videos[2]} />
-                        </Grid>
-                        <Grid item md={3}>
-                            <VideoCard video={videos[3]} />
-                        </Grid>
+                        {newvideos.map(video => {
+                            return (
+                                <Grid item md={3} key={video._id}>
+                                    <Link to={`/video/${video._id}`}>
+                                        <VideoCard video={video} />
+                                    </Link>
+                                </Grid>
+                            )
+                        })}
 
                     </>}
+
             </Grid>
             <div className={classes.btnseemore}>
                 <Link to='/video'>

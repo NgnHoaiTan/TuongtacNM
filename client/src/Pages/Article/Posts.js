@@ -1,10 +1,10 @@
-import { Box, Typography, InputBase, Container, Grid, Button } from '@mui/material';
+import { Box, Typography, InputBase, Container, Grid, Button, IconButton, CircularProgress } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@mui/styles';
 import PostCard from '../../Components/Card/PostCard';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAsyncPosts, getListPosts } from '../../features/Slice/PostSlice';
+import { fetchAsyncPosts, fetchAsyncSearchPosts, getListPosts } from '../../features/Slice/PostSlice';
 import { Link } from 'react-router-dom'
 const useStyle = makeStyles({
     searchwrapper: {
@@ -31,26 +31,67 @@ const useStyle = makeStyles({
 const Posts = () => {
     const classes = useStyle();
     const dispatch = useDispatch();
+    const [searchText, setSearchText] = useState('')
+    const [actionSearch,setActionSearch] = useState(false);
+    const [loading,setLoading] = useState(true)
     const posts = useSelector(getListPosts);
-    console.log(posts);
-    useEffect(() => {
-        dispatch(fetchAsyncPosts());
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(fetchAsyncPosts());
+    // }, [dispatch])
+    useEffect(()=>{
+        setLoading(true);
+        const searchcall = ()=>{
+            if(searchText===''){
+                setTimeout(async()=>{
+                    await dispatch(fetchAsyncPosts());
+                    setLoading(false)
+                },500)
+               
+            }
+            else{
+                setTimeout(async()=>{
+                    await dispatch(fetchAsyncSearchPosts(searchText))
+                    setLoading(false)
+                },500)
+               
+            }
+        }
+        searchcall()
+        
+    },[searchText,dispatch])
+    const handleSearch = async () => {
+        let searchtext = searchText;
+        try {
+            await dispatch(fetchAsyncSearchPosts(searchtext))
+        } catch (err) {
+            console.log(err);
+        }
+    }
+    
     return (
         <Container maxWidth='lg' disableGutters sx={{
             py: 2,
-            minHeight: '100%'
+            minHeight: '700px'
         }}>
             <Box component="div" className={classes.searchwrapper}>
                 <div className={classes.searchinput}>
-                    <SearchIcon sx={{
-                        marginRight: 1
-                    }} />
+                    <IconButton onClick={handleSearch}>
+                        <SearchIcon sx={{
+                            marginRight: 1
+                        }}
+
+                        />
+                    </IconButton>
+
                     <InputBase fullWidth sx={{
                         color: 'black',
                         fontSize: '18px',
                         fontWeight: 500
-                    }} />
+                    }}
+                    value={searchText}
+                        onChange={(e) => setSearchText(e.target.value)}
+
+                    />
                 </div>
             </Box>
             <Typography variant='h5' sx={{
@@ -59,7 +100,12 @@ const Posts = () => {
             }}>
                 Danh sách bài viết
             </Typography>
-            {posts.length > 0 &&
+            {loading &&
+            <>
+                <CircularProgress />
+            </>
+            }
+            {!loading && posts.length > 0 &&
                 <>
                     <Grid container spacing={3} sx={{
 
@@ -76,7 +122,7 @@ const Posts = () => {
 
 
                     </Grid>
-                    <Box component='div' className={classes.pagination} sx={{
+                    {/* <Box component='div' className={classes.pagination} sx={{
                         my: 2
                     }}>
                         <Button size='small' variant='contained' sx={{
@@ -94,7 +140,7 @@ const Posts = () => {
                         }}>
                             3
                         </Button>
-                    </Box>
+                    </Box> */}
                 </>}
         </Container>
 

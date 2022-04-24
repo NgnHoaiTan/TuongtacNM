@@ -14,8 +14,9 @@ import { useParams } from 'react-router';
 import { fetchAsyncPostById, getPost } from '../../features/Slice/PostSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import InteractionPost from '../../Components/Interaction/InteractionPost';
-import {  fetchAsyncAuthUserById, getAuthUser, getUser } from '../../features/Slice/UserSlice';
+import { fetchAsyncAuthUserById, getAuthUser, getUser } from '../../features/Slice/UserSlice';
 import { Link } from 'react-router-dom';
+import { fetchAsyncImagesByPost, getListImages } from '../../features/Slice/ImgPostSlice';
 
 const theme = createTheme();
 
@@ -85,6 +86,7 @@ const PostDetail = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
     const post = useSelector(getPost);
+    const images = useSelector(getListImages);
     const authUser = useSelector(getAuthUser);
     const user = useSelector(getUser);
     const authuserId = post.user;
@@ -92,6 +94,7 @@ const PostDetail = () => {
         const dispatchCall = async () => {
             await dispatch(fetchAsyncPostById(id));
             await dispatch(fetchAsyncAuthUserById(authuserId))
+            await dispatch(fetchAsyncImagesByPost(id));
         }
         dispatchCall();
     }, [dispatch, id, authuserId])
@@ -122,7 +125,7 @@ const PostDetail = () => {
 
                                 <Typography variant="body2" sx={{
                                     fontWeight: 300,
-                                    
+
 
                                 }}>
                                     {post.date_upload}
@@ -136,9 +139,14 @@ const PostDetail = () => {
                             <Grid container spacing={3}>
                                 <Grid item md={5} xs={12}>
                                     <Carousel infiniteLoop>
-                                        <div>
-                                            <img src={animalDemo1} alt='img of article' />
-                                        </div>
+                                        {images && images.map(image => {
+                                            return (
+                                                <div key={image._id}>
+                                                    <img src={image.imageurl} alt='img of article' />
+                                                </div>
+                                            )
+                                        })}
+
 
                                     </Carousel>
                                 </Grid>
@@ -175,7 +183,7 @@ const PostDetail = () => {
                                 </Grid>
                             </Grid>
                             <div className={classes.morphology}>
-                                <Typography sx={{ fontWeight: 500, }}>
+                                <Typography sx={{ fontWeight: 600,fontSize:'17px',my:1  }}>
                                     Đặc điểm hình thái
                                 </Typography>
                                 <Typography sx={{ px: 1 }}>
@@ -183,7 +191,7 @@ const PostDetail = () => {
                                 </Typography>
                             </div>
                             <div className={classes.maintainment}>
-                                <Typography sx={{ fontWeight: 500, }}>
+                                <Typography sx={{ fontWeight: 600,fontSize:'17px',my:1 }}>
                                     Tình trạng bảo tồn
                                 </Typography>
                                 <Grid item xs={12}>
@@ -220,6 +228,8 @@ const PostDetail = () => {
                                                         </TableCell>
                                                         <TableCell sx={{
                                                             fontWeight: 500,
+                                                            minWidth:'260px',
+                                                            maxWidth:'330px',
                                                             [theme.breakpoints.down(400)]: {
                                                                 padding: '5px'
 
@@ -249,7 +259,7 @@ const PostDetail = () => {
                             <Grid container>
                                 <Grid item lg={6} xs={12}>
                                     <div className={classes.maintainment}>
-                                        <Typography sx={{ fontWeight: 500, }}>
+                                        <Typography sx={{ fontWeight: 600,fontSize:'17px',my:1  }}>
                                             Khu vực sinh sống
                                         </Typography>
                                         <Typography sx={{ px: 1 }}>
@@ -260,7 +270,7 @@ const PostDetail = () => {
                                         </Typography>
                                     </div>
                                     <div className={classes.maintainment}>
-                                        <Typography sx={{ fontWeight: 500, }}>
+                                        <Typography sx={{ fontWeight: 600,fontSize:'17px',my:1  }}>
                                             Đặc điểm sinh thái
                                         </Typography>
                                         <Typography sx={{ px: 1 }}>
@@ -314,7 +324,7 @@ const PostDetail = () => {
 
                         </div>
                         <Box component='div' className={classes.interaction}>
-                            <InteractionPost authUser={authUser}/>
+                            <InteractionPost authUser={authUser} />
                         </Box>
                     </Container>
                 </div>}

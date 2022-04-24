@@ -23,6 +23,12 @@ export const fetchAsyncPostByFollowUser = createAsyncThunk('post/fetchAsyncPostB
     const response = await Axios.get(`posts/getbyfollowuser/${userId}`);
     return response.data;
 });
+
+export const fetchAsyncSearchPosts = createAsyncThunk('post/fetchAsyncSearchPosts',async(searchingText)=>{
+    const response = await Axios.get(`posts/search/${searchingText}`);
+    return response.data;
+});
+
 export const createAsyncPost = createAsyncThunk('post/createAsyncPost',async(data)=>{
     const response = await Axios.post(`posts`,
         data,
@@ -98,6 +104,14 @@ const PostSlice = createSlice({
         [createAsyncPost.rejected]:()=>{
             console.log("Create Posts Rejected");
         },
+
+        // searching posts
+        [fetchAsyncSearchPosts.fulfilled]:(state,action)=>{
+            return{
+                ...state,
+                posts:action.payload
+            }
+        }
     }
 });
 export const getListPosts = (state)=>state.post.posts;

@@ -52,7 +52,7 @@ const NewsFeeds = ({ user }) => {
     const users = useSelector(getListUsers);
     const dispatch = useDispatch()
     const followings = listfollowings.slice(0, listfollowings.length > 8 ? 8 : listfollowings.length);
-    console.log(posts);
+    console.log(followings)
     useEffect(() => {
         dispatch(fetchAsyncFollowingOfUser(user._id))
     }, [dispatch, user._id])
@@ -90,9 +90,10 @@ const NewsFeeds = ({ user }) => {
                         <TabPanel value="1" index={0}>
                             <Grid container spacing={2}>
                                 {followings.map(following => (
-                                    (posts.filter((post, index) => (post.user === following.following && index < 3))).map(post => {
+                                    (posts.filter((post, index) => (post.user === following.following))).map(post => {
                                         return (
                                             <>
+                                                
                                                 <Grid item lg={2.4} key={post._id}>
                                                     <FeedPost article={post} />
                                                 </Grid>
@@ -108,7 +109,7 @@ const NewsFeeds = ({ user }) => {
                         <TabPanel value="2" index={1}>
                             <Grid container spacing={2}>
                                 {followings.map(following => (
-                                    (videos.filter((video, index) => (video.user === following.following && index < 3))).map(video => {
+                                    (videos.filter((video, index) => (video.user === following.following))).map(video => {
                                         return (
                                             <>
                                                 <Grid item lg={2.4} key={video._id}>

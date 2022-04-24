@@ -104,20 +104,7 @@ const Header = (props) => {
                                     <VideoLibraryIcon sx={{ fontSize: "30px" }} />
                                 </Button>
                             </Link>
-                            <Link to='/'>
-                                <Button
-                                    sx={{
-                                        my: 0, mx: 1, py: 2, px: 3, color: 'white', display: 'block',
-                                        alignItem: 'center',
-                                        lineHeight: '0',
-                                        '&:hover': {
-                                            backgroundColor: 'black'
-                                        }
-                                    }}
-                                >
-                                    <HelpIcon sx={{ fontSize: "30px" }} />
-                                </Button>
-                            </Link>
+                            
 
 
                         </Box>

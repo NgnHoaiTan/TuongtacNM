@@ -18,6 +18,27 @@ export const getPost = async (req, res) => {
         res.status(500).json({ error: err});
     }
 };
+export const getPostBySearching = async (req, res) => {
+    //console.log(req.params.searching);
+    var regex = new RegExp(req.params.searching, 'i');
+    try {
+        const posts = await PostModel.find({ 
+            $or:[
+                {title: regex},
+                {scientific_name: regex},  
+                {vietnamese_name: regex},
+                {region_name: regex},
+                {family: regex},
+            ]
+            
+        
+        }).sort({"date_upload":-1});
+        
+        res.status(200).json(posts);        
+    } catch (err) {
+        res.status(500).json({ error: err});
+    }
+};
 export const getPostByUser = async (req, res) => {
     try {
         const posts = await PostModel.find({ user: req.params.userId }).sort({"date_upload":-1});
