@@ -7,6 +7,7 @@ import { fetchAsyncPosts } from '../../features/Slice/PostSlice';
 import { fetchAsyncVideos } from '../../features/Slice/VideoSlice';
 import { getresult } from '../../features/Auth/authSlice';
 import { fetchAsyncUserByAccount, getUser } from '../../features/Slice/UserSlice';
+import NewsFeeds from '../../Components/Newsfeed/NewsFeeds';
 const Homepage = () => {
     const dispatch = useDispatch();
     const {accountId} = useSelector(getresult);
@@ -22,7 +23,8 @@ const Homepage = () => {
         <div>
             <HeroImage/>
             <Explore />
-            <IntroWrite />
+            <IntroWrite user={user}/>
+            <NewsFeeds user={user}/>
         </div>
     );
 };

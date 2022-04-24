@@ -1,17 +1,14 @@
 import React, { useEffect } from 'react';
-
 import { makeStyles } from '@mui/styles';
 import userdemo from '../../Images/user5.jpg';
-import videoDemo from '../../assets/video/videodemo.mp4'
-import { createTheme } from '@mui/material/styles';
 import { Avatar, Box, Container, Typography } from '@mui/material';
 import InteractionVideo from '../../Components/Interaction/InteractionVideo';
 import { useParams } from 'react-router';
 import { fetchAsyncVideoById, getVideo } from '../../features/Slice/VideoSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAsyncUserById, getUser } from '../../features/Slice/UserSlice';
+import { fetchAsyncAuthUserById, fetchAsyncUserById, getAuthUser, getUser } from '../../features/Slice/UserSlice';
+import { Link } from 'react-router-dom';
 
-const theme = createTheme();
 
 const useStyle = makeStyles({
     root: {
@@ -34,14 +31,16 @@ const VideoDetail = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
     const video = useSelector(getVideo);
+    const authUser = useSelector(getAuthUser);
     const user = useSelector(getUser);
+    const authuserId = video.user;
     useEffect(() => {
         const dispatchCall = async () => {
             await dispatch(fetchAsyncVideoById(id))
-            await dispatch(fetchAsyncUserById(video.user))
+            await dispatch(fetchAsyncAuthUserById(authuserId))
         }
         dispatchCall();
-    }, [dispatch, id])
+    }, [dispatch, id, authuserId])
     return (
         <>
             {video !== {} &&
@@ -53,13 +52,17 @@ const VideoDetail = () => {
 
                     }}>
                         <Box component='div' className={classes.userinfo}>
-                            <Avatar alt='user image' src={user.image ? user.image : userdemo} sx={{ mr: 1 }} />
+                            <Link to={`/user/${video.user}`}>
+                                <Avatar alt='user image' src={authUser.image} sx={{ mr: 1 }} />
+                            </Link>
                             <div className={classes.username}>
-                                <Typography sx={{
-                                    fontWeight: 500
-                                }}>
-                                    {user.name}
-                                </Typography>
+                                <Link to={`/user/${video.user}`}>
+                                    <Typography sx={{
+                                        fontWeight: 500
+                                    }}>
+                                        {authUser.name}
+                                    </Typography>
+                                </Link>
                                 <Typography variant="body2" sx={{
                                     fontWeight: 300,
 

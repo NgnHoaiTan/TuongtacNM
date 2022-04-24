@@ -17,12 +17,16 @@ import { getresult } from '../features/Auth/authSlice';
 import { useSelector } from 'react-redux';
 const Applayout = () => {
   const loggedin = useSelector(getresult);
-  console.log(Object.keys(loggedin).length === 0)
+  console.log(loggedin)
+  console.log(Object.keys(loggedin).length !== 0)
   return (
     <>
       <Routes>
         {Object.keys(loggedin).length === 0 &&
-          <Route path="/welcome" element={<LandingPage />} />
+          <>
+            <Route path="/welcome" element={<LandingPage />} />
+          </>
+
         }
         {
           Object.keys(loggedin).length !== 0 &&
@@ -45,7 +49,7 @@ const Applayout = () => {
 
           </>
         }
-        <Route path='*' element={<Navigate to={Object.keys(loggedin).length === 0 ? "/welcome" : "/"} /> }/>
+        <Route path='*' element={<Navigate to={Object.keys(loggedin).length === 0 ? "/welcome" : "/"} />} />
 
       </Routes>
     </>

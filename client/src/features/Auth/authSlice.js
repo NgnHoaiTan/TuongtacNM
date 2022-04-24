@@ -22,12 +22,14 @@ export const AsyncLogin = createAsyncThunk('auth/AsyncLogin', async (data) => {
     return response.data;
 })
 export const AsyncRegister = createAsyncThunk('auth/AsyncRegister', async (data) => {
-    const response = await Axios.post('accounts/register', {
-        username: data.username,
-        password: data.password,
-        name: data.fullname,
-        phone_number: data.phonenumber,
-    })
+    const response = await Axios.post('accounts/register',
+        data,
+        {
+            headers: {
+                "Content-type": "application/json"
+            }
+        }
+    )
     return response.data;
 })
 const authReducer = createSlice({
@@ -56,11 +58,6 @@ const authReducer = createSlice({
             state.register.success = true;
             state.register.error = false;
         },
-        registerFail: (state) => {
-            state.register.isLoading = false;
-            state.register.success = false;
-            state.register.error = true;
-        },
 
         logout: (state) => {
             state.result = {};
@@ -87,6 +84,7 @@ const authReducer = createSlice({
         
         [AsyncRegister.pending]: () => {
             console.log('Start checkout account')
+            
 
         },
         [AsyncRegister.fulfilled]: (state) => {
@@ -94,10 +92,10 @@ const authReducer = createSlice({
             state.register.isLoading = false;
             state.register.error = false;
             state.register.success= true;
-
+            
 
         },
-        [AsyncRegister.rejected]: (state) => {
+        [AsyncRegister.rejected]: (state,action) => {
             console.log('Checkout account failure')
             state.register.error = true;
         },
@@ -108,10 +106,10 @@ const authReducer = createSlice({
 
 const { reducer, actions } = authReducer;
 
-export const { loginPending, loginSuccess, loginFail, logout, registerPending, registerSuccess, registerFail } = actions;
+export const { loginPending, loginSuccess, loginFail, logout, registerPending, registerSuccess } = actions;
 export const getlogin = (state) => state.auth.login;
 export const getresult = (state) => state.auth.result;
-
+export const getregister = (state) =>state.register;
 
 // export const selectUser = (state) = state.user.user;
 

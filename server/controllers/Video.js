@@ -2,7 +2,7 @@ import {VideoModel} from "../models/VideoModel.js";
 import cloudinary from "../cloudinary.js";
 export const getVideos = async (req, res) => {
     try {
-        const videos = await VideoModel.find();
+        const videos = await VideoModel.find().sort({"date_upload":-1});
         res.status(200).json(videos);        
     } catch (err) {
         res.status(500).json({ error: err});
@@ -19,7 +19,16 @@ export const getVideo = async (req, res) => {
 };
 export const getVideoByUser = async (req, res) => {
     try {
-        const videos = await VideoModel.find({ user: req.params.userId });
+        const videos = await VideoModel.find({ user: req.params.userId }).sort({"date_upload":-1});
+        
+        res.status(200).json(videos);        
+    } catch (err) {
+        res.status(500).json({ error: err});
+    }
+};
+export const getVideoByFollowUser = async (req, res) => {
+    try {
+        const videos = await VideoModel.find({ user: req.params.userId }).limit(3).sort({"date_upload":-1});
         
         res.status(200).json(videos);        
     } catch (err) {

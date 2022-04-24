@@ -3,7 +3,7 @@ import { ImagesModel } from "../models/ImagesModel.js";
 import {PostModel} from "../models/PostModel.js";
 export const getPosts = async (req, res) => {
     try {
-        const posts = await PostModel.find();
+        const posts = await PostModel.find().sort({"date_upload":-1});
         res.status(200).json(posts);        
     } catch (err) {
         res.status(500).json({ error: err});
@@ -20,7 +20,16 @@ export const getPost = async (req, res) => {
 };
 export const getPostByUser = async (req, res) => {
     try {
-        const posts = await PostModel.find({ user: req.params.userId });
+        const posts = await PostModel.find({ user: req.params.userId }).sort({"date_upload":-1});
+        
+        res.status(200).json(posts);        
+    } catch (err) {
+        res.status(500).json({ error: err});
+    }
+};
+export const getPostByFollowUser = async (req, res) => {
+    try {
+        const posts = await PostModel.find({ user: req.params.userId }).limit(5).sort({"date_upload":-1});
         
         res.status(200).json(posts);        
     } catch (err) {

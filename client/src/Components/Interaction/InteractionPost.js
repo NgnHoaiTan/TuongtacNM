@@ -36,10 +36,10 @@ const InteractionPost = () => {
     const [content,setContent] = useState('');
     const user = useSelector(getUser); 
     const listusers = useSelector(getListUsers);
+    const data = { postId: id, userId: user._id }
     useEffect(() => {
         const dispatchCall = () => {
-            dispatch(fetchAsyncReactionsByPost(id));
-            let data = { postId: id, userId: user._id }
+            dispatch(fetchAsyncReactionsByPost(id));        
             dispatch(fetchAsyncReactionsInPostByUser(data))
             dispatch(fetchAsyncUsers());
         }

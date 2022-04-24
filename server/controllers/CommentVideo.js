@@ -10,7 +10,7 @@ export const getComments =async(req,res)=>{
 };
 export const getCommentsByVideo =async(req,res)=>{
     try{
-        const comments = await CommentVideoModel.find({video:req.params.videoId});
+        const comments = await CommentVideoModel.find({video:req.params.videoId}).sort({"date_upload":-1});
         res.status(200).json(comments); 
     }catch(err){
         res.status(500).json({ error: err});

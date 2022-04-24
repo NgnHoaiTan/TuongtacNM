@@ -1,6 +1,5 @@
 import { unwrapResult } from "@reduxjs/toolkit";
-import { Navigate } from "react-router-dom";
-import { loginPending, loginSuccess, loginFail, AsyncLogin } from "./authSlice";
+import { loginPending, loginFail, AsyncLogin } from "./authSlice";
 
 export const loginUser = async(user, dispatch, navigate) => {
     dispatch(loginPending())
