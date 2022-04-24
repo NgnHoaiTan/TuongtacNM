@@ -79,7 +79,7 @@ const InforPersonalUser = ({ user }) => {
         info.birthday && formdata.append('birthday',info.birthday); 
         info.email && formdata.append('email',info.email);
         let userId = user._id;
-        
+        console.log(info)
         const data ={
             formdata,
             userId,

@@ -8,9 +8,9 @@ import CommentIcon from '@mui/icons-material/Comment';
 import { buttonViewColor, postColor } from "../../common/color.js";
 import { makeStyles } from '@mui/styles';
 import { Link } from 'react-router-dom';
-import { useDispatch,useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchAsyncUsers, getListUsers } from '../../features/Slice/UserSlice';
-
+import * as moment from 'moment'
 const useStyle = makeStyles((theme) => ({
     container: {
         padding: "10px",
@@ -29,7 +29,7 @@ const useStyle = makeStyles((theme) => ({
         objectPosition: 'center',
         height: '150px',
     },
-    titlename:{
+    titlename: {
         display: 'box',
         lineClamp: 2,
         boxOrient: 'vertical',
@@ -44,44 +44,55 @@ const VideoCard = (props) => {
     useEffect(() => {
         dispatch(fetchAsyncUsers());
     }, [dispatch])
+    
     return (
-        <Card className={classes.container}>
-            <CardHeader
-                avatar={
-                    <Avatar
-                        src={listusers.find(user=>user._id===video.user).image}
+        <>
+            {listusers &&
+                <Card className={classes.container}>
+                    <CardHeader
+                        avatar={
+                            
+                            <Avatar
+                                
+                                src={listusers.find(user => user._id === video.user).image ? listusers.find(user => user._id === video.user).image :'' }
+                            />
+
+                        
+                        }
+                        
+                        title={listusers.find(user => user._id === video.user).name}
+                        subheader={moment(video.date_upload).format('DD/MM/YYYY')}
+                        sx={{ padding: 1 }}
                     />
+                    <Link to={`/video/${video._id}`}>
+                        <CardMedia
+                            component="video"
+                            height="194"
+                            src={video.videourl}
+                            className={classes.cardimg}
+                            alt="image video"
+                            sx={{
+                                mx: "auto"
+                            }}
+
+                        />
+                    </Link>
+
+                    <Link to={`/video/${video._id}`}>
+                        <CardContent sx={{
+                            px: 0
+                        }}>
+                            <Typography sx={{ fontWeight: 600, height: '50px', pb: 0 }} className={classes.titlename}>
+                                {video.title}
+                            </Typography>
+                        </CardContent>
+                    </Link>
+                </Card>
+
+            }
+        </>
 
 
-                }
-                title={listusers.find(user=>user._id===video.user).name}
-                subheader={video.date_upload}
-                sx={{ padding: 1 }}
-            />
-            <Link to={`/video/${video._id}`}>
-                <CardMedia
-                    component="video"
-                    height="194"
-                    src={video.videourl}
-                    className={classes.cardimg}
-                    alt="image video"
-                    sx={{
-                        mx: "auto"
-                    }}
-
-                />
-            </Link>
-
-            <Link to={`/video/${video._id}`}>
-                <CardContent sx={{
-                    px: 0
-                }}>
-                    <Typography sx={{ fontWeight: 600,height:'50px',pb:0 }} className={classes.titlename}>
-                        {video.title}
-                    </Typography>
-                </CardContent>
-            </Link>
-        </Card>
     );
 };
 

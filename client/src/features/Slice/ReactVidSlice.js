@@ -4,6 +4,7 @@ import Axios from "../Axios";
 const initialState = {
     reactions: [],
     reaction: {},
+    topreactions:[],
     createresult: {},
     deleteresult: {}
 }
@@ -27,6 +28,13 @@ export const deleteAsyncReaction = createAsyncThunk('reaction_video/deleteAsyncR
     const response = await Axios.delete(`reactionvideos/${id}`);
     return response.data;
 });
+
+export const fetchAsyncTopReaction = createAsyncThunk('reaction_video/fetchAsyncTopReaction', async () => {
+    const response = await Axios.get(`reactionvideos/maxreactionbyvideo`);
+    return response.data;
+});
+
+
 const ReactionVideoSlice = createSlice({
     name: 'reaction_video',
     initialState,
@@ -77,8 +85,18 @@ const ReactionVideoSlice = createSlice({
         [deleteAsyncReaction.rejected]: () => {
             console.log('delete Reaction rejected');
         },
+
+        // top reaction 
+        [fetchAsyncTopReaction.fulfilled]: (state, action) => {
+            console.log('Fetching Reactions by video Successfully');
+            return {
+                ...state,
+                topreactions: action.payload
+            }
+        },
     }
 });
 export const getReactions = (state) => state.reaction_video.reactions;
-export const getReactionofUser = (state) => state.reaction_video.reactionbyuser
+export const getReactionofUser = (state) => state.reaction_video.reactionbyuser;
+export const getTopReactions = state =>state.reaction_video.topreactions;
 export default ReactionVideoSlice.reducer;

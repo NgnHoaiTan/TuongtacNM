@@ -31,6 +31,8 @@ const InteractionPost = () => {
     const reactions = useSelector(getReactions);
     const comments = useSelector(getListComments)
     const reactbyuser = useSelector(getReactionofUser);
+    console.log(reactions);
+    console.log(reactbyuser)
     const [actionReact, setActionReact] = useState(false);
     const [actionComment, setActionComment] = useState(false);
     const [content,setContent] = useState('');
@@ -97,7 +99,7 @@ const InteractionPost = () => {
     return (
         <>
             <Box className={classes.reaction} sx={{ display: 'flex', alignContent: 'center' }}>
-                {reactbyuser.length > 0 ?
+                {reactbyuser&&Object.keys(reactbyuser).length > 0 ?
                     <Button variant="outlined" onClick={handleUnreact}
                         sx={{
                             padding: '5px',

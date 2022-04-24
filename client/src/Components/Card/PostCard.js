@@ -10,7 +10,7 @@ import { makeStyles } from '@mui/styles';
 import {Link} from 'react-router-dom';
 import { useDispatch,useSelector } from 'react-redux';
 import { fetchAsyncUsers, getListUsers } from '../../features/Slice/UserSlice';
-
+import * as moment from 'moment'
 const useStyle = makeStyles((theme) => ({
     container: {
         padding: "10px",
@@ -54,7 +54,7 @@ const PostCard = (props) => {
                     />
                 }
                 title={listusers.find(user=>user._id===post.user).name}
-                subheader={post.date_upload}
+                subheader={moment(post.date_upload).format('DD/MM/YYYY')}
                 sx={{ padding: 1 }}
             />
             

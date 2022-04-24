@@ -17,14 +17,14 @@ const schema = mongoose.Schema({
     address:{
         type:String,
     },
-    bithday:{
+    birthday:{
         type: Date,
     },
     gender:{
         type:Boolean,
         default:false,
     },
-    introduce:{
+    introduction:{
         type:String,
     },
     education:{

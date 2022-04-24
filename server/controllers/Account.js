@@ -61,6 +61,32 @@ export const getAccount = async (req, res) => {
         res.status(500).json({ error: err});
     }
 };
+export const getListAccountsIsAdmin = async (req, res) => {
+    try {
+        const accounts = await AccountModel.find({ is_admin: true });    
+        res.status(200).json(accounts);    
+    } catch (err) {
+        res.status(500).json({ error: err});
+    }
+};
+export const updateAccount = async (req, res) => {
+    try {
+        let account = await AccountModel.findById(req.params.id);
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(req.body.password,salt);
+        // console.log(hashedPassword)
+        let updateAccount = {
+            username:req.body.username,
+            password:hashedPassword,
+            is_admin:req.body.is_admin
+        };
+        
+        account = await AccountModel.findOneAndUpdate({ _id: req.params.id }, updateAccount, { new: true }); //dieu kien , gia tri moi, user = new?gia tri moi: gia tri cu
+        res.status(200).json(account);
+    } catch (err) {
+        res.status(500).json({error: err});
+    }
+};
 export const deleteAccount = async (req, res) => {
     try {
         const account = await AccountModel.findOneAndDelete({ _id: req.params.id });

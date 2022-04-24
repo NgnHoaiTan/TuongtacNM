@@ -6,7 +6,7 @@ const useStyle = makeStyles({
 
     nameofarticle: {
         display: 'box',
-        lineClamp: 3,
+        lineClamp: 2,
         boxOrient: 'vertical',
         overflow: 'hidden',
     }

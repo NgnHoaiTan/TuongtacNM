@@ -19,6 +19,12 @@ export const fetchAsyncVideoByUser = createAsyncThunk('video/fetchAsyncVideoByUs
     const response = await Axios.get(`videos/getbyuser/${userId}`);
     return response.data;
 });
+
+export const fetchAsyncSearchVideos = createAsyncThunk('video/fetchAsyncSearchVideos',async(searchingText)=>{
+    const response = await Axios.get(`videos/search/${searchingText}`);
+    return response.data;
+});
+
 export const fetchAsyncVideoByFollowUser = createAsyncThunk('video/fetchAsyncVideoByFollowUser',async(userId)=>{
     const response = await Axios.get(`videos/getbyfollowuser/${userId}`);
     return response.data;
@@ -92,6 +98,14 @@ const VideoSlice = createSlice({
             return{
                 ...state,
                 createresult:action.payload
+            }
+        },
+
+        // search videos
+        [fetchAsyncSearchVideos.fulfilled]:(state,action)=>{
+            return{
+                ...state,
+                videos:action.payload
             }
         },
        

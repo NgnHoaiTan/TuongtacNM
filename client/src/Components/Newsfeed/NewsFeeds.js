@@ -57,97 +57,103 @@ const NewsFeeds = ({ user }) => {
         dispatch(fetchAsyncFollowingOfUser(user._id))
     }, [dispatch, user._id])
     return (
-        <Container maxWidth="xl" className={classes.container} sx={{ position: 'relative' }}>
-            <Box className={classes.wrapperexplore}>
-                <Box component="div" className={classes.text}>
-                    <Typography sx={{ fontWeight: 600, fontSize: '21px' }}>
-                        Đang theo dõi
-                    </Typography>
+        <>
+            {followings && followings.length > 0 &&
+                <>
+                    <Container maxWidth="xl" className={classes.container} sx={{ position: 'relative' }}>
+                        <Box className={classes.wrapperexplore}>
+                            <Box component="div" className={classes.text}>
+                                <Typography sx={{ fontWeight: 600, fontSize: '21px' }}>
+                                    Đang theo dõi
+                                </Typography>
 
-                </Box>
-                <Box>
-                    <TabContext value={value}>
-                        <Box sx={{
-                            borderBottom: 1, borderColor: "#2269D2"
-                        }}>
-                            <TabList onChange={handleChange} aria-label="tab trantition" >
-                                <Tab label="Bài viết" value="1" sx={{
-                                    color: 'black',
-                                    fontWeight: 600
-                                }} />
-                                <Tab label="Video - câu chuyện" value="2" sx={{
-                                    color: 'black',
-                                    fontWeight: 600,
+                            </Box>
+                            <Box>
+                                <TabContext value={value}>
+                                    <Box sx={{
+                                        borderBottom: 1, borderColor: "#2269D2"
+                                    }}>
+                                        <TabList onChange={handleChange} aria-label="tab trantition" >
+                                            <Tab label="Bài viết" value="1" sx={{
+                                                color: 'black',
+                                                fontWeight: 600
+                                            }} />
+                                            <Tab label="Video - câu chuyện" value="2" sx={{
+                                                color: 'black',
+                                                fontWeight: 600,
 
-                                }} />
-                                <Tab label="Người dùng" value="3" sx={{
-                                    color: 'black',
-                                    fontWeight: 600
-                                }} />
-                            </TabList>
+                                            }} />
+                                            <Tab label="Người dùng" value="3" sx={{
+                                                color: 'black',
+                                                fontWeight: 600
+                                            }} />
+                                        </TabList>
+                                    </Box>
+
+                                    <TabPanel value="1" index={0}>
+                                        <Grid container spacing={2}>
+                                            {followings.map(following => (
+                                                (posts.filter((post, index) => (post.user === following.following))).map(post => {
+                                                    return (
+                                                        <>
+
+                                                            <Grid item lg={2.4} key={post._id}>
+                                                                <FeedPost article={post} />
+                                                            </Grid>
+
+                                                        </>
+
+                                                    )
+                                                })
+
+                                            ))}
+                                        </Grid>
+                                    </TabPanel>
+                                    <TabPanel value="2" index={1}>
+                                        <Grid container spacing={2}>
+                                            {followings.map(following => (
+                                                (videos.filter((video, index) => (video.user === following.following))).map(video => {
+                                                    return (
+                                                        <>
+                                                            <Grid item lg={2.4} key={video._id}>
+                                                                <FeedVideo video={video} />
+                                                            </Grid>
+
+                                                        </>
+
+                                                    )
+                                                })
+
+                                            ))}
+                                        </Grid>
+                                    </TabPanel>
+                                    <TabPanel value="3" index={2}>
+                                        <Grid container spacing={2}>
+                                            {followings.map(following => (
+                                                (users.filter((user, index) => (user._id === following.following))).map(user => {
+                                                    return (
+                                                        <>
+                                                            <Grid item lg={2} key={user._id}>
+                                                                <FollowUsers user={user} />
+                                                            </Grid>
+
+                                                        </>
+
+                                                    )
+                                                })
+
+                                            ))}
+                                        </Grid>
+                                    </TabPanel>
+                                </TabContext>
+                            </Box>
+
+
                         </Box>
-
-                        <TabPanel value="1" index={0}>
-                            <Grid container spacing={2}>
-                                {followings.map(following => (
-                                    (posts.filter((post, index) => (post.user === following.following))).map(post => {
-                                        return (
-                                            <>
-                                                
-                                                <Grid item lg={2.4} key={post._id}>
-                                                    <FeedPost article={post} />
-                                                </Grid>
-                                                
-                                            </>
-
-                                        )
-                                    })
-
-                                ))}
-                            </Grid>
-                        </TabPanel>
-                        <TabPanel value="2" index={1}>
-                            <Grid container spacing={2}>
-                                {followings.map(following => (
-                                    (videos.filter((video, index) => (video.user === following.following))).map(video => {
-                                        return (
-                                            <>
-                                                <Grid item lg={2.4} key={video._id}>
-                                                    <FeedVideo video={video} />
-                                                </Grid>
-                                                
-                                            </>
-
-                                        )
-                                    })
-
-                                ))}
-                            </Grid>
-                        </TabPanel>
-                        <TabPanel value="3" index={2}>
-                            <Grid container spacing={2}>
-                                {followings.map(following => (
-                                    (users.filter((user, index) => (user._id === following.following))).map(user => {
-                                        return (
-                                            <>
-                                                <Grid item lg={2} key={user._id}>
-                                                    <FollowUsers user={user} />
-                                                </Grid>
-                                
-                                            </>
-
-                                        )
-                                    })
-
-                                ))}
-                            </Grid>
-                        </TabPanel>
-                    </TabContext>
-                </Box>
-
-
-            </Box>
-        </Container>
+                    </Container>
+                </>
+            }
+        </>
     );
 };
 

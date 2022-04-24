@@ -8,6 +8,19 @@ export const getVideos = async (req, res) => {
         res.status(500).json({ error: err});
     }
 };
+export const getVideoBySearching = async (req, res) => {
+    //console.log(req.params.searching);
+    var regex = new RegExp(req.params.searching, 'i');
+    try {
+        const videos = await VideoModel.find({ 
+            title: regex
+        }).sort({"date_upload":-1});
+        
+        res.status(200).json(videos);        
+    } catch (err) {
+        res.status(500).json({ error: err});
+    }
+};
 export const getVideo = async (req, res) => {
     try {
         const video = await VideoModel.findOne({ _id: req.params.id });

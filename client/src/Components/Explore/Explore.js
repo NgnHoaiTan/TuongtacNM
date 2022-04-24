@@ -8,6 +8,8 @@ import { exploreBg } from "../../common/color"
 import NewestPost from '../Newest/NewestPost';
 import NewestVideo from '../Newest/NewestVideo';
 import { Link } from 'react-router-dom'
+import HotPosts from '../Hottest/HotPosts';
+import HotVideos from '../Hottest/HotVideos';
 const useStyle = makeStyles((theme) => ({
     container: {
         padding: "0 40px"
@@ -59,6 +61,12 @@ const Explore = () => {
                                 <Tab label="Video mới nhất" value="2" sx={{
                                     color: 'white'
                                 }} />
+                                <Tab label="Bài viết nổi bật" value="3" sx={{
+                                    color: 'white'
+                                }} />
+                                <Tab label="Video nổi bật" value="4" sx={{
+                                    color: 'white'
+                                }} />
                             </TabList>
                         </Box>
 
@@ -67,6 +75,12 @@ const Explore = () => {
                         </TabPanel>
                         <TabPanel value="2" index={1}>
                             <NewestVideo />
+                        </TabPanel>
+                        <TabPanel value="3" index={1}>
+                            <HotPosts />
+                        </TabPanel>
+                        <TabPanel value="4" index={1}>
+                            <HotVideos />
                         </TabPanel>
                     </TabContext>
 

@@ -5,7 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import * as moment from 'moment';
 const PickDate = ({ title, content, setInfo, name }) => {
-    const [startDate, setStartDate] = useState(new Date());
+    const [startDate, setStartDate] = useState(content ? new Date(content) : new Date());
     const handleChange = (date) => {
         let field = name;
         setStartDate(date)
