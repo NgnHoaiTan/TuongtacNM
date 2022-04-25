@@ -53,8 +53,8 @@ const PostCard = (props) => {
                         src={listusers.find(user=>user._id===post.user) ? listusers.find(user=>user._id===post.user).image : ''}
                     />
                 }
-                title={listusers.find(user=>user._id===post.user)?listusers.find(user=>user._id===post.user).name:''}
-                subheader={moment(post.date_upload).format('DD/MM/YYYY')}
+                title={<Typography sx={{color:'white',fontWeight:500}}>{listusers.find(user=>user._id===post.user)?listusers.find(user=>user._id===post.user).name:''}</Typography>}
+                subheader={<Typography sx={{color:'white',fontSize:13}}>{moment(post.date_upload).format('DD/MM/YYYY')}</Typography>}
                 sx={{ padding: 1 }}
             />
             

@@ -44,24 +44,23 @@ const VideoCard = (props) => {
     useEffect(() => {
         dispatch(fetchAsyncUsers());
     }, [dispatch])
-    
+
     return (
         <>
             {listusers &&
                 <Card className={classes.container}>
                     <CardHeader
                         avatar={
-                            
+
                             <Avatar
-                                
-                                src={listusers.find(user => user._id === video.user).image ? listusers.find(user => user._id === video.user).image :'' }
+
+                                src={listusers.find(user => user._id === video.user) ? listusers.find(user => user._id === video.user).image : ''}
                             />
 
-                        
+
                         }
-                        
-                        title={listusers.find(user => user._id === video.user).name}
-                        subheader={moment(video.date_upload).format('DD/MM/YYYY')}
+                        title={<Typography sx={{ color: 'white', fontWeight: 500 }}>{listusers.find(user => user._id === video.user) ? listusers.find(user => user._id === video.user).name : ''}</Typography>}
+                        subheader={<Typography sx={{ color: 'white', fontSize: 13 }}>{moment(video.date_upload).format('DD/MM/YYYY')}</Typography>}
                         sx={{ padding: 1 }}
                     />
                     <Link to={`/video/${video._id}`}>

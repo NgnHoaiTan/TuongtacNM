@@ -6,7 +6,7 @@ import {useDispatch, useSelector } from 'react-redux';
 import { fetchAsyncPosts, getListPosts } from '../../features/Slice/PostSlice';
 import { fetchAsyncVideos } from '../../features/Slice/VideoSlice';
 import { getresult } from '../../features/Auth/authSlice';
-import { fetchAsyncUserByAccount, getUser } from '../../features/Slice/UserSlice';
+import { fetchAsyncUserByAccount, fetchAsyncUsers, getUser } from '../../features/Slice/UserSlice';
 import NewsFeeds from '../../Components/Newsfeed/NewsFeeds';
 const Homepage = () => {
     const dispatch = useDispatch();
@@ -17,10 +17,11 @@ const Homepage = () => {
     const posts = useSelector(getListPosts)
     //console.log(posts)
     useEffect(() => {
-        const calldispatch = async()=>{
-            await dispatch(fetchAsyncPosts());
-            await dispatch(fetchAsyncVideos());
-            await dispatch(fetchAsyncUserByAccount(accountId));
+        const calldispatch = ()=>{
+            dispatch(fetchAsyncPosts());
+            dispatch(fetchAsyncVideos());
+            dispatch(fetchAsyncUsers())
+            dispatch(fetchAsyncUserByAccount(accountId));
         }
         calldispatch()
     }, [dispatch])

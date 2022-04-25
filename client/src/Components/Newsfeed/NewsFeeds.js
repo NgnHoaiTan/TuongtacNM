@@ -97,7 +97,7 @@ const NewsFeeds = ({ user }) => {
                                                     return (
                                                         <>
 
-                                                            <Grid item lg={2.4} key={post._id}>
+                                                            <Grid item md={3} lg={2.4} key={post._id}>
                                                                 <FeedPost article={post} />
                                                             </Grid>
 
@@ -115,7 +115,7 @@ const NewsFeeds = ({ user }) => {
                                                 (videos.filter((video, index) => (video.user === following.following))).map(video => {
                                                     return (
                                                         <>
-                                                            <Grid item lg={2.4} key={video._id}>
+                                                            <Grid item md={3} lg={2.4} key={video._id}>
                                                                 <FeedVideo video={video} />
                                                             </Grid>
 
@@ -133,7 +133,7 @@ const NewsFeeds = ({ user }) => {
                                                 (users.filter((user, index) => (user._id === following.following))).map(user => {
                                                     return (
                                                         <>
-                                                            <Grid item lg={2} key={user._id}>
+                                                            <Grid item md={3} lg={2.4} key={user._id}>
                                                                 <FollowUsers user={user} />
                                                             </Grid>
 

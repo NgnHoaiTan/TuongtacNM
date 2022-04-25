@@ -41,16 +41,15 @@ const UserSlice = createSlice({
     reducers:{
         resetUser:(state)=>{
             state.user={}
-            console.log(state.user);
         }
     },
     extraReducers:{
         // get list
         [fetchAsyncUsers.pending]:()=>{
-            console.log("Start to fetching list users")
+            //console.log("Start to fetching list users")
         },
         [fetchAsyncUsers.fulfilled]:(state,action)=>{
-            console.log("Finish to fetch list users");
+           // console.log("Finish to fetch list users");
             return{
                 ...state,
                 users:action.payload
@@ -58,7 +57,7 @@ const UserSlice = createSlice({
         },
         
         [fetchAsyncUsers.rejected]:()=>{
-            console.log('Fetch list user rejected');
+            //console.log('Fetch list user rejected');
         },
         // get user by id
         [fetchAsyncUserById.fulfilled]:(state,action)=>{
@@ -69,14 +68,14 @@ const UserSlice = createSlice({
             }
         },
         [fetchAsyncUserById.rejected]:()=>{
-            console.log('fetch user by id rejected');
+            //console.log('fetch user by id rejected');
            
         },
 
         // get auth user 
 
         [fetchAsyncAuthUserById.fulfilled]:(state,action)=>{
-            console.log('Finish to fetch authuser by id');
+            //console.log('Finish to fetch authuser by id');
             return{
                 ...state,
                 authUser:action.payload

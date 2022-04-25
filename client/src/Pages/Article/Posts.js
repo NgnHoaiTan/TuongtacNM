@@ -45,14 +45,14 @@ const Posts = () => {
                 setTimeout(async()=>{
                     await dispatch(fetchAsyncPosts());
                     setLoading(false)
-                },500)
+                },200)
                
             }
             else{
                 setTimeout(async()=>{
                     await dispatch(fetchAsyncSearchPosts(searchText))
                     setLoading(false)
-                },500)
+                },200)
                
             }
         }

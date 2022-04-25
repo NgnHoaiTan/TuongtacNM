@@ -35,8 +35,9 @@ const SidebarUser = ({ user, authUser }) => {
     const dispatch = useDispatch();
     const handleLogout = () => {
         console.log('logout')
-        dispatch(logout())
         dispatch(resetUser())
+        dispatch(logout())
+        
         
     }
     const sidebarUserData = (user._id === authUser._id ? ([
