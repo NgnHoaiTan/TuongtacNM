@@ -52,7 +52,8 @@ const NewsFeeds = ({ user }) => {
     const users = useSelector(getListUsers);
     const dispatch = useDispatch()
     const followings = listfollowings.slice(0, listfollowings.length > 8 ? 8 : listfollowings.length);
-    console.log(followings)
+    // console.log(user)
+    // console.log(followings)
     useEffect(() => {
         dispatch(fetchAsyncFollowingOfUser(user._id))
     }, [dispatch, user._id])

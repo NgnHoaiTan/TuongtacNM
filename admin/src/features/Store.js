@@ -33,6 +33,42 @@ const migrations = {
         }
     }
 }
+const prealoadedState = {
+    auth: {
+        login:{},
+        result:{}
+    },
+    user:{
+        admins:[],
+        admin:{},
+        users:[],
+    },
+    post:{
+        posts:[],
+        post:{},
+        createresult:{},
+        updateresult:{}
+    },
+    video: {
+        videos:[],
+        video:{},
+        createresult:{},
+        updateresult:{}
+    },
+    account:{
+        accountAdmins:[],
+        accounts:[],
+    },
+    reaction_post:{
+        reactions: [],
+        reactionbyuser: {},
+        topreactions:[]
+    },
+    reaction_video:{
+        reactions: [],
+        topreactions:[]
+    }
+}
 const persistConfig = {
     key: 'root',
     storage,
@@ -59,6 +95,7 @@ const store = configureStore({
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
             },
         }),
+    prealoadedState: prealoadedState,
 
 });
 export default store;

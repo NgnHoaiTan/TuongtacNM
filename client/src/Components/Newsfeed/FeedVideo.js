@@ -1,4 +1,4 @@
-import { Box,Card, CardContent, Typography} from '@mui/material'
+import { Box, Card, CardContent, Typography } from '@mui/material'
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
@@ -11,7 +11,7 @@ const useStyle = makeStyles({
         overflow: 'hidden',
     }
 })
-const FeedVideo = ({ video}) => {
+const FeedVideo = ({ video }) => {
     const classes = useStyle();
     return (
         <Box className='feed' sx={{ p: 1 }}>
@@ -21,10 +21,10 @@ const FeedVideo = ({ video}) => {
                     <div>
                         <video
                             style={{
-                                height:'180px',
+                                height: '180px',
                                 width: '100%',
                                 objectFit: 'cover',
-                                
+
                             }}
                             type="video/mp4"
                             src={video.videourl}
@@ -32,16 +32,17 @@ const FeedVideo = ({ video}) => {
                         />
 
                     </div>
-                    <Link to={`/video/${video._id}`}>
 
-                        <CardContent style={{ padding: '10px', height: '85px' }}>
+
+                    <CardContent style={{ padding: '10px', height: '85px' }}>
+                        <Link to={`/video/${video._id}`}>
                             <div>
                                 <Typography
                                     style={{
                                         color: '#fff',
                                         fontSize: '17px',
                                         fontWeight: 500,
-                                        
+
                                     }}
 
                                     component='span'
@@ -51,10 +52,10 @@ const FeedVideo = ({ video}) => {
                                     {video.title}
                                 </Typography>
                             </div>
+                        </Link>
+                    </CardContent>
 
-                        </CardContent>
 
-                    </Link>
 
                 </Card>
             </Link>
