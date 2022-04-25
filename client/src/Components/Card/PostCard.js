@@ -50,10 +50,10 @@ const PostCard = (props) => {
             <CardHeader
                 avatar={
                     <Avatar
-                        src={listusers.find(user=>user._id===post.user).image}
+                        src={listusers.find(user=>user._id===post.user) ? listusers.find(user=>user._id===post.user).image : ''}
                     />
                 }
-                title={listusers.find(user=>user._id===post.user).name}
+                title={listusers.find(user=>user._id===post.user)?listusers.find(user=>user._id===post.user).name:''}
                 subheader={moment(post.date_upload).format('DD/MM/YYYY')}
                 sx={{ padding: 1 }}
             />
