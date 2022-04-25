@@ -13,10 +13,12 @@ import reactionVideo from './routers/reactionVideo.js';
 import video from './routers/video.js';
 import post from './routers/post.js';
 import follow from './routers/follow.js';
+import dotenv from 'dotenv'
 
+dotenv.config();
 const app = express();
-const PORT = 5000;
-const URI = "mongodb+srv://hoaitan:CWwAn9VV0dpdQz0y@cluster0.n8bi5.mongodb.net/WildDiscoveryDB?retryWrites=true&w=majority";
+const PORT = process.env.PORT || 5000;
+const URI = process.env.DATABASE_URL;
 
 app.use(bodyParser.json({limit:'30mb'}));
 app.use(bodyParser.urlencoded({ extended: true, limit: '30mb' })); 
