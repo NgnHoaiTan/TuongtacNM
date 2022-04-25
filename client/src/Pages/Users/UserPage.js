@@ -16,7 +16,8 @@ const Userpage = () => {
   },[dispatch,userId])
   const user = useSelector(getUser);
   const authUser = useSelector(getAuthUser);
-  
+  console.log(user)
+  console.log(authUser)
   return (
     <>
       {user && Object.keys(user).length > 0 ?

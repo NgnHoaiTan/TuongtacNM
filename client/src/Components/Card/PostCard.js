@@ -41,7 +41,7 @@ const PostCard = (props) => {
     const classes = useStyle();
     const dispatch = useDispatch();
     const listusers = useSelector(getListUsers);
-    
+    //console.log(listusers.find(user=>user._id===post.user));
     useEffect(() => {
         dispatch(fetchAsyncUsers());
     }, [dispatch])

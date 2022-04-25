@@ -51,7 +51,7 @@ const HomeUser = ({ user, authUser }) => {
         }
 
     }
-    console.log(followings.length===0)
+    console.log(followings)
     return (
         <div>
             <TabContext value={value}>
@@ -62,7 +62,7 @@ const HomeUser = ({ user, authUser }) => {
                     </TabList>
                     {user._id !== authUser._id ?
                         <div style={{ padding: '10px', display: 'flex', alignItems: 'center', marginRight: '10px' }}>
-                            {(followings.length===0 || followings.find(following => following.following !== authUser._id)) &&
+                            {(followings.length===0 || followings.every(following => following.following !== authUser._id)) &&
                                 
                                 <>
                                     <Button onClick={handleFollow} size='small' variant='contained' sx={{ bgcolor: '#4d85ef', '&:hover': { bgcolor: '#4d85ef' } }}>
@@ -73,7 +73,7 @@ const HomeUser = ({ user, authUser }) => {
                                     </Button>
                                 </>
                             }
-                            {(followings.length>0 && followings.find(following => following.following == authUser._id)) &&
+                            {(followings.length>0 && followings.find(following => following.following === authUser._id)) &&
                                 <> 
                                     <Button onClick={handleUnfollow}  size='small' variant='contained' sx={{ bgcolor: '#4d85ef', '&:hover': { bgcolor: '#4d85ef' } }}>
                                         <Typography sx={{ color: 'white', fontWeight: 500, fontSize: '16px' }}>
