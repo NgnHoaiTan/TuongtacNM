@@ -49,7 +49,7 @@ const UserManage = ({ adminAccounts }) => {
    useEffect(()=>{
       dispatch(fetchAsyncUsers);
    },[])
-   console.log(users)
+   // console.log(users)
 
    const handleClickRow = (rows) => {
       console.log(rows.row.id);

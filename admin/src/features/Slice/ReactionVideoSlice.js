@@ -22,19 +22,19 @@ const ReactionVideoSlice = createSlice({
     extraReducers: {
         // get reactions by video
         [fetchAsyncReactionsByVideo.fulfilled]: (state, action) => {
-            console.log('Fetching Reactions by video Successfully');
+            //console.log('Fetching Reactions by video Successfully');
             return {
                 ...state,
                 reactions: action.payload
             }
         },
         [fetchAsyncReactionsByVideo.rejected]: () => {
-            console.log('Fetching Reactions by video rejected');
+            //console.log('Fetching Reactions by video rejected');
 
         },  
         
         [fetchAsyncTopReaction.fulfilled]: (state, action) => {
-            console.log('Fetching Reactions by video Successfully');
+            //console.log('Fetching Reactions by video Successfully');
             return {
                 ...state,
                 topreactions: action.payload

@@ -28,25 +28,25 @@ const VideoSlice = createSlice({
     extraReducers:{
         // get list Videos
         [fetchAsyncVideos.fulfilled]:(state,action)=>{
-            console.log("Fetching Videos Successfully");
+            //console.log("Fetching Videos Successfully");
             return{
                 ...state,
                 videos:action.payload
             }
         },
         [fetchAsyncVideos.rejected]:()=>{
-            console.log("Fetching Videos Rejected");
+            //console.log("Fetching Videos Rejected");
         },
         // get Video by id
         [fetchAsyncVideoById.fulfilled]:(state,action)=>{
-            console.log("Fetching Video by id Successfully");
+            //console.log("Fetching Video by id Successfully");
             return{
                 ...state,
                 video:action.payload
             }
         },
         [fetchAsyncVideoById.rejected]:()=>{
-            console.log("Fetching Video by id Rejected");
+            //console.log("Fetching Video by id Rejected");
         },
 
         // get Video by user
@@ -57,7 +57,7 @@ const VideoSlice = createSlice({
             }
         },
         [fetchAsyncVideoByUser.rejected]:()=>{
-            console.log("Fetching Videos by user Rejected");
+            //console.log("Fetching Videos by user Rejected");
         },
     }
 });

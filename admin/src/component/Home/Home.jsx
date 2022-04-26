@@ -19,7 +19,7 @@ const Home = ({ adminAccounts }) => {
   const handleChangeChart = (event, newValue) => {
     setValue(newValue);
   };
-  console.log(adminAccounts)
+  
   const users = useSelector(getListUsers);
   const posts = useSelector(getListPosts);
   const videos = useSelector(getListVideos);
@@ -100,13 +100,13 @@ const Home = ({ adminAccounts }) => {
                   {
                     users.filter(user => user.account === account._id).map(user => {
                       return (
-                        <>
-                          <li key={user._id} className={classes.infoItem}>
+                        <React.Fragment key={user._id}>
+                          <li className={classes.infoItem}>
                             <Box style={{ backgroundImage: `url(${user.image})` }} className={classes.avataAdmin}></Box>
                             <Typography style={{ color: '#fff', marginLeft: '20px' }} variant='body1'>{user.name}</Typography>
                           </li>
                           
-                        </>
+                        </React.Fragment>
 
                       )
                     })

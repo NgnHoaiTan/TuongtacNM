@@ -23,13 +23,15 @@ const HotPosts = () => {
     const posts = useSelector(getListPosts);
     const users = useSelector(getListUsers);
     useEffect(() => {
-        dispatch(fetchAsyncTopReaction())
-        dispatch(fetchAsyncPosts());
+        const call = async()=>{
+            await dispatch(fetchAsyncTopReaction())
+            await dispatch(fetchAsyncPosts());
+        }
+        
     }, [])
-
     return (
         <Grid container spacing={2}>
-            {topreactions && topreactions.map(reaction => (
+            {topreactions&&posts && users && topreactions.map(reaction => (
                 <Grid item md={4} key={reaction._id}>
                     <Card elevation={0} style={{ backgroundColor: '#ededed', borderRadius: '10px' }}>
                         

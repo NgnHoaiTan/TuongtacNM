@@ -29,14 +29,14 @@ const PostSlice = createSlice({
     extraReducers:{
         // get list posts
         [fetchAsyncPosts.fulfilled]:(state,action)=>{
-            console.log("Fetching Posts Successfully");
+            //console.log("Fetching Posts Successfully");
             return{
                 ...state,
                 posts:action.payload
             }
         },
         [fetchAsyncPosts.rejected]:()=>{
-            console.log("Fetching Posts Rejected");
+            //console.log("Fetching Posts Rejected");
         },
         // get post by id
         [fetchAsyncPostById.fulfilled]:(state,action)=>{

@@ -42,14 +42,14 @@ const UserSlice = createSlice({
         // get list 
         
         [fetchAsyncAdmins.fulfilled]:(state,action)=>{
-            console.log("Finish to fetch list admins");
+            //console.log("Finish to fetch list admins");
             return{
                 ...state,
                 admins:action.payload
             }
         },
         [fetchAsyncUsers.fulfilled]:(state,action)=>{
-            console.log("Finish to fetch list users");
+            //console.log("Finish to fetch list users");
             return{
                 ...state,
                 users:action.payload
@@ -57,18 +57,18 @@ const UserSlice = createSlice({
         },
         
         [fetchAsyncUsers.rejected]:()=>{
-            console.log('Fetch list admin rejected');
+            //console.log('Fetch list admin rejected');
         },
         // get admin by id
         [fetchAsyncAdminById.fulfilled]:(state,action)=>{
-            console.log('Finish to fetch admin by id');
+            //console.log('Finish to fetch admin by id');
             return{
                 ...state,
                 admin:action.payload
             }
         },
         [fetchAsyncUserById.fulfilled]:(state,action)=>{
-            console.log('Finish to fetch user by id');
+            //console.log('Finish to fetch user by id');
             return{
                 ...state,
                 user:action.payload

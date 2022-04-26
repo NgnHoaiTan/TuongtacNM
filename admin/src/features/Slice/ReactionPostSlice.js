@@ -23,14 +23,14 @@ const ReactionPostSlice = createSlice({
     extraReducers: {
         // get reactions by post
         [fetchAsyncReactionsByPost.fulfilled]: (state, action) => {
-            console.log('Fetching Reactions by post Successfully');
+            //console.log('Fetching Reactions by post Successfully');
             return {
                 ...state,
                 reactions: action.payload
             }
         },
         [fetchAsyncReactionsByPost.rejected]: () => {
-            console.log('Fetching Reactions by post rejected');
+            //console.log('Fetching Reactions by post rejected');
 
         },
         // get reactions by post
