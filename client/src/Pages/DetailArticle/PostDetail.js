@@ -176,7 +176,7 @@ const PostDetail = () => {
                                         data={dataimage}
                                         time={6000}
                                         // width="850px"
-                                        height="260px"
+                                        height="300px"
                                         captionStyle={captionStyle}
                                         radius="10px"
                                         slideNumber={true}
@@ -188,7 +188,7 @@ const PostDetail = () => {
                                         pauseIconSize="40px"
                                         slideBackgroundColor="darkgrey"
                                         slideImageFit="contain"
-                                        thumbnails={true}
+                                        thumbnails={false}
                                         thumbnailWidth="100px"
                                         style={{
                                             textAlign: "center",
