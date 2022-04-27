@@ -88,21 +88,21 @@ const UserSlice = createSlice({
 
         // update user
         [AsyncUpdateUser.fulfilled]:()=>{
-            console.log('Update information successfully')
+            //console.log('Update information successfully')
         },
 
         [AsyncUpdateUser.rejected]:()=>{
-            console.log('Update information rejected');
+            //console.log('Update information rejected');
         },
 
         // get user by account
         [fetchAsyncUserByAccount.pending]:()=>{
-            console.log('Start to fetch user by account');
+            //console.log('Start to fetch user by account');
         },
         
         
         [fetchAsyncUserByAccount.fulfilled]:(state,action)=>{
-            console.log('Finish to fetch user by account');
+            //console.log('Finish to fetch user by account');
             return{
                 ...state,
                 user:action.payload
@@ -110,7 +110,7 @@ const UserSlice = createSlice({
         },
         
         [fetchAsyncUserByAccount.rejected]:()=>{
-            console.log('Fetch user by account rejected');
+            //console.log('Fetch user by account rejected');
         },
         
         

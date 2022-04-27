@@ -32,53 +32,53 @@ const FollowSlice = createSlice({
     extraReducers:{
         // lay du lieu follow cua nguoi dung dang duoc follow
         [fetchAsyncFollowsOfUser.pending]:()=>{
-            console.log('Start to fetch followed of user');
+            //console.log('Start to fetch followed of user');
         },
         [fetchAsyncFollowsOfUser.fulfilled]:(state,action)=>{
-            console.log('Finish to fetch followed of user');
+            //console.log('Finish to fetch followed of user');
             return{
                 ...state,
                 follows:action.payload
             }
         },
         [fetchAsyncFollowsOfUser.rejected]:()=>{
-            console.log('Failed to fetch followed of user');
+            //console.log('Failed to fetch followed of user');
         },
 
         // lay du lieu nguoi dung dang follow ai do 
 
         [fetchAsyncFollowingOfUser.pending]:()=>{
-            console.log('Start to fetch following of user');
+            //console.log('Start to fetch following of user');
         },
         [fetchAsyncFollowingOfUser.fulfilled]:(state,action)=>{
-            console.log('Finish to fetch following of user');
+            //console.log('Finish to fetch following of user');
             return{
                 ...state,
                 following:action.payload
             }
         },
         [fetchAsyncFollowingOfUser.rejected]:()=>{
-            console.log('Failed to fetch following of user');
+            //console.log('Failed to fetch following of user');
         },
 
         // follow someone
         [AsyncFollowSomeone.fulfilled]:(state,action)=>{
-            console.log('Follow someone success');
+            //console.log('Follow someone success');
             return{
                 ...state,
                 resultfollow:action.payload
             }
         },
         [AsyncFollowSomeone.rejected]:()=>{
-            console.log('Follow someone failed');
+           // console.log('Follow someone failed');
             
         },
         // unfollow someone
         [AsyncUnFollowSomeone.fulfilled]:()=>{
-            console.log('unfollow success');
+            //console.log('unfollow success');
         },
         [AsyncUnFollowSomeone.rejected]:()=>{
-            console.log('unfollow failed');
+           // console.log('unfollow failed');
         },
 
     }

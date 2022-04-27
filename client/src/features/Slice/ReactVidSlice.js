@@ -42,38 +42,38 @@ const ReactionVideoSlice = createSlice({
     extraReducers: {
         // get reactions by video
         [fetchAsyncReactionsByVideo.fulfilled]: (state, action) => {
-            console.log('Fetching Reactions by video Successfully');
+           //console.log('Fetching Reactions by video Successfully');
             return {
                 ...state,
                 reactions: action.payload
             }
         },
         [fetchAsyncReactionsByVideo.rejected]: () => {
-            console.log('Fetching Reactions by video rejected');
+            //console.log('Fetching Reactions by video rejected');
 
         },
         // get reaction of user on particular video
         [fetchAsyncReactionsInVideoByUser.fulfilled]: (state, action) => {
-            console.log(action.payload)
+            //console.log(action.payload)
             return {
                 ...state,
                 reactionbyuser: action.payload
             }
         },
         [fetchAsyncReactionsInVideoByUser.rejected]: () => {
-            console.log('Fetching Reactions of user on particular video rejected');
+           // console.log('Fetching Reactions of user on particular video rejected');
         },
 
         // create reaction
         [createAsyncReaction.fulfilled]: (state, action) => {
-            console.log('create Reaction Successfully');
+            //console.log('create Reaction Successfully');
             return {
                 ...state,
                 createresult: action.payload
             }
         },
         [createAsyncReaction.rejected]: () => {
-            console.log('create Reaction rejected');
+            //console.log('create Reaction rejected');
 
         },
         [deleteAsyncReaction.fulfilled]: (state, action) => {
@@ -83,12 +83,12 @@ const ReactionVideoSlice = createSlice({
             }
         },
         [deleteAsyncReaction.rejected]: () => {
-            console.log('delete Reaction rejected');
+            //console.log('delete Reaction rejected');
         },
 
         // top reaction 
         [fetchAsyncTopReaction.fulfilled]: (state, action) => {
-            console.log('Fetching Reactions by video Successfully');
+            //console.log('Fetching Reactions by video Successfully');
             return {
                 ...state,
                 topreactions: action.payload

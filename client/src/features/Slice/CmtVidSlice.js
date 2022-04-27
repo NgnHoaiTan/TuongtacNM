@@ -28,27 +28,27 @@ const CommentVideoSlice = createSlice({
     extraReducers:{
         // get cmt by video
         [fetchAsyncCommentsByVideo.fulfilled]:(state,action)=>{
-            console.log('Fetching Comments by video Successfully');
+            //console.log('Fetching Comments by video Successfully');
             return{
                 ...state,
                 comments:action.payload
             }
         },
         [fetchAsyncCommentsByVideo.rejected]:()=>{
-            console.log('Fetching Comments by video rejected');
+           // console.log('Fetching Comments by video rejected');
             
         },
         
         // create comment
         [createAsyncComment.fulfilled]:(state,action)=>{
-            console.log('create Comments Successfully');
+            //console.log('create Comments Successfully');
             return{
                 ...state,
                 createresult:action.payload
             }
         },
         [createAsyncComment.rejected]:()=>{
-            console.log('create Comments rejected');
+            //console.log('create Comments rejected');
             
         },
     }

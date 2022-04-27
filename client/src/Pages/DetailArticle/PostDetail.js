@@ -5,10 +5,9 @@ import React, { useEffect } from 'react';
 import { makeStyles } from '@mui/styles';
 import userdemo from '../../Images/user5.jpg';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from 'react-responsive-carousel';
+// import { Carousel } from 'react-responsive-carousel';
 import animalDemo1 from '../../Images/echgiunnguyen.JPG';
 import markImg from '../../Images/gps.png';
-import Map, { Marker, FullscreenControl, Layer } from 'react-map-gl';
 import { createTheme } from '@mui/material/styles';
 import { useParams } from 'react-router';
 import { fetchAsyncPostById, getPost } from '../../features/Slice/PostSlice';
@@ -17,6 +16,11 @@ import InteractionPost from '../../Components/Interaction/InteractionPost';
 import { fetchAsyncAuthUserById, getAuthUser, getUser } from '../../features/Slice/UserSlice';
 import { Link } from 'react-router-dom';
 import { fetchAsyncImagesByPost, getListImages } from '../../features/Slice/ImgPostSlice';
+import Map, { Marker, FullscreenControl, Layer } from 'react-map-gl';
+import MapboxWorker from 'mapbox-gl/dist/mapbox-gl-csp-worker';
+import { Carousel } from 'react-carousel-minimal';
+
+Map.workerClass = MapboxWorker;
 
 const theme = createTheme();
 
@@ -80,7 +84,14 @@ const useStyle = makeStyles({
         overflow: 'auto'
     }
 })
-
+const captionStyle = {
+    fontSize: '2em',
+    fontWeight: 'bold',
+}
+const slideNumberStyle = {
+    fontSize: '16px',
+    fontWeight: '500',
+}
 const PostDetail = () => {
     const classes = useStyle();
     const dispatch = useDispatch();
@@ -90,6 +101,7 @@ const PostDetail = () => {
     const authUser = useSelector(getAuthUser);
     const user = useSelector(getUser);
     const authuserId = post.user;
+
     useEffect(() => {
         const dispatchCall = async () => {
             await dispatch(fetchAsyncPostById(id));
@@ -98,7 +110,18 @@ const PostDetail = () => {
         }
         dispatchCall();
     }, [dispatch, id, authuserId])
+    const dataimage = Object.keys(images).length > 0 ?
+        images.map((image) => {
+            return (
+                {
+                    image: image.imageurl,
+                    cation: "Ảnh sưu tầm"
+                }
+            )
+        })
+        : []
 
+    //console.log(dataimage)
     return (
         <>
             {post !== {} &&
@@ -138,7 +161,7 @@ const PostDetail = () => {
                             </Typography>
                             <Grid container spacing={3}>
                                 <Grid item md={5} xs={12}>
-                                    <Carousel infiniteLoop>
+                                    {/* <Carousel infiniteLoop >
                                         {images && images.map(image => {
                                             return (
                                                 <div key={image._id}>
@@ -148,7 +171,31 @@ const PostDetail = () => {
                                         })}
 
 
-                                    </Carousel>
+                                    </Carousel> */}
+                                    <Carousel
+                                        data={dataimage}
+                                        time={6000}
+                                        // width="850px"
+                                        height="260px"
+                                        captionStyle={captionStyle}
+                                        radius="10px"
+                                        slideNumber={true}
+                                        slideNumberStyle={slideNumberStyle}
+                                        captionPosition="bottom"
+                                        automatic={true}
+                                        dots={true}
+                                        pauseIconColor="white"
+                                        pauseIconSize="40px"
+                                        slideBackgroundColor="darkgrey"
+                                        slideImageFit="contain"
+                                        thumbnails={true}
+                                        thumbnailWidth="100px"
+                                        style={{
+                                            textAlign: "center",
+                                            margin: "0 auto",
+                                            
+                                        }}
+                                    />
                                 </Grid>
                                 <Grid item md={7} xs={12} className={classes.general_info}>
                                     <Box component='div'>
@@ -179,11 +226,17 @@ const PostDetail = () => {
                                         <Typography sx={{ fontWeight: 400, mb: 0.5 }}>
                                             <span className={classes.span_title}>Giá trị sử dụng:</span> {post.value_of_use}
                                         </Typography>
+                                        <Typography sx={{ fontWeight: 400, mb: 0.5 }}>
+                                        <span className={classes.span_title}>Phân bố:</span> {post.distribution}
+                                        </Typography>
+                                        <Typography sx={{ fontWeight: 400, mb: 0.5 }}>
+                                        <span className={classes.span_title}>Tình trạng mẫu vật:</span> {post.status_creature}
+                                        </Typography>
                                     </Box>
                                 </Grid>
                             </Grid>
                             <div className={classes.morphology}>
-                                <Typography sx={{ fontWeight: 600,fontSize:'17px',my:1  }}>
+                                <Typography sx={{ fontWeight: 600, fontSize: '17px', my: 1 }}>
                                     Đặc điểm hình thái
                                 </Typography>
                                 <Typography sx={{ px: 1 }}>
@@ -191,7 +244,7 @@ const PostDetail = () => {
                                 </Typography>
                             </div>
                             <div className={classes.maintainment}>
-                                <Typography sx={{ fontWeight: 600,fontSize:'17px',my:1 }}>
+                                <Typography sx={{ fontWeight: 600, fontSize: '17px', my: 1 }}>
                                     Tình trạng bảo tồn
                                 </Typography>
                                 <Grid item xs={12}>
@@ -228,8 +281,8 @@ const PostDetail = () => {
                                                         </TableCell>
                                                         <TableCell sx={{
                                                             fontWeight: 500,
-                                                            minWidth:'260px',
-                                                            maxWidth:'330px',
+                                                            minWidth: '260px',
+                                                            maxWidth: '330px',
                                                             [theme.breakpoints.down(400)]: {
                                                                 padding: '5px'
 
@@ -259,7 +312,7 @@ const PostDetail = () => {
                             <Grid container>
                                 <Grid item lg={6} xs={12}>
                                     <div className={classes.maintainment}>
-                                        <Typography sx={{ fontWeight: 600,fontSize:'17px',my:1  }}>
+                                        <Typography sx={{ fontWeight: 600, fontSize: '17px', my: 1 }}>
                                             Khu vực sinh sống
                                         </Typography>
                                         <Typography sx={{ px: 1 }}>
@@ -270,18 +323,13 @@ const PostDetail = () => {
                                         </Typography>
                                     </div>
                                     <div className={classes.maintainment}>
-                                        <Typography sx={{ fontWeight: 600,fontSize:'17px',my:1  }}>
+                                        <Typography sx={{ fontWeight: 600, fontSize: '17px', my: 1 }}>
                                             Đặc điểm sinh thái
                                         </Typography>
                                         <Typography sx={{ px: 1 }}>
                                             {post.ecology}
                                         </Typography>
-                                        <Typography sx={{ px: 1 }}>
-                                            Phân bố: {post.distribution}
-                                        </Typography>
-                                        <Typography sx={{ px: 1 }}>
-                                            Tình trạng mẫu vật: {post.status_creature}
-                                        </Typography>
+
                                     </div>
                                 </Grid>
                                 <Grid item lg={6} xs={12}>
@@ -294,7 +342,7 @@ const PostDetail = () => {
                                                 center: [post.longitude, post.latitude],
                                                 zoom: 10,
                                             }}
-                                            style={{ width: '100%', height: 300 }}
+                                            style={{ height: 300 }}
                                             mapStyle="mapbox://styles/mapbox/streets-v11"
 
                                         >
@@ -312,8 +360,11 @@ const PostDetail = () => {
                                         anchor="bottom"
                                         onClose={() => setShowPopup(false)}>
                                         <img src={markImg} style={{width:'30px'}} />
-                                    </Popup>)} */}
+                                            </Popup>)} */}
                                         </Map>
+
+
+
                                     </div>
 
                                 </Grid>

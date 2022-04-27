@@ -17,17 +17,17 @@ const ImageSlice = createSlice({
     reducers:{},
     extraReducers:{
         [fetchAsyncImagesByPost.pending]:()=>{
-            console.log('fetching images by post start');
+            //console.log('fetching images by post start');
         },
         [fetchAsyncImagesByPost.fulfilled]:(state,action)=>{
-            console.log("Get images by post success")
+            //console.log("Get images by post success")
             return{
                 ...state,
                 images:action.payload
             }
         },
         [fetchAsyncImagesByPost.rejected]:()=>{
-            console.log('fetching images by post rejected');
+            //console.log('fetching images by post rejected');
         },
     }
 });

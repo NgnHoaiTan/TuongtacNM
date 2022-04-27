@@ -51,7 +51,7 @@ const HomeUser = ({ user, authUser }) => {
         }
 
     }
-    console.log(followings)
+    // console.log(followings)
     return (
         <div>
             <TabContext value={value}>

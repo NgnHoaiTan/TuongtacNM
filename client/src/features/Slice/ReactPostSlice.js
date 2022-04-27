@@ -31,7 +31,7 @@ export const deleteAsyncReaction = createAsyncThunk('reaction_post/deleteAsyncRe
 
 
 
-export const fetchAsyncTopReaction = createAsyncThunk('reaction_post/fetchAsyncTopReactionByPost', async () => {
+export const fetchAsyncTopReaction = createAsyncThunk('reaction_post/fetchAsyncTopReaction', async () => {
     const response = await Axios.get(`reactionposts/maxreactionbypost`);
     return response.data;
 });
@@ -43,38 +43,38 @@ const ReactionPostSlice = createSlice({
     extraReducers: {
         // get reactions by post
         [fetchAsyncReactionsByPost.fulfilled]: (state, action) => {
-            console.log('Fetching Reactions by post Successfully');
+            //console.log('Fetching Reactions by post Successfully');
             return {
                 ...state,
                 reactions: action.payload
             }
         },
         [fetchAsyncReactionsByPost.rejected]: () => {
-            console.log('Fetching Reactions by post rejected');
+            //console.log('Fetching Reactions by post rejected');
 
         },
         // get reaction of user on particular post
         [fetchAsyncReactionsInPostByUser.fulfilled]:(state,action)=>{
-            console.log(action.payload)
+            //console.log(action.payload)
             return{
                 ...state,
                 reactionbyuser:action.payload
             }
         },
         [fetchAsyncReactionsInPostByUser.rejected]:()=>{
-            console.log('Fetching Reactions of user on particular post rejected');
+            //console.log('Fetching Reactions of user on particular post rejected');
         },
 
         // create reaction
         [createAsyncReaction.fulfilled]: (state, action) => {
-            console.log('create Reaction Successfully');
+            //console.log('create Reaction Successfully');
             return {
                 ...state,
                 createresult: action.payload
             }
         },
         [createAsyncReaction.rejected]: () => {
-            console.log('create Reaction rejected');
+            //console.log('create Reaction rejected');
 
         },
         [deleteAsyncReaction.fulfilled]:(state, action)=>{
@@ -84,11 +84,11 @@ const ReactionPostSlice = createSlice({
             }
         },
         [deleteAsyncReaction.rejected]:()=>{
-            console.log('delete Reaction rejected');
+            //console.log('delete Reaction rejected');
         },
         // top reaction 
         [fetchAsyncTopReaction.fulfilled]: (state, action) => {
-            console.log('Fetching Reactions by video Successfully');
+            //console.log('Fetching Reactions by video Successfully');
             return {
                 ...state,
                 topreactions: action.payload

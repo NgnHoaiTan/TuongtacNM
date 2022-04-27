@@ -31,8 +31,8 @@ const InteractionPost = () => {
     const reactions = useSelector(getReactions);
     const comments = useSelector(getListComments)
     const reactbyuser = useSelector(getReactionofUser);
-    console.log(reactions);
-    console.log(reactbyuser)
+    // console.log(reactions);
+    // console.log(reactbyuser)
     const [actionReact, setActionReact] = useState(false);
     const [actionComment, setActionComment] = useState(false);
     const [content,setContent] = useState('');
@@ -41,9 +41,12 @@ const InteractionPost = () => {
     const data = { postId: id, userId: user._id }
     useEffect(() => {
         const dispatchCall = () => {
-            dispatch(fetchAsyncReactionsByPost(id));        
-            dispatch(fetchAsyncReactionsInPostByUser(data))
-            dispatch(fetchAsyncUsers());
+            if(user){
+                dispatch(fetchAsyncReactionsByPost(id));        
+                dispatch(fetchAsyncReactionsInPostByUser(data))
+                dispatch(fetchAsyncUsers());
+            }
+            
         }
         dispatchCall();
     }, [dispatch, actionReact, id])
@@ -70,7 +73,7 @@ const InteractionPost = () => {
     const handleUnreact = async () => {
         // add id user after
         setActionReact(false);
-        let data = reactbyuser[0]._id
+        let data = reactbyuser._id
         try {
             await dispatch(deleteAsyncReaction(data));
             setActionReact(true);

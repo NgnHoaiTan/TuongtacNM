@@ -48,40 +48,40 @@ const VideoSlice = createSlice({
     extraReducers:{
         // get list Videos
         [fetchAsyncVideos.pending]:()=>{
-            console.log("Fetching Videos Start")
+            //console.log("Fetching Videos Start")
         },
         [fetchAsyncVideos.fulfilled]:(state,action)=>{
-            console.log("Fetching Videos Successfully");
+            //console.log("Fetching Videos Successfully");
             return{
                 ...state,
                 videos:action.payload
             }
         },
         [fetchAsyncVideos.rejected]:()=>{
-            console.log("Fetching Videos Rejected");
+            //console.log("Fetching Videos Rejected");
         },
         // get Video by id
         [fetchAsyncVideoById.fulfilled]:(state,action)=>{
-            console.log("Fetching Video by id Successfully");
+            //console.log("Fetching Video by id Successfully");
             return{
                 ...state,
                 video:action.payload
             }
         },
         [fetchAsyncVideoById.rejected]:()=>{
-            console.log("Fetching Video by id Rejected");
+            //console.log("Fetching Video by id Rejected");
         },
 
         // get Video by user
         [fetchAsyncVideoByUser.fulfilled]:(state,action)=>{
-            console.log("Fetching Videos by user Successfully");
+            //console.log("Fetching Videos by user Successfully");
             return{
                 ...state,
                 videos:action.payload
             }
         },
         [fetchAsyncVideoByUser.rejected]:()=>{
-            console.log("Fetching Videos by user Rejected");
+            //console.log("Fetching Videos by user Rejected");
         },
         // get videos by follow
 

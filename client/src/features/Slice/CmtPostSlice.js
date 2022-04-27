@@ -28,27 +28,27 @@ const CommentPostSlice = createSlice({
     extraReducers:{
         // get cmt by post
         [fetchAsyncCommentsByPost.fulfilled]:(state,action)=>{
-            console.log('Fetching Comments by post Successfully');
+            //console.log('Fetching Comments by post Successfully');
             return{
                 ...state,
                 comments:action.payload
             }
         },
         [fetchAsyncCommentsByPost.rejected]:()=>{
-            console.log('Fetching Comments by post rejected');
+            //console.log('Fetching Comments by post rejected');
             
         },
         
         // create comment
         [createAsyncComment.fulfilled]:(state,action)=>{
-            console.log('create Comments Successfully');
+            //console.log('create Comments Successfully');
             return{
                 ...state,
                 createresult:action.payload
             }
         },
         [createAsyncComment.rejected]:()=>{
-            console.log('create Comments rejected');
+            //console.log('create Comments rejected');
             
         },
     }

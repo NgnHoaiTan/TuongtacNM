@@ -48,17 +48,17 @@ const PostSlice = createSlice({
     extraReducers:{
         // get list posts
         [fetchAsyncPosts.pending]:()=>{
-            console.log("Fetching Posts Start")
+            //console.log("Fetching Posts Start")
         },
         [fetchAsyncPosts.fulfilled]:(state,action)=>{
-            console.log("Fetching Posts Successfully");
+            //console.log("Fetching Posts Successfully");
             return{
                 ...state,
                 posts:action.payload
             }
         },
         [fetchAsyncPosts.rejected]:()=>{
-            console.log("Fetching Posts Rejected");
+            //console.log("Fetching Posts Rejected");
         },
         // get post by id
         [fetchAsyncPostById.fulfilled]:(state,action)=>{
@@ -69,7 +69,7 @@ const PostSlice = createSlice({
             }
         },
         [fetchAsyncPostById.rejected]:()=>{
-            console.log("Fetching Post by id Rejected");
+            //console.log("Fetching Post by id Rejected");
         },
 
         // get post by user
@@ -81,7 +81,7 @@ const PostSlice = createSlice({
             }
         },
         [fetchAsyncPostByUser.rejected]:()=>{
-            console.log("Fetching Posts by user Rejected");
+            //console.log("Fetching Posts by user Rejected");
         },
         // get posts by following
 
@@ -102,7 +102,7 @@ const PostSlice = createSlice({
             }
         },
         [createAsyncPost.rejected]:()=>{
-            console.log("Create Posts Rejected");
+            //console.log("Create Posts Rejected");
         },
 
         // searching posts

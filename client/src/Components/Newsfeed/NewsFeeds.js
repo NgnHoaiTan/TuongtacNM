@@ -52,10 +52,13 @@ const NewsFeeds = ({ user }) => {
     const users = useSelector(getListUsers);
     const dispatch = useDispatch()
     const followings = listfollowings.slice(0, listfollowings.length > 8 ? 8 : listfollowings.length);
-    // console.log(user)
-    // console.log(followings)
+    
+
     useEffect(() => {
-        dispatch(fetchAsyncFollowingOfUser(user._id))
+        if(Object.keys(user).length>0){
+            dispatch(fetchAsyncFollowingOfUser(user._id))
+        }
+        
     }, [dispatch, user._id])
     return (
         <>
@@ -93,37 +96,52 @@ const NewsFeeds = ({ user }) => {
 
                                     <TabPanel value="1" index={0}>
                                         <Grid container spacing={2}>
-                                            {followings.map(following => (
-                                                (posts.filter((post, index) => (post.user === following.following))).map(post => {
+                                            {followings
+                                                .map((following) => {
                                                     return (
-                                                        <>
+                                                        <React.Fragment key={following._id}>
+                                                            {(posts
+                                                                .filter((post) => (post.user === following.following)))
+                                                                .map(post => {
+                                                                    return (
+                                                                        <React.Fragment key={post._id}>
+                                                                            <Grid item md={3} lg={2.4} >
+                                                                                <FeedPost article={post} />
 
-                                                            <Grid item md={3} lg={2.4} key={post._id}>
-                                                                <FeedPost article={post} />
-                                                            </Grid>
+                                                                            </Grid>
+                                                                        </React.Fragment >
 
-                                                        </>
-
+                                                                    )
+                                                                })}
+                                                        </React.Fragment>
                                                     )
-                                                })
 
-                                            ))}
+
+
+                                                    //console.log(posts.filter((post, index) => (post.user === following.following)) + index)
+
+                                                })}
                                         </Grid>
                                     </TabPanel>
                                     <TabPanel value="2" index={1}>
                                         <Grid container spacing={2}>
                                             {followings.map(following => (
-                                                (videos.filter((video, index) => (video.user === following.following))).map(video => {
-                                                    return (
-                                                        <>
-                                                            <Grid item md={3} lg={2.4} key={video._id}>
-                                                                <FeedVideo video={video} />
-                                                            </Grid>
+                                                <React.Fragment key={following._id}>
+                                                    {
+                                                        (videos.filter((video, index) => (video.user === following.following))).map(video => {
+                                                            return (
+                                                                <React.Fragment key={video._id}>
+                                                                    <Grid item md={3} lg={2.4} >
+                                                                        <FeedVideo video={video} />
+                                                                    </Grid>
 
-                                                        </>
+                                                                </React.Fragment>
 
-                                                    )
-                                                })
+                                                            )
+                                                        })
+                                                    }
+                                                </React.Fragment>
+
 
                                             ))}
                                         </Grid>
@@ -131,17 +149,21 @@ const NewsFeeds = ({ user }) => {
                                     <TabPanel value="3" index={2}>
                                         <Grid container spacing={2}>
                                             {followings.map(following => (
-                                                (users.filter((user, index) => (user._id === following.following))).map(user => {
-                                                    return (
-                                                        <>
-                                                            <Grid item md={3} lg={2.4} key={user._id}>
-                                                                <FollowUsers user={user} />
-                                                            </Grid>
+                                                <React.Fragment key={following._id}>
+                                                    {
+                                                        (users.filter((user, index) => (user._id === following.following))).map(user => {
+                                                            return (
+                                                                <React.Fragment key={user._id}>
+                                                                    <Grid item md={3} lg={2.4}>
+                                                                        <FollowUsers user={user} />
+                                                                    </Grid>
 
-                                                        </>
+                                                                </React.Fragment>
 
-                                                    )
-                                                })
+                                                            )
+                                                        })
+                                                    }
+                                                </React.Fragment>
 
                                             ))}
                                         </Grid>

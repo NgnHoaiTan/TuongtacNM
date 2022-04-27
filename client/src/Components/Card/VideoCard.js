@@ -63,7 +63,7 @@ const VideoCard = (props) => {
                         subheader={<Typography sx={{ color: 'white', fontSize: 13 }}>{moment(video.date_upload).format('DD/MM/YYYY')}</Typography>}
                         sx={{ padding: 1 }}
                     />
-                    <Link to={`/video/${video._id}`}>
+                    
                         <CardMedia
                             component="video"
                             height="194"
@@ -75,9 +75,9 @@ const VideoCard = (props) => {
                             }}
 
                         />
-                    </Link>
+                    
 
-                    <Link to={`/video/${video._id}`}>
+                    
                         <CardContent sx={{
                             px: 0
                         }}>
@@ -85,7 +85,7 @@ const VideoCard = (props) => {
                                 {video.title}
                             </Typography>
                         </CardContent>
-                    </Link>
+                    
                 </Card>
 
             }

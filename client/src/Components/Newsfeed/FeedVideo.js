@@ -15,7 +15,7 @@ const FeedVideo = ({ video }) => {
     const classes = useStyle();
     return (
         <Box className='feed' sx={{ p: 1 }}>
-            <Link to={`/video/${video._id}`}>
+            
 
                 <Card style={{ backgroundColor: '#191919', borderRadius: '10px' }}>
                     <div>
@@ -58,7 +58,7 @@ const FeedVideo = ({ video }) => {
 
 
                 </Card>
-            </Link>
+            
         </Box>
     );
 };
