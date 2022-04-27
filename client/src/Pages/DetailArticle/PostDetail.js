@@ -5,7 +5,7 @@ import React, { useEffect } from 'react';
 import { makeStyles } from '@mui/styles';
 import userdemo from '../../Images/user5.jpg';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-// import { Carousel } from 'react-responsive-carousel';
+import { Carousel } from 'react-responsive-carousel';
 import animalDemo1 from '../../Images/echgiunnguyen.JPG';
 import markImg from '../../Images/gps.png';
 import { createTheme } from '@mui/material/styles';
@@ -18,7 +18,7 @@ import { Link } from 'react-router-dom';
 import { fetchAsyncImagesByPost, getListImages } from '../../features/Slice/ImgPostSlice';
 import Map, { Marker, FullscreenControl, Layer } from 'react-map-gl';
 import MapboxWorker from 'mapbox-gl/dist/mapbox-gl-csp-worker';
-import { Carousel } from 'react-carousel-minimal';
+
 
 Map.workerClass = MapboxWorker;
 
@@ -84,14 +84,7 @@ const useStyle = makeStyles({
         overflow: 'auto'
     }
 })
-const captionStyle = {
-    fontSize: '2em',
-    fontWeight: 'bold',
-}
-const slideNumberStyle = {
-    fontSize: '16px',
-    fontWeight: '500',
-}
+
 const PostDetail = () => {
     const classes = useStyle();
     const dispatch = useDispatch();
@@ -110,16 +103,16 @@ const PostDetail = () => {
         }
         dispatchCall();
     }, [dispatch, id, authuserId])
-    const dataimage = Object.keys(images).length > 0 ?
-        images.map((image) => {
-            return (
-                {
-                    image: image.imageurl,
-                    cation: "Ảnh sưu tầm"
-                }
-            )
-        })
-        : []
+    // const dataimage = Object.keys(images).length > 0 ?
+    //     images.map((image) => {
+    //         return (
+    //             {
+    //                 image: image.imageurl,
+    //                 cation: "Ảnh sưu tầm"
+    //             }
+    //         )
+    //     })
+    //     : []
 
     //console.log(dataimage)
     return (
@@ -161,41 +154,19 @@ const PostDetail = () => {
                             </Typography>
                             <Grid container spacing={3}>
                                 <Grid item md={5} xs={12}>
-                                    {/* <Carousel infiniteLoop >
+                                    <Carousel infiniteLoop >
                                         {images && images.map(image => {
                                             return (
-                                                <div key={image._id}>
-                                                    <img src={image.imageurl} alt='img of article' />
+                                                <div key={image._id} style={{height:'240px'}}>
+                                                    <img src={image.imageurl} alt='img of article' style={{height:'100%',width:'100%',objectFit:'cover'}} />
+                                                    <p style={{fontSize:15}}>{post.vietnamese_name}</p>
                                                 </div>
                                             )
                                         })}
 
 
-                                    </Carousel> */}
-                                    <Carousel
-                                        data={dataimage}
-                                        time={6000}
-                                        // width="850px"
-                                        height="300px"
-                                        captionStyle={captionStyle}
-                                        radius="10px"
-                                        slideNumber={true}
-                                        slideNumberStyle={slideNumberStyle}
-                                        captionPosition="bottom"
-                                        automatic={true}
-                                        dots={true}
-                                        pauseIconColor="white"
-                                        pauseIconSize="40px"
-                                        slideBackgroundColor="darkgrey"
-                                        slideImageFit="contain"
-                                        thumbnails={false}
-                                        thumbnailWidth="100px"
-                                        style={{
-                                            textAlign: "center",
-                                            margin: "0 auto",
-                                            
-                                        }}
-                                    />
+                                    </Carousel>
+                                    
                                 </Grid>
                                 <Grid item md={7} xs={12} className={classes.general_info}>
                                     <Box component='div'>
