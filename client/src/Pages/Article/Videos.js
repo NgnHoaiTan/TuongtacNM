@@ -98,7 +98,7 @@ const Videos = () => {
                 my: 3,
                 fontWeight: 600
             }}>
-                Danh sách bài viết
+                Danh sách Videos
             </Typography>
             <Grid container spacing={3} sx={{
 

@@ -3,7 +3,6 @@ import { fetchAsyncUserByAccount } from "../Slice/UserSlice";
 import { loginPending, loginFail, AsyncLogin } from "./authSlice";
 
 export const loginUser = async(user, dispatch, navigate) => {
-    dispatch(loginPending())
     try {
         // call api xử lý
         const rawresult = await dispatch(AsyncLogin(user));

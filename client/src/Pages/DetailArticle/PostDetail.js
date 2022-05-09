@@ -94,14 +94,11 @@ const PostDetail = () => {
     const authUser = useSelector(getAuthUser);
     const user = useSelector(getUser);
     const authuserId = post.user;
-
+    console.log(post)
     useEffect(() => {
-        const dispatchCall = async () => {
-            await dispatch(fetchAsyncPostById(id));
-            await dispatch(fetchAsyncAuthUserById(authuserId))
-            await dispatch(fetchAsyncImagesByPost(id));
-        }
-        dispatchCall();
+        dispatch(fetchAsyncPostById(id));
+        dispatch(fetchAsyncAuthUserById(authuserId))
+        dispatch(fetchAsyncImagesByPost(id));
     }, [dispatch, id, authuserId])
     // const dataimage = Object.keys(images).length > 0 ?
     //     images.map((image) => {
@@ -114,7 +111,7 @@ const PostDetail = () => {
     //     })
     //     : []
 
-    //console.log(dataimage)
+    console.log(authUser)
     return (
         <>
             {post !== {} &&
@@ -127,7 +124,7 @@ const PostDetail = () => {
 
                         <Box component='div' className={classes.userinfo}>
                             <Link to={`/user/${post.user}`}>
-                                <Avatar alt='user image' src={authUser.image} sx={{ mr: 1 }} />
+                                <Avatar alt='user image' src={authUser ? authUser.image : ""} sx={{ mr: 1 }} />
                             </Link>
 
                             <div className={classes.username}>
@@ -157,16 +154,16 @@ const PostDetail = () => {
                                     <Carousel infiniteLoop >
                                         {images && images.map(image => {
                                             return (
-                                                <div key={image._id} style={{height:'240px'}}>
-                                                    <img src={image.imageurl} alt='img of article' style={{height:'100%',width:'100%',objectFit:'cover'}} />
-                                                    <p style={{fontSize:15}}>{post.vietnamese_name}</p>
+                                                <div key={image._id} style={{ height: '240px' }}>
+                                                    <img src={image.imageurl} alt='img of article' style={{ height: '100%', width: '100%', objectFit: 'cover' }} />
+                                                    <p style={{ fontSize: 15 }}>{post.vietnamese_name}</p>
                                                 </div>
                                             )
                                         })}
 
 
                                     </Carousel>
-                                    
+
                                 </Grid>
                                 <Grid item md={7} xs={12} className={classes.general_info}>
                                     <Box component='div'>
@@ -198,10 +195,10 @@ const PostDetail = () => {
                                             <span className={classes.span_title}>Giá trị sử dụng:</span> {post.value_of_use}
                                         </Typography>
                                         <Typography sx={{ fontWeight: 400, mb: 0.5 }}>
-                                        <span className={classes.span_title}>Phân bố:</span> {post.distribution}
+                                            <span className={classes.span_title}>Phân bố:</span> {post.distribution}
                                         </Typography>
                                         <Typography sx={{ fontWeight: 400, mb: 0.5 }}>
-                                        <span className={classes.span_title}>Tình trạng mẫu vật:</span> {post.status_creature}
+                                            <span className={classes.span_title}>Tình trạng mẫu vật:</span> {post.status_creature}
                                         </Typography>
                                     </Box>
                                 </Grid>

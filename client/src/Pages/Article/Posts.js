@@ -35,9 +35,9 @@ const Posts = () => {
     const [actionSearch,setActionSearch] = useState(false);
     const [loading,setLoading] = useState(true)
     const posts = useSelector(getListPosts);
-    // useEffect(() => {
-    //     dispatch(fetchAsyncPosts());
-    // }, [dispatch])
+    useEffect(() => {
+        dispatch(fetchAsyncPosts());
+    }, [dispatch])
     useEffect(()=>{
         setLoading(true);
         const searchcall = ()=>{
@@ -73,6 +73,8 @@ const Posts = () => {
             py: 2,
             minHeight: '700px'
         }}>
+
+            {/* search bar  */}
             <Box component="div" className={classes.searchwrapper}>
                 <div className={classes.searchinput}>
                     <IconButton onClick={handleSearch}>

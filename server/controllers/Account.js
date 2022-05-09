@@ -44,6 +44,20 @@ export const loginAccount = async(req,res)=>{
         res.status(500).json({error:err})
     }
 }
+export const loginAdminAccount = async(req,res)=>{
+    try{
+        const account = await AccountModel.findOne({username:req.body.username});
+        if(!account) return res.status(400).json({ message: 'Username is invalid!'});
+        const validPass = await bcrypt.compare(req.body.password,account.password);
+        if (!validPass) return res.status(400).json({ message: 'Invalid password'});
+        const isAdmin = account.is_admin;
+        if(!isAdmin) return res.status(400).json({ message: 'Invalid admin'});
+        res.status(200).json({ message: 'Login success!', isloged:true, accountId:account._id });
+    }
+    catch(err){
+        res.status(500).json({error:err})
+    }
+}
 export const getAccounts = async (req, res)=>{
     try{
         const accounts = await AccountModel.find();

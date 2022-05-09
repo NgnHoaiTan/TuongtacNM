@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 import Homepage from '../Pages/Homepage/Homepage';
@@ -14,11 +14,23 @@ import PostDetail from '../Pages/DetailArticle/PostDetail';
 import VideoDetail from '../Pages/DetailArticle/VideoDetail';
 import Login from '../Components/Login/Login';
 import { getresult } from '../features/Auth/authSlice';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAsyncUserByAccount, fetchAsyncUsers, getUser } from '../features/Slice/UserSlice';
 const Applayout = () => {
   const loggedin = useSelector(getresult);
+  const user = useSelector(getUser)
+  const dispatch = useDispatch()
   console.log(loggedin)
   console.log(Object.keys(loggedin).length !== 0)
+  useEffect(()=>{
+    if(Object.keys(loggedin).length !== 0){
+        dispatch(fetchAsyncUserByAccount(loggedin.accountId))
+    }
+  },[loggedin])
+  useEffect(()=>{
+    dispatch(fetchAsyncUsers())
+  })
+  console.log(user);
   return (
     <>
       <Routes>

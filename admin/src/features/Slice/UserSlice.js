@@ -3,7 +3,7 @@ import Axios from "../Axios";
 
 const initialState={
     admins:[],
-    admin:{},
+    admin:{initial:'value'},
     users:[],
 }
 export const fetchAsyncAdmins = createAsyncThunk('user/fetchAsyncAdmins',async()=>{

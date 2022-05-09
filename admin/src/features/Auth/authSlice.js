@@ -10,7 +10,7 @@ const initialState = {
     result: {},
 }
 export const AsyncLogin = createAsyncThunk('auth/AsyncLogin', async (data) => {
-    const response = await Axios.post('accounts/login', {
+    const response = await Axios.post('accounts/admin/login', {
         username: data.username,
         password: data.password
     })

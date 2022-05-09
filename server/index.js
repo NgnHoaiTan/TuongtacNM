@@ -18,11 +18,12 @@ import dotenv from 'dotenv'
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
-const URI = process.env.DATABASE_URL;
+const URI = "mongodb+srv://hoaitan:CWwAn9VV0dpdQz0y@cluster0.n8bi5.mongodb.net/WildDiscoveryDB?retryWrites=true&w=majority";
 
-app.use(bodyParser.json({limit:'30mb'}));
-app.use(bodyParser.urlencoded({ extended: true, limit: '30mb' })); 
 app.use(cors());
+app.use(bodyParser.json({ limit: '30mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '30mb' }));
+
 
 mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
@@ -33,13 +34,13 @@ mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true })
     }).catch(error => {
         console.log('error', error);
     });
-app.use('/accounts',account);
-app.use('/users',user);
-app.use('/images',image);
-app.use('/commentposts',commentPost);
-app.use('/commentvideos',commentVideo);
-app.use('/reactionposts',reactionPost);
-app.use('/reactionvideos',reactionVideo);
-app.use('/videos',video);
-app.use('/posts',post);
-app.use('/follows',follow);
+app.use('/accounts', account);
+app.use('/users', user);
+app.use('/images', image);
+app.use('/commentposts', commentPost);
+app.use('/commentvideos', commentVideo);
+app.use('/reactionposts', reactionPost);
+app.use('/reactionvideos', reactionVideo);
+app.use('/videos', video);
+app.use('/posts', post);
+app.use('/follows', follow);

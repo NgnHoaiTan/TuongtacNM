@@ -36,10 +36,7 @@ const authReducer = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        loginPending: (state) => {
-            state.login.isLoading = true;
-            state.login.error = false;
-        },
+        
         loginSuccess: (state, action) => {
             console.log(action.payload)
             state.login.isLoading = false;
@@ -49,10 +46,7 @@ const authReducer = createSlice({
             state.login.error = true;
         },
 
-        registerPending: (state) => {
-            state.register.isLoading = true;
-            state.register.error = false;
-        },
+        
         registerSuccess: (state) => {
             state.register.isLoading = false;
             state.register.success = true;
@@ -83,21 +77,15 @@ const authReducer = createSlice({
 
         
         [AsyncRegister.pending]: () => {
-            console.log('Start checkout account')
+            console.log('Start signup account')
             
 
         },
         [AsyncRegister.fulfilled]: (state) => {
-            console.log('Checkout account success')
-            state.register.isLoading = false;
-            state.register.error = false;
-            state.register.success= true;
-            
-
+            console.log('signup account success')
         },
         [AsyncRegister.rejected]: (state,action) => {
-            console.log('Checkout account failure')
-            state.register.error = true;
+            console.log('signup account failure')
         },
         
     }

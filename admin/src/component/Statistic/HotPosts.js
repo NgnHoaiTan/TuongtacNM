@@ -27,7 +27,7 @@ const HotPosts = () => {
             await dispatch(fetchAsyncTopReaction())
             await dispatch(fetchAsyncPosts());
         }
-        
+        call()
     }, [])
     return (
         <Grid container spacing={2}>

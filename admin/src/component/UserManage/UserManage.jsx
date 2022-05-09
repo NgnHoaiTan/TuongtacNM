@@ -82,7 +82,7 @@ const UserManage = ({ adminAccounts }) => {
                         columns={columns}
                         rowHeight={42}
                         onRowClick={handleClickRow}
-                        pageSize={15}
+                        pageSize={13}
                      />
                   </Box>
                </Grid>
